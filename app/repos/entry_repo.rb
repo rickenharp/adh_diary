@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+module AdhDiary
+  module Repos
+    class EntryRepo < AdhDiary::DB::Repo
+      def all
+        entries.order { date.desc }.to_a
+      end
+
+      def on(date)
+        entries.where(Sequel.lit("date(date) = ?", date.to_date.to_s))
+      end
+    end
+  end
+end

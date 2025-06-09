@@ -2,4 +2,4 @@
 
 require "hanami/rake_tasks"
 
-task ci: %w[assets:precompile spec]
+task ci: %w[db:migrate assets:precompile spec]
