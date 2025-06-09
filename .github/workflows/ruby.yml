@@ -9,6 +9,8 @@ on:
 
 jobs:
   tests:
+    env:
+      HANAMI_ENV: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,6 +21,8 @@ jobs:
           bundler-cache: true
       - name: Prepare env
         run: cp .env-example .env
+      - name: Prepare database
+        run: bundle exec hanami db prepare -e test
       - name: npm install
         run: npm install
       - name: Run all tests

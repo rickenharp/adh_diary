@@ -24,6 +24,7 @@ end
 group :development, :test do
   gem "dotenv"
   gem "standard"
+  gem "irb"
 end
 
 group :cli, :development do
@@ -37,6 +38,7 @@ end
 group :test do
   # Database
   gem "database_cleaner-sequel"
+  gem "rom-factory"
 
   # Web integration
   gem "capybara"
