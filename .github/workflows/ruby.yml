@@ -19,5 +19,7 @@ jobs:
           bundler-cache: true
       - name: Prepare env
         run: cp .env-example .env
+      - name: npm install
+        run: npm install
       - name: Run all tests
         run: bundle exec rake ci
