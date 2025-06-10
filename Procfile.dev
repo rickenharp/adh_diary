@@ -1,2 +1,3 @@
 web: bundle exec hanami server
 assets: bundle exec hanami assets watch
+yard: yard server -G Gemfile
