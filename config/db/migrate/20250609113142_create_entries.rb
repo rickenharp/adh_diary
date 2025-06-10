@@ -2,13 +2,13 @@
 
 ROM::SQL.migration do
   # Add your migration here.
-  #
+
   # See https://guides.hanamirb.org/v2.2/database/migrations/ for details.
   change do
     create_table :entries do
       primary_key :id
 
-      column :date, Date, null: false
+      column :date, Date, null: false, unique: true, index: true
       column :attention, Integer, null: false
       column :organisation, Integer, null: false
       column :mood_swings, Integer, null: false
