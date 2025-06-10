@@ -1,0 +1,20 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label(field_name, class: "label") { label_text } %>
+  </div>
+
+  <div class="field-body">
+
+      <div class="radios">
+          <% options.each do |option_name, option_value| %>
+            <label class="radio">
+              <%= f.radio_button field_name, option_value, class: radio_field_classes %>
+              <%= option_name %>
+            </label>
+          <% end %>
+
+          <%= render("field_errors", messages: errors) if error_field? %>
+      </div>
+  </div>
+
+</div>
