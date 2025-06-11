@@ -17,6 +17,9 @@ gem "rackup"
 gem "rake"
 gem "sqlite3"
 
+gem "omniauth"
+gem "rack_csrf"
+
 group :development do
   gem "hanami-webconsole", "~> 2.2"
 end

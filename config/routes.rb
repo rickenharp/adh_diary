@@ -8,5 +8,7 @@ module AdhDiary
     get "/entries/new", to: "entries.new"
     post "/entries", to: "entries.create", as: "create_entry"
     get "/entries/:id", to: "entries.show", as: "show_entry"
+
+    get "/auth/developer/callback", to: "auth.developer_callback"
   end
 end

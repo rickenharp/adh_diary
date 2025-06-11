@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 require "hanami"
+require "omniauth"
+# require "rack/csrf"
+
+# OmniAuth::AuthenticityTokenProtection.default_options(authenticity_param: "_csrf_token")
 
 module AdhDiary
   class App < Hanami::App
+    config.middleware.use OmniAuth::Strategies::Developer
     config.actions.sessions = :cookie, {
       key: "adh_diary.session",
       secret: settings.session_secret,
