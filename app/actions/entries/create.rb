@@ -33,7 +33,7 @@ module AdhDiary
             entry = entry_repo.create(request.params[:entry])
 
             response.flash[:notice] = "Entry created"
-            response.redirect_to routes.path(:show_entry, id: entry[:id])
+            response.redirect_to routes.path(:entries, id: entry[:id])
           else
             response.flash.now[:alert] = "Could not create entry"
             errors = request.params.errors[:entry].to_h

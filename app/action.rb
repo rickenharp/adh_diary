@@ -9,7 +9,7 @@ module AdhDiary
     # Provide `Success` and `Failure` for pattern matching on operation results
     include Dry::Monads[:result]
 
-    handle_exception ROM::TupleCountMismatchError => :handle_not_found
+    # handle_exception ROM::TupleCountMismatchError => :handle_not_found
 
     private
 

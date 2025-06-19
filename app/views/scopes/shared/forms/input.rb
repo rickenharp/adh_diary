@@ -50,6 +50,18 @@ module AdhDiary
               classes.join(" ")
             end
 
+            def email_field_classes
+              classes = %w[email]
+              classes << "is-danger" if error_field?
+              classes.join(" ")
+            end
+
+            def password_field_classes
+              classes = %w[password]
+              classes << "is-danger" if error_field?
+              classes.join(" ")
+            end
+
             def icon_name?
               respond_to?(:icon_name) && icon_name
             end

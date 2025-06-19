@@ -9,6 +9,10 @@ module AdhDiary
         expose :entries do
           entry_repo.all
         end
+
+        expose :selected_id do |selected_id:|
+          selected_id.to_i
+        end
       end
     end
   end

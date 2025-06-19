@@ -15,7 +15,9 @@
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item brand-text" href="/">
-          Home
+          <span class="icon is-large has-text-primary">
+            <i class="fas fa-2x fa-brain"></i>
+          </span>
         </a>
         <div class="navbar-burger burger" data-target="navMenu">
           <span></span>
@@ -31,6 +33,23 @@
           <a class="navbar-item" href="/entries">
             Entries
           </a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% unless warden.user %>
+                <%= link_to("Sign up", AdhDiary::App["routes"].path(:sign_up), class:"button is-light is-primary") %>
+              <% end %>
+              <% if warden.user %>
+                <%= form_for :logout, 'logout', method: :delete do %>
+                  <button type="submit">Logout</button>
+                <% end %>
+              <% else %>
+                <a class="button is-primary" href="/login">Login</a>
+              <% end %>
+
+            </div>
+          </div>
         </div>
 
       </div>

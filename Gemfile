@@ -17,6 +17,9 @@ gem "rackup"
 gem "rake"
 gem "sqlite3"
 
+gem "warden"
+gem "bcrypt"
+
 group :development do
   gem "hanami-webconsole", "~> 2.2"
 end
@@ -25,6 +28,7 @@ group :development, :test do
   gem "dotenv"
   gem "standard"
   gem "irb"
+  gem "launchy"
 end
 
 group :cli, :development do

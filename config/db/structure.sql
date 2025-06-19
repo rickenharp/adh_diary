@@ -14,5 +14,13 @@ CREATE TABLE `entries`(
   `weight` double precision NOT NULL
 );
 CREATE INDEX `entries_date_index` ON `entries`(`date`);
+CREATE TABLE `users`(
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `password_salt` varchar(255) NOT NULL
+);
 INSERT INTO schema_migrations (filename) VALUES
-('20250609113142_create_entries.rb');
+('20250609113142_create_entries.rb'),
+('20250611091712_create_users.rb');

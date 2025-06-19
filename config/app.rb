@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "hanami"
+require "warden"
 
 module AdhDiary
   class App < Hanami::App
@@ -11,20 +12,22 @@ module AdhDiary
     }
     config.actions.content_security_policy[:script_src] = [
       "'self'",
-      "https://kit.fontawesome.com",
-      "localhost:2300",
-      "localhost:2323",
       "'unsafe-inline'"
     ].join(" ")
     config.actions.content_security_policy[:connect_src] = [
-      "'self'",
-      "https://ka-f.fontawesome.com"
+      "'self'"
     ].join(" ")
     config.actions.content_security_policy[:font_src] = [
       "'self'",
-      "https://ka-f.fontawesome.com",
       "https://cdnjs.cloudflare.com",
       "data:"
     ].join(" ")
+    config.middleware.use Warden::Manager do |manager|
+      manager.default_strategies :password
+      manager.failure_app =
+        lambda do |env|
+          AdhDiary::Actions::AuthFailure::Show.new.call(env)
+        end
+    end
   end
 end

@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Entries
-      class Show < AdhDiary::Action
+      class Show < AdhDiary::AuthenticatedAction
         def handle(request, response)
           response.render(view, id: request.params[:id])
         end

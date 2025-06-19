@@ -2,10 +2,9 @@
 
 module AdhDiary
   module Actions
-    module Entries
-      class Index < AdhDiary::AuthenticatedAction
+    module Login
+      class New < AdhDiary::Action
         def handle(request, response)
-          response.render view, selected_id: request.params[:id].to_i
         end
       end
     end

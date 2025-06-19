@@ -3,8 +3,8 @@
 module AdhDiary
   module Repos
     class EntryRepo < AdhDiary::DB::Repo
-      def all
-        entries.order { date.desc }.to_a
+      def all(order: :asc)
+        entries.order { (order == :asc) ? date.asc : date.desc }.to_a
       end
 
       def get(id)
@@ -16,7 +16,7 @@ module AdhDiary
       end
 
       def create(attributes)
-        entries.changeset(:create, attributes).commit.tap { |x| pp x }
+        entries.changeset(:create, attributes).commit
       end
     end
   end

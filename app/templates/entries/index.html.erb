@@ -1,7 +1,59 @@
-<h1 class="title">AdhDiary::Views::Entries::Index</h1>
+<h1 class="title">Entries</h1>
+<p class="buttons">
+  <a class="button" href="<%= AdhDiary::App["routes"].path(:new_entry) %>">
+    <span class="icon">
+      <i class="fab fa-plus"></i>
+    </span>
+    <span>Add Entry</span>
+  </a>
+</p>
 
-<ul>
+<table class="table is-striped">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Dose</th>
+    <th><abbr title="Attention Span">Att</abbr></th>
+    <th><abbr title="Organisation">Org</abbr></th>
+    <th><abbr title="Mood Swings">Mood</abbr></th>
+    <th><abbr title="Stress sensitivity">Stress</abbr></th>
+    <th><abbr title="Restlessness">Rest</abbr></th>
+    <th><abbr title="Impulsivity">Imp</abbr></th>
+    <th><abbr title="Side effects">SE</abbr></th>
+    <th><abbr title="Blood pressure">BP</abbr></th>
+    <th>Weight</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>Date</th>
+    <th>Dose</th>
+    <th><abbr title="Attention Span">Att</abbr></th>
+    <th><abbr title="Organisation">Org</abbr></th>
+    <th><abbr title="Mood Swings">Mood</abbr></th>
+    <th><abbr title="Stress sensitivity">Stress</abbr></th>
+    <th><abbr title="Restlessness">Rest</abbr></th>
+    <th><abbr title="Impulsivity">Imp</abbr></th>
+    <th><abbr title="Side effects">SE</abbr></th>
+    <th><abbr title="Blood pressure">BP</abbr></th>
+    <th>Weight</th>
+  </tr>
+  </tfoot>
+  <tbody>
   <% entries.each do |entry| %>
-  <li>Entry for <%= entry.date %></li>
-  <% end %>
-</ul>
+  <tr class="<%= entry.css_class%>">
+    <td class="date"><%= entry.date %></td>
+    <td class="attention"><%= entry.attention %></td>
+    <td class="organisation"><%= entry.organisation %></td>
+    <td class="mood-swings"><%= entry.mood_swings %></td>
+    <td class="stress-sensitivity"><%= entry.stress_sensitivity %></td>
+    <td class="irritability"><%= entry.irritability %></td>
+    <td class="restlessness"><%= entry.restlessness %></td>
+    <td class="impulsivity"><%= entry.impulsivity %></td>
+    <td class="side-effects"><%= entry.side_effects %></td>
+    <td class="blood-pressure"><%= entry.blood_pressure %></td>
+    <td class="weight"><%= entry.weight %></td>
+  </tr>
+  <% end  %>
+  </tbody>
+</table>
