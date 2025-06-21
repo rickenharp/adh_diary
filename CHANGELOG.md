@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/rickenharp/adh_diary/compare/v0.0.1...v0.0.2) (2025-06-21)
+
+
+### Miscellaneous Chores
+
+* release 0.0.2 ([8d0e27d](https://github.com/rickenharp/adh_diary/commit/8d0e27da52846b3bf5a7abc0b12a4c79e066861b))
+
 ## 0.0.1 (2025-06-21)
 
 
