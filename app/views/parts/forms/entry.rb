@@ -62,6 +62,16 @@ module AdhDiary
               .render("shared/forms/number_field")
           end
 
+          def dose_input(f)
+            prepare_scope(f, :dose, icon_name: "scale-balanced", placeholder: "30")
+              .render("shared/forms/number_field")
+          end
+
+          def medication_input(f)
+            prepare_scope(f, :medication, icon_name: "pills", placeholder: "Lisdexamfetamin")
+              .render("shared/forms/text_field")
+          end
+
           def errors(key)
             value.dig(:errors, key).to_a
           end

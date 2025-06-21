@@ -3,7 +3,11 @@
 module AdhDiary
   module Relations
     class Entries < AdhDiary::DB::Relation
-      schema :entries, infer: true
+      schema :entries, infer: true do
+        associations do
+          belongs_to :user
+        end
+      end
     end
   end
 end

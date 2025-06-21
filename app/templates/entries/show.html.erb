@@ -1,37 +1,30 @@
-<h1 class="title"><%= entry.date %></h1>
+<h1 class="title">Edit entry for <%= entry.date %></h1>
 
-<div class="content">
-  <dl>
-    <dt>Attention</dt>
-    <dd><%= entry.attention %></dd>
+<%= form_for :entry, routes.path(:entry, id: entry.id), method: "patch" do |f| %>
+  <%= form.date_input(f) %>
+  <%= form.medication_input(f) %>
+  <%= form.dose_input(f) %>
+  <%= form.attention_input(f) %>
+  <%= form.organisation_input(f) %>
+  <%= form.mood_swings_input(f) %>
+  <%= form.stress_sensitivity_input(f) %>
+  <%= form.irritability_input(f) %>
+  <%= form.restlessness_input(f) %>
+  <%= form.impulsivity_input(f) %>
+  <%= form.side_effects_input(f) %>
+  <%= form.blood_pressure_input(f) %>
+  <%= form.weight_input(f) %>
 
-    <dt>Organisation</dt>
-    <dd><%= entry.organisation %></dd>
-
-    <dt>Mood swings</dt>
-    <dd><%= entry.mood_swings %></dd>
-
-    <dt>Stress sensitivity</dt>
-    <dd><%= entry.stress_sensitivity %></dd>
-
-    <dt>Irritability</dt>
-    <dd><%= entry.irritability %></dd>
-
-    <dt>Restlessness</dt>
-    <dd><%= entry.restlessness %></dd>
-
-    <dt>Impulsivity</dt>
-    <dd><%= entry.impulsivity %></dd>
-
-    <dt>Side effects</dt>
-    <dd><%= entry.side_effects %></dd>
-
-    <dt>Blood pressure</dt>
-    <dd><%= entry.blood_pressure %></dd>
-
-    <dt>Weight</dt>
-    <dd><%= entry.weight %></dd>
-
-  </dl>
-</div>
-
+  <div class="field is-horizontal">
+    <div class="field-label">
+      <!-- Left empty for spacing -->
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= f.submit "Update", class: "button is-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

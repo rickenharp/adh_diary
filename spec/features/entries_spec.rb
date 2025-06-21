@@ -19,7 +19,7 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "visiting the entries page shows an entry" do
-    Factory.create(:entry, date: "2025-06-09")
+    Factory.create(:entry, date: "2025-06-09", user: user)
     visit "/entries"
 
     expect(page).to have_content "2025-06-09"
@@ -29,6 +29,8 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-08"
+    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    fill_in "entry[dose]", with: "30"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
     choose "entry[mood_swings]", option: "2"
@@ -44,13 +46,13 @@ RSpec.feature "Entries", db: true do
 
     expect(page).to have_content "Entry created"
     expect(page).to have_content "2025-06-08"
-    expect(page).to have_selector "td.attention", text: "0"
-    expect(page).to have_selector "td.organisation", text: "1"
-    expect(page).to have_selector "td.mood-swings", text: "2"
-    expect(page).to have_selector "td.stress-sensitivity", text: "3"
-    expect(page).to have_selector "td.irritability", text: "4"
-    expect(page).to have_selector "td.restlessness", text: "5"
-    expect(page).to have_selector "td.impulsivity", text: "4"
+    expect(page).to have_selector "td.attention", text: "gar nicht"
+    expect(page).to have_selector "td.organisation", text: "leicht"
+    expect(page).to have_selector "td.mood-swings", text: "mäßig"
+    expect(page).to have_selector "td.stress-sensitivity", text: "mittel"
+    expect(page).to have_selector "td.irritability", text: "stärker"
+    expect(page).to have_selector "td.restlessness", text: "stark"
+    expect(page).to have_selector "td.impulsivity", text: "stärker"
     expect(page).to have_selector "td.blood-pressure", text: "122/70"
     expect(page).to have_selector "td.weight", text: "126.7"
   end

@@ -3,12 +3,18 @@
 module AdhDiary
   module Repos
     class EntryRepo < AdhDiary::DB::Repo
+      commands update: :by_pk, delete: :by_pk
+
       def all(order: :asc)
         entries.order { (order == :asc) ? date.asc : date.desc }.to_a
       end
 
       def get(id)
         entries.by_pk(id).one!
+      end
+
+      def for(user_id)
+        entries.where(user_id: user_id).order { date.asc }.to_a
       end
 
       def on(date)

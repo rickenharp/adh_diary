@@ -9,6 +9,10 @@ module AdhDiary
   class AuthenticatedAction < AdhDiary::Action
     before :authenticate_user
 
+    def current_user
+      request.env["warden"].user
+    end
+
     private
 
     def authenticate_user(request, response)
