@@ -9,14 +9,15 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.4
-FROM docker.io/library/ruby:${RUBY_VERSION}-slim AS base
+FROM docker.io/library/ruby:${RUBY_VERSION} AS base
 
 # Rails app lives here
 WORKDIR /hanami
 
 # Install base packages
+RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh && bash nodesource_setup.sh
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 sqlite3 && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 sqlite3 nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -42,6 +43,7 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+RUN npm install
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SESSION_SECRET=1 bundle exec hanami assets compile
 
@@ -58,7 +60,7 @@ COPY --from=build /hanami /hanami
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 hanami && \
     useradd hanami --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R hanami:hanami db log public config/db
+    chown -R hanami:hanami log public config/db
 USER 1000:1000
 
 # Entrypoint prepares the database.
