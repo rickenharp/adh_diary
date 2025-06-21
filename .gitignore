@@ -5,3 +5,5 @@ node_modules/
 db/*.sqlite
 spec/examples.txt
 .idea/
+capybara-*.html
+database/*

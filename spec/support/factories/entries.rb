@@ -10,4 +10,5 @@ Factory.define(:entry) do |f|
   f.side_effects ""
   f.blood_pressure "126/74"
   f.weight 126.7
+  f.association(:user)
 end

@@ -3,12 +3,14 @@
 module AdhDiary
   module Actions
     module Entries
-      class Create < AdhDiary::Action
+      class Create < AdhDiary::AuthenticatedAction
         include Deps["repos.entry_repo"]
 
         params do
           required(:entry).hash do
             required(:date).filled(:date)
+            required(:dose).filled(:integer)
+            required(:medication).filled(:string)
             required(:attention).filled(:integer)
             required(:organisation).filled(:integer)
             required(:mood_swings).filled(:integer)
@@ -30,10 +32,10 @@ module AdhDiary
           end
 
           if request.params.valid? && existing_entries.zero?
-            entry = entry_repo.create(request.params[:entry])
+            entry = entry_repo.create(request.params[:entry].merge(user_id: request.session[:user_id]))
 
             response.flash[:notice] = "Entry created"
-            response.redirect_to routes.path(:show_entry, id: entry[:id])
+            response.redirect_to routes.path(:entries, id: entry[:id])
           else
             response.flash.now[:alert] = "Could not create entry"
             errors = request.params.errors[:entry].to_h
