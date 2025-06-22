@@ -22,6 +22,7 @@ gem "bcrypt"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"
+  gem "amazing_print"
 end
 
 group :development, :test do

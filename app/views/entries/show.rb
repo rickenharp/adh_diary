@@ -10,9 +10,9 @@ module AdhDiary
           entry_repo.get(id)
         end
 
-        expose(:form, as: Parts::Forms::Entry) do |entry, values: {}, errors: {}|
+        expose(:form, as: Parts::Forms::Entry) do |values: {}, errors: {}|
           {
-            values: entry.to_h,
+            values: {},
             errors: errors
           }
         end

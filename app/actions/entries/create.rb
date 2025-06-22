@@ -32,6 +32,8 @@ module AdhDiary
           end
 
           if request.params.valid? && existing_entries.zero?
+            request.session[:last_medication] = request.params[:entry][:medication]
+            request.session[:last_dose] = request.params[:entry][:dose]
             entry = entry_repo.create(request.params[:entry].merge(user_id: request.session[:user_id]))
 
             response.flash[:notice] = "Entry created"
