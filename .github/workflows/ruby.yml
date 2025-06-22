@@ -8,7 +8,25 @@ on:
   create:
 
 jobs:
+  pre_job:
+    permissions:
+      actions: write
+      contents: read
+    continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          # All of these options are optional, so you can remove them if you are happy with the defaults
+          concurrent_skipping: 'same_content_newer'
+          skip_after_successful_duplicate: 'true'
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
   tests:
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
     env:
       HANAMI_ENV: test
     runs-on: ubuntu-latest
