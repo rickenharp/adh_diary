@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/rickenharp/adh_diary/compare/v0.0.2...v0.1.0) (2025-06-22)
+
+
+### Features
+
+* **entries:** remember last used medication and dose ([f693ff5](https://github.com/rickenharp/adh_diary/commit/f693ff53dc3de299dfaa3ee9e81c8add1c2a9705))
+
 ## [0.0.2](https://github.com/rickenharp/adh_diary/compare/v0.0.1...v0.0.2) (2025-06-21)
 
 
