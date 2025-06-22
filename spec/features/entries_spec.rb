@@ -62,6 +62,8 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
+    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    fill_in "entry[dose]", with: "30"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
     choose "entry[mood_swings]", option: "2"
@@ -89,5 +91,29 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_content "Could not create entry"
     expect(page).to have_field "Date", with: "2025-06-08"
     expect(page).to have_field "Weight", with: ""
+  end
+
+  scenario "remember last used medication and dose" do
+    visit "/entries/new"
+
+    fill_in "entry[date]", with: "2025-06-09"
+    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    fill_in "entry[dose]", with: "30"
+    choose "entry[attention]", option: "0"
+    choose "entry[organisation]", option: "1"
+    choose "entry[mood_swings]", option: "2"
+    choose "entry[stress_sensitivity]", option: "3"
+    choose "entry[irritability]", option: "4"
+    choose "entry[restlessness]", option: "5"
+    choose "entry[impulsivity]", option: "4"
+    fill_in("Side effects", with: "Omniscience")
+    fill_in("Blood pressure", with: "122/70")
+    fill_in("Weight", with: "126.7")
+
+    click_on("Create")
+
+    visit "/entries/new"
+    expect(page).to have_field("entry[medication]", with: "Lisdexamfetamin")
+    expect(page).to have_field("entry[dose]", with: "30")
   end
 end
