@@ -1,7 +1,7 @@
 services:
   adh-diary:
     restart: unless-stopped
-    image: adh_diary:latest
+    image: ghcr.io/rickenharp/adh_diary:main
     volumes:
       - "./database:/hanami/db"
     environment:
@@ -15,8 +15,8 @@ services:
       - traefik.http.routers.adh-diary.entrypoints=anubis # Listening on the exclusive Anubis Network
       - traefik.http.services.adh-diary.loadbalancer.server.port=2300
       - traefik.http.routers.adh-diary.service=adh-diary # Telling Traefik to use the above specified port
-#    networks:
-#      - proxy
-#networks:
-#  proxy:
-#    external: true
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
