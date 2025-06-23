@@ -13,8 +13,8 @@ module AdhDiary
         entries.by_pk(id).one!
       end
 
-      def for(user_id)
-        entries.where(user_id: user_id).order { date.asc }.to_a
+      def for(user_id, page: 1)
+        entries.where(user_id: user_id).order { date.asc }.page(page)
       end
 
       def on(date)
