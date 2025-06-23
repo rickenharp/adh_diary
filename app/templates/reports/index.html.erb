@@ -1,0 +1,7 @@
+<h1 class="title">Reports</h1>
+
+<ul>
+  <% weeks.each do |week| %>
+    <li><%= link_to week[:week], routes.path(:report, week: week[:week]) %></li>
+  <% end %>
+</ul>
