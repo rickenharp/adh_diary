@@ -21,6 +21,39 @@ module AdhDiary
         entries.where(Sequel.lit("date(date) = ?", date.to_date.to_s))
       end
 
+      def weeks_base
+        entries.select { [function(:strftime, "%Y-W%W", date).as(:week)] }.group { week }.order(:date)
+      end
+
+      def weeks
+        weeks_base.to_a
+      end
+
+      def entries_for_week(the_week)
+        weeks_base.having(week: the_week).count
+      end
+
+      def for_week(the_week)
+        entries.select {
+          [
+            function(:strftime, "%Y-W%W", date).as(:week),
+            integer.min(date).as(:from),
+            integer.max(date).as(:to),
+            integer.cast(function(:round, function(:avg, attention))).as(:attention),
+            integer.cast(function(:round, function(:avg, organisation))).as(:organisation),
+            integer.cast(function(:round, function(:avg, mood_swings))).as(:mood_swings),
+            integer.cast(function(:round, function(:avg, stress_sensitivity))).as(:stress_sensitivity),
+            integer.cast(function(:round, function(:avg, irritability))).as(:irritability),
+            integer.cast(function(:round, function(:avg, restlessness))).as(:restlessness),
+            integer.cast(function(:round, function(:avg, impulsivity))).as(:impulsivity),
+
+            string.group_concat(string.nullif(side_effects, "")).as(:side_effects),
+            string.group_concat(blood_pressure).order(:date).as(:blood_pressure),
+            function(:json_extract, function(:json_group_array, weight), "$[#-1]").as(:weight)
+          ]
+        }.group { week }.having(week: the_week).one
+      end
+
       def create(attributes)
         entries.changeset(:create, attributes).commit
       end
