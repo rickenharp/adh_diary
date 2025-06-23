@@ -1,0 +1,24 @@
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <a href="<%= routes.path(:entries, page: 1) %>" class="pagination-previous">First</a>
+  <% if pager.prev_page %>
+  <a href="<%= routes.path(:entries, page: pager.prev_page) %>" class="pagination-previous">Previous</a>
+  <% else %>
+   <a href="#" class="pagination-previous is-disabled">Previous</a>
+  <% end %>
+  <% if pager.next_page %>
+  <a href="<%= routes.path(:entries, page: pager.next_page) %>" class="pagination-next">Next page</a>
+  <% else %>
+    <a href="#" class="pagination-next is-disabled">Next page</a>
+  <% end %>
+  <a href="<%= routes.path(:entries, page: pager.total_pages) %>" class="pagination-next">Last</a>
+  <ul class="pagination-list">
+    <% (1..pager.total_pages).each do |p| %>
+      <% if p == pager.current_page %>
+        <li><a class="pagination-link is-current" aria-label="Page <%= p %>" aria-current="page"><%= p %></a></li>
+      <% else %>
+        <li><a href="<%= routes.path(:entries, page: p) %>" class="pagination-link" aria-label="Goto page <%= p %>"><%= p %></a></li>
+      <% end %>
+
+    <% end %>
+  </ul>
+</nav>
