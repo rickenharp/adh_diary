@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/rickenharp/adh_diary/compare/v0.1.0...v0.2.0) (2025-06-23)
+
+
+### Features
+
+* add pagination to entries ([#22](https://github.com/rickenharp/adh_diary/issues/22)) ([91074f5](https://github.com/rickenharp/adh_diary/commit/91074f502287d95f478d28b637128ef7f0efd3de)), closes [#17](https://github.com/rickenharp/adh_diary/issues/17)
+* **report:** implement report feature ([#20](https://github.com/rickenharp/adh_diary/issues/20)) ([5f52b92](https://github.com/rickenharp/adh_diary/commit/5f52b924b83a329069996349706405130e40db14)), closes [#19](https://github.com/rickenharp/adh_diary/issues/19)
+
 ## [0.1.0](https://github.com/rickenharp/adh_diary/compare/v0.0.2...v0.1.0) (2025-06-22)
 
 
