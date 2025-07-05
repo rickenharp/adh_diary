@@ -43,6 +43,7 @@ RSpec.feature "Entries", db: true do
     fill_in("Weight", with: "126.7")
 
     click_on("Create")
+    # save_and_open_page
 
     expect(page).to have_content "Entry created"
     expect(page).to have_content "2025-06-08"
@@ -81,7 +82,7 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_content "already exists"
   end
 
-  scenario "creating an  invalid entry" do
+  scenario "creating an invalid entry" do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-08"
@@ -91,6 +92,42 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_content "Could not create entry"
     expect(page).to have_field "Date", with: "2025-06-08"
     expect(page).to have_field "Weight", with: ""
+  end
+
+  scenario "editing an entry" do
+    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user)
+
+    visit "/entries/#{entry.id}/edit"
+
+    expect(page).to have_field "Date", with: "2025-06-09"
+    expect(page).to have_field "Dose", with: "30"
+
+    fill_in "entry[dose]", with: "70"
+
+    click_on("Update")
+
+    expect(page).to have_content "Entry updated"
+
+    visit "/entries/#{entry.id}"
+
+    expect(page).to have_content "Medication Lisdexamfetamin 70"
+  end
+
+  scenario "editing an entry invalidly" do
+    Factory.create(:entry, date: "2025-06-08", dose: 30, user: user)
+    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user)
+
+    visit "/entries/#{entry.id}/edit"
+
+    expect(page).to have_field "Date", with: "2025-06-09"
+    expect(page).to have_field "Dose", with: "30"
+
+    fill_in "entry[date]", with: "2025-06-08"
+
+    click_on("Update")
+
+    expect(page).to have_content "Could not update entry"
+    expect(page).to have_content "already exists"
   end
 
   scenario "remember last used medication and dose" do

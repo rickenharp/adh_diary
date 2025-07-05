@@ -18,6 +18,7 @@ module AdhDiary
     get "/entries/new", to: "entries.new", as: "new_entry"
     post "/entries", to: "entries.create", as: "create_entry"
     get "/entries/:id", to: "entries.show", as: "entry"
+    get "/entries/:id/edit", to: "entries.edit", as: "edit_entry"
     patch "/entries/:id", to: "entries.update", as: "entry"
     get "/reports", to: "reports.index"
     get "/reports/:week", to: "reports.show", as: "report"

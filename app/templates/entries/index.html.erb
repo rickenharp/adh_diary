@@ -48,7 +48,7 @@
   <tbody>
   <% entries.each do |entry| %>
   <tr class="<%= entry.css_class%>">
-    <td class="date"><%= entry.date %></td>
+    <td class="date"><%= link_to entry.date, Hanami.app["routes"].path(:entry, id: entry.id) %></td>
     <td class="medication"><%= entry.medication %> (<%= entry.dose %>mg)</td>
     <td class="attention"><%= AdhDiary::Types::Strength[entry.attention]  %></td>
     <td class="organisation"><%= AdhDiary::Types::Strength[entry.organisation] %></td>
@@ -61,7 +61,7 @@
     <td class="blood-pressure"><%= entry.blood_pressure %></td>
     <td class="weight"><%= entry.weight %></td>
     <td class="actions">
-      <%= link_to "Edit", Hanami.app["routes"].path(:entry, id: entry.id), class: "button is-link" %>
+      <%= link_to "Edit", Hanami.app["routes"].path(:edit_entry, id: entry.id), class: "button is-link" %>
       <%= link_to "Destroy", "#", class: "button is-danger" %>
     </td>
   </tr>

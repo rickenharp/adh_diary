@@ -1,5 +1,7 @@
 Factory.define(:entry) do |f|
   f.date { Date.today }
+  f.medication "Lisdexamfetamin"
+  f.dose 30
   f.attention { (0..5).to_a.sample }
   f.organisation { (0..5).to_a.sample }
   f.mood_swings { (0..5).to_a.sample }

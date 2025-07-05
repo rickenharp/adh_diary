@@ -2,9 +2,15 @@
 
 require "hanami"
 require "warden"
+begin
+  require "amazing_print"
+rescue LoadError
+  # Just ignore this outside of development and test
+end
 
 module AdhDiary
   class App < Hanami::App
+    Dry::Validation.load_extensions(:monads)
     config.actions.sessions = :cookie, {
       key: "adh_diary.session",
       secret: settings.session_secret,
