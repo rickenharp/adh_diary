@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/rickenharp/adh_diary/compare/v0.2.0...v0.2.1) (2025-07-05)
+
+
+### Bug Fixes
+
+* reorder fields in entry table ([#24](https://github.com/rickenharp/adh_diary/issues/24)) ([8f3f22b](https://github.com/rickenharp/adh_diary/commit/8f3f22bc1a95c16c0df299fd1b72208b20ae1804)), closes [#23](https://github.com/rickenharp/adh_diary/issues/23)
+
 ## [0.2.0](https://github.com/rickenharp/adh_diary/compare/v0.1.0...v0.2.0) (2025-06-23)
 
 
