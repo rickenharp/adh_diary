@@ -8,7 +8,7 @@ module AdhDiary
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def date_input(f)
-            prepare_scope(f, :date, value: value.dig(:values, :date) || Date.today.to_s)
+            prepare_scope(f, :date)
               .render("shared/forms/date_field")
           end
 

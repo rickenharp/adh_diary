@@ -1,30 +1,49 @@
-<h1 class="title">Edit entry for <%= entry.date %></h1>
+<h1 class="title">Entry for <%= entry.date %></h1>
 
-<%= form_for :entry, routes.path(:entry, id: entry.id), method: "patch" do |f| %>
-  <%= form.date_input(f) %>
-  <%= form.medication_input(f) %>
-  <%= form.dose_input(f) %>
-  <%= form.attention_input(f) %>
-  <%= form.organisation_input(f) %>
-  <%= form.mood_swings_input(f) %>
-  <%= form.stress_sensitivity_input(f) %>
-  <%= form.irritability_input(f) %>
-  <%= form.restlessness_input(f) %>
-  <%= form.impulsivity_input(f) %>
-  <%= form.side_effects_input(f) %>
-  <%= form.blood_pressure_input(f) %>
-  <%= form.weight_input(f) %>
+<table class="table">
+  <tr>
+    <th>Medication</th>
+    <td><%= entry.medication %> <%= entry.dose %></td>
+  </tr>
+  <tr>
+    <th>Attention</th>
+    <td><%= entry.attention %></td>
+  </tr>
+  <tr>
+    <th>Organisation</th>
+    <td><%= entry.organisation %></td>
+  </tr>
+  <tr>
+    <th>Mood Swings</th>
+    <td><%= entry.mood_swings %></td>
+  </tr>
+  <tr>
+   <th>Stress Sensitivity</th>
+   <td><%= entry.stress_sensitivity %></td>
+  </tr>
+  <tr>
+   <th>Irritability</th>
+   <td><%= entry.irritability %></td>
+  </tr>
+  <tr>
+    <th>Restlessness</th>
+    <td><%= entry.restlessness %></td>
+  </tr>
+  <tr>
+    <th>Impulsivity</th>
+    <td><%= entry.impulsivity %></td>
+  </tr>
+  <tr>
+    <th>Side Effects</th>
+    <td><%= entry.side_effects %></td>
+  </tr>
+  <tr>
+    <th>Blood Pressure</th>
+    <td><%= entry.blood_pressure %></td>
+  </tr>
+  <tr>
+    <th>Weight</th>
+    <td><%= entry.weight %></td>
+  </tr>
+</table>
 
-  <div class="field is-horizontal">
-    <div class="field-label">
-      <!-- Left empty for spacing -->
-    </div>
-    <div class="field-body">
-      <div class="field">
-        <div class="control">
-          <%= f.submit "Update", class: "button is-primary" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>

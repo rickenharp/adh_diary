@@ -5,7 +5,7 @@
 
   <div class="field-body">
     <div class="<%= control_field_classes %>">
-      <%= f.date_field(field_name, class: date_field_classes, value: value) %>
+      <%= f.date_field(field_name, class: date_field_classes) %>
       <%= render("shared/forms/field_icon", icon_name: "calendar", align: "left") %>
       <%= render("field_errors", messages: errors) if error_field? %>
     </div>
