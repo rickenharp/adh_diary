@@ -423,7 +423,7 @@ DEPENDENCIES
   launchy
   puma
   rack-test
-  rackup
+  rackup (~> 1.0)
   rake
   rom-factory
   sqlite3
