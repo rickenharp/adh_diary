@@ -11,7 +11,13 @@ RSpec.feature "Entries", db: true do
     Factory.create(:user, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
   end
 
+  let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
+  let(:medikinet) { Factory.create(:medication, name: "Medikinet") }
+
   before(:each) do
+    lisdexamfetamin
+    medikinet
+
     visit "/login"
     fill_in "email", with: user.email
     fill_in "password", with: password
@@ -29,7 +35,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-08"
-    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    select "Lisdexamfetamin", from: "entry[medication_id]"
     fill_in "entry[dose]", with: "30"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
@@ -63,7 +69,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
-    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    select "Lisdexamfetamin", from: "entry[medication_id]"
     fill_in "entry[dose]", with: "30"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
@@ -95,7 +101,7 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "editing an entry" do
-    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user)
+    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user, medication: lisdexamfetamin)
 
     visit "/entries/#{entry.id}/edit"
 
@@ -114,8 +120,8 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "editing an entry invalidly" do
-    Factory.create(:entry, date: "2025-06-08", dose: 30, user: user)
-    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user)
+    Factory.create(:entry, date: "2025-06-08", dose: 30, user: user, medication: lisdexamfetamin)
+    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user, medication: lisdexamfetamin)
 
     visit "/entries/#{entry.id}/edit"
 
@@ -134,7 +140,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
-    fill_in "entry[medication]", with: "Lisdexamfetamin"
+    select "Lisdexamfetamin", from: "entry[medication_id]"
     fill_in "entry[dose]", with: "30"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
@@ -150,7 +156,8 @@ RSpec.feature "Entries", db: true do
     click_on("Create")
 
     visit "/entries/new"
-    expect(page).to have_field("entry[medication]", with: "Lisdexamfetamin")
+
+    expect(page).to have_select("entry[medication_id]", selected: "Lisdexamfetamin")
     expect(page).to have_field("entry[dose]", with: "30")
   end
 end

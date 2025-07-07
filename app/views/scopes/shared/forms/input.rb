@@ -32,6 +32,12 @@ module AdhDiary
               classes.join(" ")
             end
 
+            def select_field_classes
+              classes = %w[]
+              classes << "is-danger" if error_field?
+              classes.join(" ")
+            end
+
             def text_area_classes
               classes = %w[textarea]
               classes << "is-danger" if error_field?

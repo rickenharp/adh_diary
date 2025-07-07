@@ -5,6 +5,7 @@ module AdhDiary
     module Parts
       module Forms
         class Entry < AdhDiary::Views::Part
+          include Deps["repos.medication_repo"]
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def date_input(f)
@@ -68,8 +69,9 @@ module AdhDiary
           end
 
           def medication_input(f)
-            prepare_scope(f, :medication, icon_name: "pills", placeholder: "Lisdexamfetamin")
-              .render("shared/forms/text_field")
+            values = medication_repo.all.each_with_object({}) { _2[_1.name] = _1.id }
+            prepare_scope(f, :medication_id, icon_name: "pills", values: values, selected: value[:entry].medication_id)
+              .render("shared/forms/select_field")
           end
 
           def errors(key)

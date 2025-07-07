@@ -6,19 +6,19 @@ module AdhDiary
       commands update: :by_pk, delete: :by_pk
 
       def all(order: :asc)
-        entries.order { (order == :asc) ? date.asc : date.desc }.to_a
+        entries.combine(:medications).order { (order == :asc) ? date.asc : date.desc }.to_a
       end
 
       def get(id)
-        entries.by_pk(id).one!
+        entries.combine(:medications).by_pk(id).one!
       end
 
       def for(user_id, page: 1)
-        entries.where(user_id: user_id).order { date.asc }.page(page)
+        entries.combine(:medications).where(user_id: user_id).order { date.asc }.page(page)
       end
 
       def on(date)
-        entries.where(Sequel.lit("date(date) = ?", date.to_date.to_s))
+        entries.combine(:medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
       end
 
       def weeks_base
@@ -34,7 +34,7 @@ module AdhDiary
       end
 
       def for_week(the_week)
-        entries.select {
+        entries.left_join(:medications, id: :medication_id).select {
           [
             function(:strftime, "%Y-W%W", date).as(:week),
             integer.min(date).as(:from),
@@ -49,7 +49,15 @@ module AdhDiary
 
             string.group_concat(string.nullif(side_effects, "")).as(:side_effects),
             string.group_concat(blood_pressure).order(:date).as(:blood_pressure),
-            function(:json_extract, function(:json_group_array, weight), "$[#-1]").as(:weight)
+            function(:json_extract, function(:json_group_array, weight), "$[#-1]").as(:weight),
+            function(
+              :replace,
+              string.group_concat(
+                string.concat(Sequel[:medications][:name], " ", Sequel[:entries][:dose])
+              ).order(:date).distinct,
+              ",",
+              ", "
+            ).as(:medication)
           ]
         }.group { week }.having(week: the_week).one
       end

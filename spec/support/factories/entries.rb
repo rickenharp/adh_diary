@@ -1,6 +1,5 @@
 Factory.define(:entry) do |f|
   f.date { Date.today }
-  f.medication "Lisdexamfetamin"
   f.dose 30
   f.attention { (0..5).to_a.sample }
   f.organisation { (0..5).to_a.sample }
@@ -13,4 +12,5 @@ Factory.define(:entry) do |f|
   f.blood_pressure "126/74"
   f.weight 126.7
   f.association(:user)
+  f.association(:medication)
 end

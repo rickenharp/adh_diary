@@ -8,7 +8,7 @@ module AdhDiary
       class New < AdhDiary::View
         expose :entry do |last_medication: "", last_dose: ""|
           OpenStruct.new(
-            medication: last_medication,
+            medication_id: last_medication,
             dose: last_dose,
             date: Date.today
           )

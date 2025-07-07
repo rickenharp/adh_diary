@@ -1,0 +1,16 @@
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <%= f.label(field_name, class: "label") { label_text } %>
+  </div>
+
+  <div class="field-body">
+    <div class="control <%= control_field_classes %>">
+      <div class="select">
+        <%= f.select(field_name, values, options: {selected: selected}, class: select_field_classes) %>
+        <%= render("shared/forms/field_icon", icon_name: , align: 'left') if icon_name? %>
+        <%= render("field_errors", messages: errors) if error_field? %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -17,6 +17,10 @@
     <td>from <%= entry.from %> to <%= entry.to %></td>
   </tr>
   <tr>
+    <td>Mediation</td>
+    <td><%= entry.medication %></td>
+  </tr>
+  <tr>
     <td>Attention</td>
     <td><%= AdhDiary::Types::Strength[entry.attention] %></td>
   </tr>

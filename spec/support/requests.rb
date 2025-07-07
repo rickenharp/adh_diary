@@ -11,7 +11,9 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods, type: :request
   config.include_context "Rack::Test", type: :request
   config.include Warden::Test::Helpers, type: :request
+  config.include Warden::Test::Helpers, type: :feature
   config.before(:each, type: :request) { AdhDiary::App.prepare(:warden) }
   config.before(:each, type: :feature) { AdhDiary::App.prepare(:warden) }
   config.after(:each, type: :request) { Warden.test_reset! }
+  config.after(:each, type: :feature) { Warden.test_reset! }
 end

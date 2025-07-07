@@ -1,0 +1,39 @@
+<h1 class="title">Medications</h1>
+
+<p class="buttons">
+  <a class="button" href="<%= Hanami.app["routes"].path("new_medication") %>">
+    <span class="icon">
+      <i class="fab fa-plus"></i>
+    </span>
+    <span>Add Medication</span>
+  </a>
+</p>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  </tfoot>
+  <tbody>
+  <% medications.each do |medication|  %>
+  <tr>
+    <th><%= medication.id %></th>
+    <td><%= medication.name %></td>
+    <th>
+      <%= link_to "Edit", routes.path("edit_medication", id: medication.id), class: "button is-link" %>
+      <%= link_to "Delete", Hanami.app["routes"].path("delete_medication", id: medication.id), class: "button is-danger" %>
+    </th>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

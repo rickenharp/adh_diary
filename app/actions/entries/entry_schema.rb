@@ -7,7 +7,7 @@ module AdhDiary
         required(:entry).hash do
           required(:date).filled(:date)
           required(:dose).filled(:integer)
-          required(:medication).filled(:string)
+          required(:medication_id).filled(:integer)
           required(:attention).filled(:integer)
           required(:organisation).filled(:integer)
           required(:mood_swings).filled(:integer)
