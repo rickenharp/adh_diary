@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module AdhDiary
+  module Actions
+    module Medications
+      class Edit < AdhDiary::AuthenticatedAction
+        def handle(request, response)
+          response.render(view, id: request.params[:id])
+        end
+      end
+    end
+  end
+end

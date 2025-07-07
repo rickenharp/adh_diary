@@ -22,5 +22,13 @@ module AdhDiary
     patch "/entries/:id", to: "entries.update", as: "entry"
     get "/reports", to: "reports.index"
     get "/reports/:week", to: "reports.show", as: "report"
+
+    get "/medications", to: "medications.index", as: "medications"
+    get "/medications/:id/delete", to: "medications.delete", as: "delete_medication"
+    delete "/medications/:id", to: "medications.destroy", as: "destroy_medication"
+    get "/medications/new", to: "medications.new", as: "new_medication"
+    post "/medications", to: "medications.create", as: "create_medication"
+    get "/medications/:id/edit", to: "medications.edit", as: "edit_medication"
+    patch "/medications/:id", to: "medications.update", as: "update_medication"
   end
 end

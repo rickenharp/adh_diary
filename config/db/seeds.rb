@@ -13,3 +13,6 @@
 #
 #   categories = Hanami.app["relations.categories"]
 #   categories.insert(title: "General")
+medications = Hanami.app["relations.medications"]
+medications.dataset.insert_conflict.insert(name: "Lisdexamfetamin")
+medications.dataset.insert_conflict.insert(name: "Medikinet")

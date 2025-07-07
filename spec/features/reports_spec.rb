@@ -10,6 +10,7 @@ RSpec.feature "Entries", db: true do
     password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     Factory.create(:user, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
   end
+  let(:medication) { Factory.create(:medication, name: "Lisdexamfetamin") }
 
   before(:each) do
     visit "/login"
@@ -22,7 +23,7 @@ RSpec.feature "Entries", db: true do
     start_date = Date.parse("2025-06-02")
     end_date = Date.parse("2025-06-15")
     (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user)
+      Factory.create(:entry, date: date, user: user, medication: medication)
     end
 
     visit "/reports"
@@ -31,11 +32,11 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_content "2025-W23"
   end
 
-  scenario "visiting the reports page shows an entry" do
+  scenario "visiting the report detail page shows an entry" do
     start_date = Date.parse("2025-06-02")
     end_date = Date.parse("2025-06-15")
     (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user)
+      Factory.create(:entry, date: date, user: user, medication: medication)
     end
 
     visit "/reports/2025-W22"
