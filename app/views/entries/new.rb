@@ -14,8 +14,9 @@ module AdhDiary
           )
         end
 
-        expose(:form, as: Parts::Forms::Entry) do |values: {}, errors: {}|
+        expose(:form, as: Parts::Forms::Entry) do |entry, values: {}, errors: {}|
           {
+            entry: entry,
             values: values,
             errors: errors
           }

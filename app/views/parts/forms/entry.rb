@@ -76,6 +76,10 @@ module AdhDiary
             value.dig(:errors, key).to_a
           end
 
+          def html_form(url:, action:, http_method: "post")
+            render("entries/form", url: url, entry: value[:entry], action: action, http_method: http_method)
+          end
+
           private
 
           def prepare_scope(f, field_name, **options)
