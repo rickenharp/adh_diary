@@ -4,6 +4,7 @@ module AdhDiary
       schema(:users, infer: true) do
         associations do
           has_many :entries
+          has_many :medication_schedules
         end
       end
     end

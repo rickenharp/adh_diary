@@ -6,6 +6,7 @@ module AdhDiary
       schema :medications, infer: true do
         associations do
           has_many :entries
+          has_many :medication_schedules
         end
       end
     end
