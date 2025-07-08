@@ -23,7 +23,7 @@ module AdhDiary
 
             response.render(
               view,
-              values: request.params[:entry],
+              values: request.params[:medication],
               errors: errors
             )
           end
