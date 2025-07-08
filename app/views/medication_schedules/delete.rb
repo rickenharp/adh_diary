@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-require "ostruct"
 module AdhDiary
   module Views
     module MedicationSchedules
-      class Index < AdhDiary::View
+      class Delete < AdhDiary::View
         include Deps["repos.medication_schedule_repo"]
 
-        expose :medication_schedules do
-          medication_schedule_repo.all
+        expose :medication_schedule do |id:|
+          medication_schedule_repo.get(id)
         end
       end
     end

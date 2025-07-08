@@ -20,7 +20,7 @@ RSpec.feature "Medication schedules", db: true do
       expect(page).to have_content "Please log in"
     end
 
-    xscenario "delete redirects to login" do
+    scenario "delete redirects to login" do
       medication_schedule = Factory.create(:medication_schedule)
       visit "/medication_schedules/#{medication_schedule.id}/delete"
 
@@ -47,20 +47,28 @@ RSpec.feature "Medication schedules", db: true do
       expect(page).to have_content "Lisdexamfetamin 30 0 0 0"
     end
 
-    xscenario "delete medication schedule" do
-      Factory.create(:medication, name: "Lisdexamfetamin")
-      Factory.create(:medication, name: "Medikinet")
+    scenario "delete medication schedule" do
+      Factory.create(
+        :medication_schedule,
+        user: user,
+        medication: medication,
+        morning: 30,
+        noon: 0,
+        evening: 0,
+        before_bed: 0
+      )
 
-      visit "/medications"
-      within all("tbody/tr")[1] do
+      visit "/medication_schedules"
+
+      within all("tbody/tr")[0] do
         click_on "Delete"
       end
 
-      expect(page).to have_content "Delete Medikinet?"
+      expect(page).to have_content "Delete Lisdexamfetamin 30-0-0-0?"
 
       click_on("Confirm")
-      expect(page).to have_content "Medication deleted"
-      expect(page).not_to have_content "Medikinet"
+      expect(page).to have_content "Medication schedule deleted"
+      expect(page).not_to have_content "Lisdexamfetamin 30 0 0 0"
     end
 
     scenario "create medication schedule" do

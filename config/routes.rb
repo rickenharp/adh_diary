@@ -36,5 +36,7 @@ module AdhDiary
     patch "/medication_schedules/:id", to: "medication_schedules.update", as: "update_medication_schedule"
     get "/medication_schedules/new", to: "medication_schedules.new", as: "new_medication_schedule"
     post "/medication_schedules", to: "medication_schedules.create", as: "create_medication_schedule"
+    get "/medication_schedules/:id/delete", to: "medication_schedules.delete", as: "delete_medication_schedule"
+    delete "/medication_schedules/:id", to: "medication_schedules.destroy", as: "destroy_medication_schedule"
   end
 end

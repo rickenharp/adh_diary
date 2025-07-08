@@ -10,7 +10,7 @@ module AdhDiary
       end
 
       def get(id)
-        medication_schedules.by_pk(id).one!
+        medication_schedules.combine(:medications).by_pk(id).one!
       end
 
       def create(attributes)
