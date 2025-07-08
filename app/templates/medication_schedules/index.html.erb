@@ -1,7 +1,7 @@
 <h1 class="title">Medication Schedules</h1>
 
 <p class="buttons">
-  <a class="button" href="<%#= routes.path("new_medication_schedule") %>">
+  <a class="button" href="<%= routes.path("new_medication_schedule") %>">
     <span class="icon">
       <i class="fab fa-plus"></i>
     </span>
@@ -42,7 +42,7 @@
       <td><%= medication_schedule.evening.to_i %></td>
       <td><%= medication_schedule.before_bed.to_i %></td>
       <th>
-        <%= link_to "Edit", "#", class: "button is-link" %>
+        <%= link_to "Edit", routes.path("edit_medication_schedule", id: medication_schedule.id), class: "button is-link" %>
         <%= link_to "Delete", "#", class: "button is-danger" %>
       </th>
     </tr>

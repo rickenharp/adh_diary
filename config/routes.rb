@@ -32,5 +32,9 @@ module AdhDiary
     patch "/medications/:id", to: "medications.update", as: "update_medication"
 
     get "/medication_schedules", to: "medication_schedules.index", as: "medication_schedules"
+    get "/medication_schedules/:id/edit", to: "medication_schedules.edit", as: "edit_medication_schedule"
+    patch "/medication_schedules/:id", to: "medication_schedules.update", as: "update_medication_schedule"
+    get "/medication_schedules/new", to: "medication_schedules.new", as: "new_medication_schedule"
+    post "/medication_schedules", to: "medication_schedules.create", as: "create_medication_schedule"
   end
 end

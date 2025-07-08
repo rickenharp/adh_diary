@@ -14,20 +14,20 @@ RSpec.feature "Medication schedules", db: true do
       expect(page).to have_content "Please log in"
     end
 
-    xscenario "new redirects to login" do
+    scenario "new redirects to login" do
       visit "/medication_schedules/new"
 
       expect(page).to have_content "Please log in"
     end
 
     xscenario "delete redirects to login" do
-      medication = Factory.create(:medication)
-      visit "/medication_schedules/#{medication.id}/delete"
+      medication_schedule = Factory.create(:medication_schedule)
+      visit "/medication_schedules/#{medication_schedule.id}/delete"
 
       expect(page).to have_content "Please log in"
     end
 
-    xscenario "edit redirects to login" do
+    scenario "edit redirects to login" do
       medication_schedule = Factory.create(:medication_schedule, user: user, medication: medication)
       visit "/medication_schedules/#{medication_schedule.id}/edit"
 
@@ -47,7 +47,7 @@ RSpec.feature "Medication schedules", db: true do
       expect(page).to have_content "Lisdexamfetamin 30 0 0 0"
     end
 
-    xscenario "delete medication" do
+    xscenario "delete medication schedule" do
       Factory.create(:medication, name: "Lisdexamfetamin")
       Factory.create(:medication, name: "Medikinet")
 
@@ -63,47 +63,49 @@ RSpec.feature "Medication schedules", db: true do
       expect(page).not_to have_content "Medikinet"
     end
 
-    xscenario "create medication" do
-      visit "/medications"
+    scenario "create medication schedule" do
+      medication
+      visit "/medication_schedules"
 
-      click_on("Add Medication")
+      click_on("Add Medication Schedule")
 
-      fill_in "medication[name]", with: "Lisdexamfetamin"
+      select "Lisdexamfetamin", from: "medication_schedule[medication_id]"
 
       click_on("Create")
-      expect(page).to have_content "Medication was successfully created"
+      expect(page).to have_content "Medication schedule was successfully created"
       expect(page).to have_content "Lisdexamfetamin"
     end
 
-    xscenario "create invalid medication" do
-      visit "/medications"
+    scenario "create invalid medication" do
+      visit "/medication_schedules"
 
-      click_on("Add Medication")
+      click_on("Add Medication Schedule")
+      fill_in "medication_schedule[morning]", with: nil
 
       click_on("Create")
-      expect(page).to have_content "Could not create medication"
+      expect(page).to have_content "Could not create medication schedule"
       expect(page).to have_content "must be filled"
     end
 
-    xscenario "edit medication" do
-      medication = Factory.create(:medication, name: "Lisdexamfetamin")
-      visit "/medications/#{medication.id}/edit"
+    scenario "edit medication schedule" do
+      medication_schedule = Factory.create(:medication_schedule, medication: medication, user: user, morning: 30)
+      visit "/medication_schedules/#{medication_schedule.id}/edit"
 
-      fill_in "medication[name]", with: "Apple"
+      fill_in "medication_schedule[morning]", with: 40
 
       click_on("Update")
-      expect(page).to have_content "Medication successfully updated"
-      expect(page).to have_content "Apple"
+      expect(page).to have_content "Medication schedule successfully updated"
+      expect(page).to have_content "40"
     end
 
-    xscenario "invalid edit medication" do
-      medication = Factory.create(:medication, name: "Lisdexamfetamin")
-      visit "/medications/#{medication.id}/edit"
+    scenario "invalid edit medication" do
+      medication_schedule = Factory.create(:medication_schedule, medication: medication, user: user, morning: 30)
+      visit "/medication_schedules/#{medication_schedule.id}/edit"
 
-      fill_in "medication[name]", with: ""
+      fill_in "medication_schedule[morning]", with: nil
 
       click_on("Update")
-      expect(page).to have_content "Could not update medication"
+      expect(page).to have_content "Could not update medication schedule"
       expect(page).to have_content "must be filled"
     end
   end
