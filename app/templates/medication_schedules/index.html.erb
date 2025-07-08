@@ -1,0 +1,51 @@
+<h1 class="title">Medication Schedules</h1>
+
+<p class="buttons">
+  <a class="button" href="<%#= routes.path("new_medication_schedule") %>">
+    <span class="icon">
+      <i class="fab fa-plus"></i>
+    </span>
+    <span>Add Medication Schedule</span>
+  </a>
+</p>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Medication</th>
+    <th>Morning</th>
+    <th>Noon</th>
+    <th>Evening</th>
+    <th>Before Bed</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>Id</th>
+    <th>Medication</th>
+    <th>Morning</th>
+    <th>Noon</th>
+    <th>Evening</th>
+    <th>Before Bed</th>
+    <th></th>
+  </tr>
+  </tfoot>
+  <tbody>
+  <% medication_schedules.each do |medication_schedule|  %>
+    <tr>
+      <th><%= medication_schedule.id %></th>
+      <td><%= medication_schedule.medication.name %></td>
+      <td><%= medication_schedule.morning.to_i %></td>
+      <td><%= medication_schedule.noon.to_i %></td>
+      <td><%= medication_schedule.evening.to_i %></td>
+      <td><%= medication_schedule.before_bed.to_i %></td>
+      <th>
+        <%= link_to "Edit", "#", class: "button is-link" %>
+        <%= link_to "Delete", "#", class: "button is-danger" %>
+      </th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

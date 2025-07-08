@@ -31,6 +31,16 @@ CREATE TABLE `entries`(
   FOREIGN KEY(`user_id`) REFERENCES `users` ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE INDEX `entries_date_index` ON `entries`(`date`);
+CREATE TABLE `medication_schedules`(
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `medication_id` integer REFERENCES `medications`,
+  `user_id` integer REFERENCES `users`,
+  `morning` double precision DEFAULT(0),
+  `noon` double precision DEFAULT(0),
+  `evening` double precision DEFAULT(0),
+  `before_bed` double precision DEFAULT(0),
+  `notes` varchar(255)
+);
 INSERT INTO schema_migrations (filename) VALUES
 ('20250609113142_create_entries.rb'),
 ('20250611091712_create_users.rb'),
@@ -39,4 +49,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250619160833_add_medication_to_entry.rb'),
 ('20250620154450_make_email_unique.rb'),
 ('20250707111925_add_medications.rb'),
-('20250707162552_make_user_medications_foreign_key.rb');
+('20250707162552_make_user_medications_foreign_key.rb'),
+('20250708121437_add_medication_schedule.rb');

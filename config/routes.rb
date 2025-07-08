@@ -30,5 +30,7 @@ module AdhDiary
     post "/medications", to: "medications.create", as: "create_medication"
     get "/medications/:id/edit", to: "medications.edit", as: "edit_medication"
     patch "/medications/:id", to: "medications.update", as: "update_medication"
+
+    get "/medication_schedules", to: "medication_schedules.index", as: "medication_schedules"
   end
 end
