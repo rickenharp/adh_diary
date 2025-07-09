@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Reports
-      class Index < AdhDiary::Action
+      class Index < AdhDiary::AuthenticatedAction
         def handle(request, response)
         end
       end

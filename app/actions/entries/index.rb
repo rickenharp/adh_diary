@@ -8,7 +8,6 @@ module AdhDiary
           response.render(
             view,
             selected_id: request.params[:id].to_i,
-            user_id: request.session[:user_id],
             page: (request.params[:page] || 1).to_i
           )
         end

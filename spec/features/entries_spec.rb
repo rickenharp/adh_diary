@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "bcrypt"
 
 RSpec.feature "Entries", db: true do
   let(:password) { "password" }
-  let(:user) do
-    password_salt = BCrypt::Engine.generate_salt
-    password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    Factory.create(:user, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
-  end
+  let(:user) { Factory.create(:user) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
   let(:medikinet) { Factory.create(:medication, name: "Medikinet") }
@@ -18,10 +13,7 @@ RSpec.feature "Entries", db: true do
     lisdexamfetamin
     medikinet
 
-    visit "/login"
-    fill_in "email", with: user.email
-    fill_in "password", with: password
-    click_on("Log in")
+    login_as(user)
   end
 
   scenario "visiting the entries page shows an entry" do
@@ -49,7 +41,6 @@ RSpec.feature "Entries", db: true do
     fill_in("Weight", with: "126.7")
 
     click_on("Create")
-    # save_and_open_page
 
     expect(page).to have_content "Entry created"
     expect(page).to have_content "2025-06-08"
@@ -65,7 +56,7 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "creating an entry with existing date" do
-    Factory.create(:entry, date: "2025-06-09")
+    Factory.create(:entry, date: "2025-06-09", user: user)
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
