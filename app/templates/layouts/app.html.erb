@@ -48,7 +48,7 @@
           <div class="navbar-item">
             <div class="buttons">
               <% unless warden.user %>
-                <%= link_to("Sign up", AdhDiary::App["routes"].path(:sign_up), class:"button is-light is-primary") %>
+                <%= link_to("Sign up", routes.path(:sign_up), class:"button is-light is-primary") %>
               <% end %>
               <% if warden.user %>
                 <%= form_for :logout, 'logout', method: :delete do %>

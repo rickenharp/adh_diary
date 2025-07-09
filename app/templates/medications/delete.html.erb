@@ -1,6 +1,6 @@
 <h1 class="title">Delete <%= medication.name %>?</h1>
 
-<%= form_for :medication, AdhDiary::App["routes"].path("destroy_medication", id: medication.id), method: :delete do |f| %>
+<%= form_for :medication, routes.path("destroy_medication", id: medication.id), method: :delete do |f| %>
   <%= f.submit "Confirm", name: "action", value: "confirm", class: "button is-danger" %>
   <%= f.submit "Cancel", name: "action", value: "cancel", class: "button is-link" %>
 <% end %>
