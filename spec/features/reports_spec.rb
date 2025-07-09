@@ -1,29 +1,22 @@
 # frozen_string_literal: true
 
 require "rspec"
-require "bcrypt"
 
 RSpec.feature "Entries", db: true do
   let(:password) { "password" }
-  let(:user) do
-    password_salt = BCrypt::Engine.generate_salt
-    password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    Factory.create(:user, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
-  end
+  let(:user) { Factory.create(:user) }
   let(:medication) { Factory.create(:medication, name: "Lisdexamfetamin") }
+  let(:medication_schedule) { Factory.create(:medication_schedule, medication: medication, morning: 30, user: user) }
 
   before(:each) do
-    visit "/login"
-    fill_in "email", with: user.email
-    fill_in "password", with: password
-    click_on("Log in")
+    login_as(user)
   end
 
   scenario "visiting the reports page shows an entry" do
     start_date = Date.parse("2025-06-02")
     end_date = Date.parse("2025-06-15")
     (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user, medication: medication)
+      Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule)
     end
 
     visit "/reports"
@@ -36,7 +29,7 @@ RSpec.feature "Entries", db: true do
     start_date = Date.parse("2025-06-02")
     end_date = Date.parse("2025-06-15")
     (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user, medication: medication)
+      Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule)
     end
 
     visit "/reports/2025-W22"

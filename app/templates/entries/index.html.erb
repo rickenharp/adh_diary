@@ -49,7 +49,7 @@
   <% entries.each do |entry| %>
   <tr>
     <td class="date"><%= link_to entry.date, routes.path(:entry, id: entry.id) %></td>
-    <td class="medication"><%= entry.medication.name %> (<%= entry.dose %>mg)</td>
+    <td class="medication"><%= entry.medication_schedule.long_name %></td>
     <td class="attention"><%= AdhDiary::Types::Strength[entry.attention]  %></td>
     <td class="organisation"><%= AdhDiary::Types::Strength[entry.organisation] %></td>
     <td class="mood-swings"><%= AdhDiary::Types::Strength[entry.mood_swings] %></td>

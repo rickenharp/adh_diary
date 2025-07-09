@@ -8,7 +8,8 @@ module AdhDiary
       schema :entries, infer: true do
         associations do
           belongs_to :user
-          belongs_to :medication
+          belongs_to :medication_schedule
+          has_one :medication, through: :medication_schedules
         end
       end
     end

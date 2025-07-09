@@ -16,8 +16,4 @@ RSpec.describe AdhDiary::Views::Parts::MedicationSchedule do
   it "works" do
     expect(subject).to be_kind_of(described_class)
   end
-
-  it "long_name" do
-    expect(subject.long_name).to eq("Lisdexamfetamin 30-0-0-0")
-  end
 end

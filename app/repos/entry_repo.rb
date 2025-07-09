@@ -4,15 +4,19 @@ module AdhDiary
   module Repos
     class EntryRepo < AdhDiary::DB::Repo
       def all(order: :asc, page: 1)
-        entries.combine(:medications).where(user_id: user.id).order { (order == :asc) ? date.asc : date.desc }.page(page)
+        entries.combine(medication_schedules: :medications).where(user_id: user.id).order { (order == :asc) ? date.asc : date.desc }.page(page)
+      end
+
+      def last_entry
+        entries.where(user_id: user.id).order { date.desc }.limit(1).one
       end
 
       def get(id)
-        entries.where(user_id: user.id).combine(:medications).by_pk(id).one!
+        entries.where(user_id: user.id).combine(medication_schedules: :medications).by_pk(id).one!
       end
 
       def on(date)
-        entries.where(user_id: user.id).combine(:medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
+        entries.where(user_id: user.id).combine(medication_schedules: :medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
       end
 
       def weeks_base
@@ -28,7 +32,7 @@ module AdhDiary
       end
 
       def for_week(the_week)
-        entries.left_join(:medications, id: :medication_id).where(user_id: user.id).select {
+        entries.left_join(:medications).where(Sequel[:entries][:user_id] => user.id).select {
           [
             function(:strftime, "%Y-W%W", date).as(:week),
             integer.min(date).as(:from),
@@ -47,7 +51,13 @@ module AdhDiary
             function(
               :replace,
               string.group_concat(
-                string.concat(Sequel[:medications][:name], " ", Sequel[:entries][:dose])
+                string.concat(
+                  Sequel[:medications][:name], " ",
+                  integer.cast(Sequel[:medication_schedules][:morning]), "-",
+                  integer.cast(Sequel[:medication_schedules][:noon]), "-",
+                  integer.cast(Sequel[:medication_schedules][:evening]), "-",
+                  integer.cast(Sequel[:medication_schedules][:before_bed])
+                )
               ).order(:date).distinct,
               ",",
               ", "

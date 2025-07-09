@@ -1,7 +1,6 @@
 <%= form_for :entry, url, method: http_method do |f| %>
   <%= form.date_input(f) %>
-  <%= form.medication_input(f) %>
-  <%= form.dose_input(f) %>
+  <%= form.medication_schedule_input(f) %>
   <%= form.attention_input(f) %>
   <%= form.organisation_input(f) %>
   <%= form.mood_swings_input(f) %>

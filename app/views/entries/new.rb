@@ -6,10 +6,11 @@ module AdhDiary
   module Views
     module Entries
       class New < AdhDiary::View
-        expose :entry do |last_medication: "", last_dose: ""|
+        include Deps["repos.entry_repo"]
+
+        expose :entry do
           OpenStruct.new(
-            medication_id: last_medication,
-            dose: last_dose,
+            medication_schedule_id: entry_repo.last_entry&.medication_schedule_id,
             date: Date.today
           )
         end

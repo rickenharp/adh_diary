@@ -7,6 +7,7 @@ module AdhDiary
         associations do
           belongs_to :medication
           belongs_to :user
+          has_many :entries
         end
       end
     end
