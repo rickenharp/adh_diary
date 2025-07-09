@@ -4,10 +4,10 @@ module AdhDiary
   module Views
     module Reports
       class Index < AdhDiary::View
-        include Deps["repos.entry_repo"]
+        include Deps["repos.weekly_report_repo"]
 
         expose :weeks do
-          entry_repo.weeks
+          weekly_report_repo.weeks
         end
       end
     end

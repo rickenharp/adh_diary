@@ -31,9 +31,47 @@ ROM::SQL.migration do
       drop_foreign_key :medication_id
       drop_column :dose
     end
+
+    create_or_replace_view(
+      :weekly_reports,
+      Hanami.app["relations.entries"].left_join(:medications).select {
+        [
+          user_id,
+          function(:strftime, "%Y-W%W", date).as(:week),
+          integer.min(date).as(:from),
+          integer.max(date).as(:to),
+          integer.cast(function(:round, function(:avg, attention))).as(:attention),
+          integer.cast(function(:round, function(:avg, organisation))).as(:organisation),
+          integer.cast(function(:round, function(:avg, mood_swings))).as(:mood_swings),
+          integer.cast(function(:round, function(:avg, stress_sensitivity))).as(:stress_sensitivity),
+          integer.cast(function(:round, function(:avg, irritability))).as(:irritability),
+          integer.cast(function(:round, function(:avg, restlessness))).as(:restlessness),
+          integer.cast(function(:round, function(:avg, impulsivity))).as(:impulsivity),
+
+          string.group_concat(string.nullif(side_effects, "")).as(:side_effects),
+          string.group_concat(blood_pressure).order(:date).as(:blood_pressure),
+          function(:json_extract, function(:json_group_array, weight), "$[#-1]").as(:weight),
+          function(
+            :replace,
+            string.group_concat(
+              string.concat(
+                Sequel[:medications][:name], " ",
+                integer.cast(Sequel[:medication_schedules][:morning]), "-",
+                integer.cast(Sequel[:medication_schedules][:noon]), "-",
+                integer.cast(Sequel[:medication_schedules][:evening]), "-",
+                integer.cast(Sequel[:medication_schedules][:before_bed])
+              )
+            ).order(:date).distinct,
+            ",",
+            ", "
+          ).as(:medication)
+        ]
+      }.group { week }.dataset
+    )
   end
 
   down do
+    drop_view(:weekly_reports)
     alter_table(:entries) do
       add_foreign_key :medication_id, :medications
       add_column :dose, Float
