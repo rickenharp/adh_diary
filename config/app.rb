@@ -4,6 +4,7 @@ require "hanami"
 require "warden"
 begin
   require "amazing_print"
+  require "pry"
 rescue LoadError
   # Just ignore this outside of development and test
 end

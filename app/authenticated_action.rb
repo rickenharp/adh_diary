@@ -4,13 +4,18 @@
 
 require "hanami/action"
 require "dry/monads"
+require "dry-effects"
 
 module AdhDiary
   class AuthenticatedAction < AdhDiary::Action
+    include Dry::Effects::Handler.Reader(:user)
+
     before :authenticate_user
 
-    def current_user
-      request.env["warden"].user
+    def call(env)
+      with_user(env["warden"].user) do
+        super
+      end
     end
 
     private

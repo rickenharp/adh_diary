@@ -5,22 +5,17 @@ module AdhDiary
     class Update < AdhDiary::Operation
       include Deps["repos.entry_repo", "actions.entries.update_contract"]
 
-      def call(params, user_id)
+      def call(params)
         attrs = step validate(params.to_h)
-        entry = step merge(attrs, user_id)
-        step update(params[:id], entry)
+        step update(params[:id], attrs[:entry])
       end
 
       def validate(params)
         update_contract.call(params).to_monad
       end
 
-      def merge(attrs, user_id)
-        Success(attrs.to_h.fetch(:entry).merge(user_id: user_id))
-      end
-
-      def update(id, entry)
-        Success(entry_repo.update(id, entry))
+      def update(id, attrs)
+        Success(entry_repo.update(id, attrs))
       end
     end
   end

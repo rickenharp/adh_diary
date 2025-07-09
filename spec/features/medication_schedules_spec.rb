@@ -3,6 +3,10 @@ RSpec.feature "Medication schedules", db: true do
     Factory.create(:user, name: "Some Guy")
   end
 
+  let(:other_user) do
+    Factory.create(:user, name: "Some Other Guy")
+  end
+
   let(:medication) do
     Factory.create(:medication, name: "Lisdexamfetamin")
   end
@@ -42,9 +46,12 @@ RSpec.feature "Medication schedules", db: true do
 
     scenario "index shows all medication_schedules" do
       Factory.create(:medication_schedule, user: user, medication: medication)
+      Factory.create(:medication_schedule, user: other_user, medication: medication, morning: 70)
+
       visit "/medication_schedules"
 
       expect(page).to have_content "Lisdexamfetamin 30 0 0 0"
+      expect(page).to_not have_content "Lisdexamfetamin 70 0 0 0"
     end
 
     scenario "delete medication schedule" do

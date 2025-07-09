@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module MedicationSchedules
-      class Destroy < AdhDiary::Action
+      class Destroy < AdhDiary::AuthenticatedAction
         include Deps["routes", "repos.medication_schedule_repo"]
 
         params do

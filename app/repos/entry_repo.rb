@@ -3,26 +3,20 @@
 module AdhDiary
   module Repos
     class EntryRepo < AdhDiary::DB::Repo
-      commands update: :by_pk, delete: :by_pk
-
-      def all(order: :asc)
-        entries.combine(:medications).order { (order == :asc) ? date.asc : date.desc }.to_a
+      def all(order: :asc, page: 1)
+        entries.combine(:medications).where(user_id: user.id).order { (order == :asc) ? date.asc : date.desc }.page(page)
       end
 
       def get(id)
-        entries.combine(:medications).by_pk(id).one!
-      end
-
-      def for(user_id, page: 1)
-        entries.combine(:medications).where(user_id: user_id).order { date.asc }.page(page)
+        entries.where(user_id: user.id).combine(:medications).by_pk(id).one!
       end
 
       def on(date)
-        entries.combine(:medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
+        entries.where(user_id: user.id).combine(:medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
       end
 
       def weeks_base
-        entries.select { [function(:strftime, "%Y-W%W", date).as(:week)] }.group { week }.order(:date)
+        entries.where(user_id: user.id).select { [function(:strftime, "%Y-W%W", date).as(:week)] }.group { week }.order(:date)
       end
 
       def weeks
@@ -34,7 +28,7 @@ module AdhDiary
       end
 
       def for_week(the_week)
-        entries.left_join(:medications, id: :medication_id).select {
+        entries.left_join(:medications, id: :medication_id).where(user_id: user.id).select {
           [
             function(:strftime, "%Y-W%W", date).as(:week),
             integer.min(date).as(:from),
@@ -63,7 +57,15 @@ module AdhDiary
       end
 
       def create(attributes)
-        entries.changeset(:create, attributes).commit
+        entries.changeset(:create, attributes.merge(user_id: user.id)).commit
+      end
+
+      def update(id, attributes)
+        entries.where(user_id: user.id).by_pk(id).changeset(:update, attributes).commit
+      end
+
+      def delete(id)
+        entries.where(user_id: user.id).by_pk(id).changeset(:delete).commit
       end
     end
   end

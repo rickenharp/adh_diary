@@ -7,7 +7,7 @@ module AdhDiary
         include Deps["repos.entry_repo", "entries.create"]
 
         def handle(request, response)
-          case create.call(request.params, request.session[:user_id])
+          case create.call(request.params)
           in Success(entry)
             request.session[:last_medication] = request.params[:entry][:medication_id]
             request.session[:last_dose] = request.params[:entry][:dose]

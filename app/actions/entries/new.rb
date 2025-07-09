@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Entries
-      class New < AdhDiary::Action
+      class New < AdhDiary::AuthenticatedAction
         def handle(request, response)
           response.render view, last_medication: request.session[:last_medication], last_dose: request.session[:last_dose]
         end

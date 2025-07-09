@@ -29,6 +29,7 @@ group :development, :test do
   gem "dotenv"
   gem "standard"
   gem "irb"
+  gem "pry"
   gem "launchy"
 end
 
@@ -49,3 +50,5 @@ group :test do
   gem "capybara"
   gem "rack-test"
 end
+
+gem "dry-effects", "~> 0.5.0"

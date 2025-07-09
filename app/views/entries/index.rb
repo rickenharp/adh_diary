@@ -6,12 +6,12 @@ module AdhDiary
       class Index < AdhDiary::View
         include Deps["repos.entry_repo"]
 
-        expose :entries do |user_id:, page: 1|
-          entry_repo.for(user_id, page: page)
+        expose :entries do |page: 1|
+          entry_repo.all(page: page)
         end
 
-        expose :pager do |user_id:, page: 1|
-          entry_repo.for(user_id, page: page).pager
+        expose :pager do |page: 1|
+          entry_repo.all(page: page).pager
         end
 
         expose :selected_id do |selected_id:|
