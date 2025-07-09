@@ -7,7 +7,6 @@ module AdhDiary
         def handle(request, response)
           response.render(
             view,
-            selected_id: request.params[:id].to_i,
             page: (request.params[:page] || 1).to_i
           )
         end

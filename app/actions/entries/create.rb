@@ -12,7 +12,7 @@ module AdhDiary
             request.session[:last_medication] = request.params[:entry][:medication_id]
             request.session[:last_dose] = request.params[:entry][:dose]
             response.flash[:notice] = "Entry created"
-            response.redirect_to routes.path(:entries, id: entry[:id])
+            response.redirect_to routes.path(:entries)
           in Failure(validation)
             response.flash.now[:alert] = "Could not create entry"
             errors = validation.errors[:entry].to_h

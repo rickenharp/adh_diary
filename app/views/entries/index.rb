@@ -13,10 +13,6 @@ module AdhDiary
         expose :pager do |page: 1|
           entry_repo.all(page: page).pager
         end
-
-        expose :selected_id do |selected_id:|
-          selected_id.to_i
-        end
       end
     end
   end
