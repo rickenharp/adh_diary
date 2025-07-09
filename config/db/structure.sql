@@ -11,6 +11,16 @@ CREATE TABLE `medications`(
   `id` integer NOT NULL PRIMARY KEY,
   `name` varchar(255) NOT NULL UNIQUE
 );
+CREATE TABLE `medication_schedules`(
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `medication_id` integer REFERENCES `medications`,
+  `user_id` integer REFERENCES `users`,
+  `morning` double precision DEFAULT(0),
+  `noon` double precision DEFAULT(0),
+  `evening` double precision DEFAULT(0),
+  `before_bed` double precision DEFAULT(0),
+  `notes` varchar(255)
+);
 CREATE TABLE `entries`(
   `id` INTEGER DEFAULT(NULL) NOT NULL PRIMARY KEY AUTOINCREMENT,
   `date` date DEFAULT(NULL) NOT NULL UNIQUE,
@@ -25,22 +35,11 @@ CREATE TABLE `entries`(
   `blood_pressure` varchar(255) DEFAULT(NULL) NULL,
   `weight` double precision DEFAULT(NULL) NOT NULL,
   `user_id` INTEGER DEFAULT(NULL) NULL,
-  `dose` INTEGER DEFAULT(0) NULL,
-  `medication_id` INTEGER DEFAULT(NULL) NOT NULL,
-  FOREIGN KEY(`medication_id`) REFERENCES `medications` ON DELETE NO ACTION ON UPDATE NO ACTION,
+  `medication_schedule_id` INTEGER DEFAULT(NULL) NOT NULL,
+  FOREIGN KEY(`medication_schedule_id`) REFERENCES `medication_schedules` ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY(`user_id`) REFERENCES `users` ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE INDEX `entries_date_index` ON `entries`(`date`);
-CREATE TABLE `medication_schedules`(
-  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `medication_id` integer REFERENCES `medications`,
-  `user_id` integer REFERENCES `users`,
-  `morning` double precision DEFAULT(0),
-  `noon` double precision DEFAULT(0),
-  `evening` double precision DEFAULT(0),
-  `before_bed` double precision DEFAULT(0),
-  `notes` varchar(255)
-);
 INSERT INTO schema_migrations (filename) VALUES
 ('20250609113142_create_entries.rb'),
 ('20250611091712_create_users.rb'),
@@ -50,4 +49,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250620154450_make_email_unique.rb'),
 ('20250707111925_add_medications.rb'),
 ('20250707162552_make_user_medications_foreign_key.rb'),
-('20250708121437_add_medication_schedule.rb');
+('20250708121437_add_medication_schedule.rb'),
+('20250709152754_switch_entries_to_medication_schedule.rb');

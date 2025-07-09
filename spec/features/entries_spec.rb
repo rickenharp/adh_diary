@@ -7,11 +7,17 @@ RSpec.feature "Entries", db: true do
   let(:user) { Factory.create(:user) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
-  let(:medikinet) { Factory.create(:medication, name: "Medikinet") }
+  let(:medication_schedule) do
+    Factory.create(
+      :medication_schedule,
+      medication: lisdexamfetamin,
+      morning: 30,
+      user: user
+    )
+  end
 
   before(:each) do
-    lisdexamfetamin
-    medikinet
+    medication_schedule
 
     login_as(user)
   end
@@ -27,8 +33,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-08"
-    select "Lisdexamfetamin", from: "entry[medication_id]"
-    fill_in "entry[dose]", with: "30"
+    select "Lisdexamfetamin 30-0-0-0", from: "entry[medication_schedule_id]"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
     choose "entry[mood_swings]", option: "2"
@@ -60,8 +65,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
-    select "Lisdexamfetamin", from: "entry[medication_id]"
-    fill_in "entry[dose]", with: "30"
+    select "Lisdexamfetamin 30-0-0-0", from: "entry[medication_schedule_id]"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
     choose "entry[mood_swings]", option: "2"
@@ -92,14 +96,14 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "editing an entry" do
-    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user, medication: lisdexamfetamin)
+    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
 
     visit "/entries/#{entry.id}/edit"
 
     expect(page).to have_field "Date", with: "2025-06-09"
-    expect(page).to have_field "Dose", with: "30"
+    expect(page).to have_field "Medication schedule", with: 1
 
-    fill_in "entry[dose]", with: "70"
+    fill_in "entry[side_effects]", with: "Death"
 
     click_on("Update")
 
@@ -107,17 +111,17 @@ RSpec.feature "Entries", db: true do
 
     visit "/entries/#{entry.id}"
 
-    expect(page).to have_content "Medication Lisdexamfetamin 70"
+    expect(page).to have_content "Death"
   end
 
   scenario "editing an entry invalidly" do
-    Factory.create(:entry, date: "2025-06-08", dose: 30, user: user, medication: lisdexamfetamin)
-    entry = Factory.create(:entry, date: "2025-06-09", dose: 30, user: user, medication: lisdexamfetamin)
+    Factory.create(:entry, date: "2025-06-08", user: user, medication_schedule: medication_schedule)
+    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
 
     visit "/entries/#{entry.id}/edit"
 
     expect(page).to have_field "Date", with: "2025-06-09"
-    expect(page).to have_field "Dose", with: "30"
+    expect(page).to have_field "Medication schedule", with: 1
 
     fill_in "entry[date]", with: "2025-06-08"
 
@@ -127,12 +131,17 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_content "already exists"
   end
 
-  scenario "remember last used medication and dose" do
+  scenario "remember last used medication schedule" do
+    Factory.create(
+      :medication_schedule,
+      medication: lisdexamfetamin,
+      morning: 40,
+      user: user
+    )
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
-    select "Lisdexamfetamin", from: "entry[medication_id]"
-    fill_in "entry[dose]", with: "30"
+    select "Lisdexamfetamin 40-0-0-0", from: "entry[medication_schedule_id]"
     choose "entry[attention]", option: "0"
     choose "entry[organisation]", option: "1"
     choose "entry[mood_swings]", option: "2"
@@ -148,7 +157,6 @@ RSpec.feature "Entries", db: true do
 
     visit "/entries/new"
 
-    expect(page).to have_select("entry[medication_id]", selected: "Lisdexamfetamin")
-    expect(page).to have_field("entry[dose]", with: "30")
+    expect(page).to have_select("entry[medication_schedule_id]", selected: "Lisdexamfetamin 40-0-0-0")
   end
 end

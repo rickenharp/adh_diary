@@ -9,8 +9,6 @@ module AdhDiary
         def handle(request, response)
           case update.call(request.params)
           in Success(entry)
-            request.session[:last_medication] = request.params[:entry][:medication]
-            request.session[:last_dose] = request.params[:entry][:dose]
             response.flash[:notice] = "Entry updated"
             response.redirect_to routes.path(:entries, id: entry[:id])
           in Failure(validation)
