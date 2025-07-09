@@ -1,7 +1,7 @@
 <h1 class="title">Medications</h1>
 
 <p class="buttons">
-  <a class="button" href="<%= Hanami.app["routes"].path("new_medication") %>">
+  <a class="button" href="<%= routes.path("new_medication") %>">
     <span class="icon">
       <i class="fab fa-plus"></i>
     </span>
@@ -31,7 +31,7 @@
     <td><%= medication.name %></td>
     <th>
       <%= link_to "Edit", routes.path("edit_medication", id: medication.id), class: "button is-link" %>
-      <%= link_to "Delete", Hanami.app["routes"].path("delete_medication", id: medication.id), class: "button is-danger" %>
+      <%= link_to "Delete", routes.path("delete_medication", id: medication.id), class: "button is-danger" %>
     </th>
   </tr>
   <% end %>
