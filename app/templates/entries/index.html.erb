@@ -47,7 +47,7 @@
   </tfoot>
   <tbody>
   <% entries.each do |entry| %>
-  <tr class="<%= entry.css_class%>">
+  <tr>
     <td class="date"><%= link_to entry.date, routes.path(:entry, id: entry.id) %></td>
     <td class="medication"><%= entry.medication.name %> (<%= entry.dose %>mg)</td>
     <td class="attention"><%= AdhDiary::Types::Strength[entry.attention]  %></td>
