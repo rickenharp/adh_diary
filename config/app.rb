@@ -2,6 +2,7 @@
 
 require "hanami"
 require "warden"
+require "rack/unpoly/middleware"
 begin
   require "amazing_print"
   require "pry"
@@ -36,5 +37,6 @@ module AdhDiary
           AdhDiary::Actions::AuthFailure::Show.new.call(env)
         end
     end
+    config.middleware.use Rack::Unpoly::Middleware
   end
 end

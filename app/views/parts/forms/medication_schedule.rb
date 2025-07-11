@@ -10,27 +10,27 @@ module AdhDiary
 
           def medication_id_input(f)
             values = medication_repo.all.each_with_object({}) { _2[_1.name] = _1.id }
-            prepare_scope(f, :medication_id, icon_name: "pills", values: values, selected: value[:medication_schedule].medication_id)
+            prepare_scope(f, :medication_id, label: i18n.t("medication_schedule.medication"), icon_name: "pills", values: values, selected: value[:medication_schedule].medication_id)
               .render("shared/forms/select_field")
           end
 
           def morning_input(f)
-            prepare_scope(f, :morning, icon_name: "sun")
+            prepare_scope(f, :morning, label: i18n.t("medication_schedule.morning"), icon_name: "sun")
               .render("shared/forms/number_field")
           end
 
           def noon_input(f)
-            prepare_scope(f, :noon, icon_name: "bowl-food")
+            prepare_scope(f, :noon, label: i18n.t("medication_schedule.noon"), icon_name: "bowl-food")
               .render("shared/forms/number_field")
           end
 
           def evening_input(f)
-            prepare_scope(f, :evening, icon_name: "moon")
+            prepare_scope(f, :evening, label: i18n.t("medication_schedule.evening"), icon_name: "moon")
               .render("shared/forms/number_field")
           end
 
           def before_bed_input(f)
-            prepare_scope(f, :before_bed, icon_name: "bed")
+            prepare_scope(f, :before_bed, label: i18n.t("medication_schedule.before_bed"), icon_name: "bed")
               .render("shared/forms/number_field")
           end
 

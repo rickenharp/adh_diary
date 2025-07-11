@@ -1,4 +1,6 @@
 import "../css/app.css";
+import "unpoly/unpoly.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
         const $notification = $delete.parentNode;

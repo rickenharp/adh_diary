@@ -10,9 +10,11 @@ module AdhDiary
     post "/users", to: "users.create", as: "create_user"
 
     # Session management
-    get "/login", to: "login.new"
+    get "/login", to: "login.new", as: "login"
     post "/sessions", to: "sessions.create", as: "create_session"
-    delete "/logout", to: "sessions.destroy"
+    delete "/logout", to: "sessions.destroy", as: "logout"
+
+    get "/language/:lang", to: "language.update", as: "language"
 
     get "/entries", to: "entries.index", as: "entries"
     get "/entries/new", to: "entries.new", as: "new_entry"
@@ -20,7 +22,7 @@ module AdhDiary
     get "/entries/:id", to: "entries.show", as: "entry"
     get "/entries/:id/edit", to: "entries.edit", as: "edit_entry"
     patch "/entries/:id", to: "entries.update", as: "entry"
-    get "/reports", to: "reports.index"
+    get "/reports", to: "reports.index", as: "reports"
     get "/reports/:week", to: "reports.show", as: "report"
 
     get "/medications", to: "medications.index", as: "medications"

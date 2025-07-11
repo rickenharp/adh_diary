@@ -1,10 +1,10 @@
-<h1 class="title">Entries</h1>
+<h1 class="title"><%= t("entries") %></h1>
 <p class="buttons">
   <a class="button" href="<%= routes.path(:new_entry) %>">
     <span class="icon">
       <i class="fab fa-plus"></i>
     </span>
-    <span>Add Entry</span>
+    <span><%= t("add_entry") %></span>
   </a>
 </p>
 
@@ -12,57 +12,29 @@
 
 <table class="table is-striped">
   <thead>
-  <tr>
-    <th>Date</th>
-    <th>Medication</th>
-    <th><abbr title="Attention Span">Att</abbr></th>
-    <th><abbr title="Organisation">Org</abbr></th>
-    <th><abbr title="Mood Swings">Mood</abbr></th>
-    <th><abbr title="Stress sensitivity">Stress</abbr></th>
-    <th><abbr title="Irritability">Imp</abbr></th>
-    <th><abbr title="Restlessness">Rest</abbr></th>
-    <th><abbr title="Impulsivity">Imp</abbr></th>
-    <th><abbr title="Side effects">SE</abbr></th>
-    <th><abbr title="Blood pressure">BP</abbr></th>
-    <th>Weight</th>
-    <th>Actions</th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </thead>
   <tfoot>
-  <tr>
-    <th>Date</th>
-    <th>Medication</th>
-    <th><abbr title="Attention Span">Att</abbr></th>
-    <th><abbr title="Organisation">Org</abbr></th>
-    <th><abbr title="Mood Swings">Mood</abbr></th>
-    <th><abbr title="Stress sensitivity">Stress</abbr></th>
-    <th><abbr title="Irritability">Imp</abbr></th>
-    <th><abbr title="Restlessness">Rest</abbr></th>
-    <th><abbr title="Impulsivity">Imp</abbr></th>
-    <th><abbr title="Side effects">SE</abbr></th>
-    <th><abbr title="Blood pressure">BP</abbr></th>
-    <th>Weight</th>
-    <th>Actions</th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </tfoot>
   <tbody>
   <% entries.each do |entry| %>
   <tr>
     <td class="date"><%= link_to entry.date, routes.path(:entry, id: entry.id) %></td>
     <td class="medication"><%= entry.medication_schedule.long_name %></td>
-    <td class="attention"><%= AdhDiary::Types::Strength[entry.attention]  %></td>
-    <td class="organisation"><%= AdhDiary::Types::Strength[entry.organisation] %></td>
-    <td class="mood-swings"><%= AdhDiary::Types::Strength[entry.mood_swings] %></td>
-    <td class="stress-sensitivity"><%= AdhDiary::Types::Strength[entry.stress_sensitivity] %></td>
-    <td class="irritability"><%= AdhDiary::Types::Strength[entry.irritability] %></td>
-    <td class="restlessness"><%= AdhDiary::Types::Strength[entry.restlessness] %></td>
-    <td class="impulsivity"><%= AdhDiary::Types::Strength[entry.impulsivity] %></td>
+    <td class="attention"><%= t("entry.strengths")[entry.attention]  %></td>
+    <td class="organisation"><%= t("entry.strengths")[entry.organisation] %></td>
+    <td class="mood-swings"><%= t("entry.strengths")[entry.mood_swings] %></td>
+    <td class="stress-sensitivity"><%= t("entry.strengths")[entry.stress_sensitivity] %></td>
+    <td class="irritability"><%= t("entry.strengths")[entry.irritability] %></td>
+    <td class="restlessness"><%= t("entry.strengths")[entry.restlessness] %></td>
+    <td class="impulsivity"><%= t("entry.strengths")[entry.impulsivity] %></td>
     <td class="side-effects"><%= entry.side_effects %></td>
     <td class="blood-pressure"><%= entry.blood_pressure %></td>
     <td class="weight"><%= entry.weight %></td>
     <td class="actions">
-      <%= link_to "Edit", routes.path(:edit_entry, id: entry.id), class: "button is-link" %>
-      <%= link_to "Destroy", "#", class: "button is-danger" %>
+      <%= link_to t("edit"), routes.path(:edit_entry, id: entry.id), class: "button is-link" %>
+      <%= link_to t("destroy"), "#", class: "button is-danger" %>
     </td>
   </tr>
   <% end  %>

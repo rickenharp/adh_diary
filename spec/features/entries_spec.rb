@@ -41,21 +41,21 @@ RSpec.feature "Entries", db: true do
     choose "entry[irritability]", option: "4"
     choose "entry[restlessness]", option: "5"
     choose "entry[impulsivity]", option: "4"
-    fill_in("Side effects", with: "Omniscience")
-    fill_in("Blood pressure", with: "122/70")
+    fill_in("Side Effects", with: "Omniscience")
+    fill_in("Blood Pressure", with: "122/70")
     fill_in("Weight", with: "126.7")
 
     click_on("Create")
 
     expect(page).to have_content "Entry created"
     expect(page).to have_content "2025-06-08"
-    expect(page).to have_selector "td.attention", text: "gar nicht"
-    expect(page).to have_selector "td.organisation", text: "leicht"
-    expect(page).to have_selector "td.mood-swings", text: "mäßig"
-    expect(page).to have_selector "td.stress-sensitivity", text: "mittel"
-    expect(page).to have_selector "td.irritability", text: "stärker"
-    expect(page).to have_selector "td.restlessness", text: "stark"
-    expect(page).to have_selector "td.impulsivity", text: "stärker"
+    expect(page).to have_selector "td.attention", text: "none"
+    expect(page).to have_selector "td.organisation", text: "mild"
+    expect(page).to have_selector "td.mood-swings", text: "moderate"
+    expect(page).to have_selector "td.stress-sensitivity", text: "medium"
+    expect(page).to have_selector "td.irritability", text: "stronger"
+    expect(page).to have_selector "td.restlessness", text: "sever"
+    expect(page).to have_selector "td.impulsivity", text: "stronger"
     expect(page).to have_selector "td.blood-pressure", text: "122/70"
     expect(page).to have_selector "td.weight", text: "126.7"
   end
@@ -73,8 +73,8 @@ RSpec.feature "Entries", db: true do
     choose "entry[irritability]", option: "4"
     choose "entry[restlessness]", option: "5"
     choose "entry[impulsivity]", option: "4"
-    fill_in("Side effects", with: "Omniscience")
-    fill_in("Blood pressure", with: "122/70")
+    fill_in("Side Effects", with: "Omniscience")
+    fill_in("Blood Pressure", with: "122/70")
     fill_in("Weight", with: "126.7")
 
     click_on("Create")
@@ -101,7 +101,7 @@ RSpec.feature "Entries", db: true do
     visit "/entries/#{entry.id}/edit"
 
     expect(page).to have_field "Date", with: "2025-06-09"
-    expect(page).to have_field "Medication schedule", with: 1
+    expect(page).to have_select "Medication schedule", with_options: ["Lisdexamfetamin 30-0-0-0"]
 
     fill_in "entry[side_effects]", with: "Death"
 
@@ -121,14 +121,22 @@ RSpec.feature "Entries", db: true do
     visit "/entries/#{entry.id}/edit"
 
     expect(page).to have_field "Date", with: "2025-06-09"
-    expect(page).to have_field "Medication schedule", with: 1
+    expect(page).to have_select "Medication schedule", with_options: ["Lisdexamfetamin 30-0-0-0"]
 
     fill_in "entry[date]", with: "2025-06-08"
 
     click_on("Update")
-
     expect(page).to have_content "Could not update entry"
     expect(page).to have_content "already exists"
+  end
+
+  scenario "dismissing notification", js: true do
+    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
+    visit "/entries/#{entry.id}/edit"
+    click_on("Update")
+    expect(page).to have_content "Entry updated"
+    page.find("button.delete").click
+    expect(page).to_not have_content "Entry updated"
   end
 
   scenario "remember last used medication schedule" do
@@ -149,8 +157,8 @@ RSpec.feature "Entries", db: true do
     choose "entry[irritability]", option: "4"
     choose "entry[restlessness]", option: "5"
     choose "entry[impulsivity]", option: "4"
-    fill_in("Side effects", with: "Omniscience")
-    fill_in("Blood pressure", with: "122/70")
+    fill_in("Side Effects", with: "Omniscience")
+    fill_in("Blood Pressure", with: "122/70")
     fill_in("Weight", with: "126.7")
 
     click_on("Create")

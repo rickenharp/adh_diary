@@ -1,4 +1,4 @@
-<h1 class="title">Medication Schedules</h1>
+<h1 class="title"><%= t("edit_medication_schedule") %></h1>
 
 <p class="buttons">
   <a class="button" href="<%= routes.path("new_medication_schedule") %>">
@@ -11,26 +11,10 @@
 
 <table class="table">
   <thead>
-  <tr>
-    <th>Id</th>
-    <th>Medication</th>
-    <th>Morning</th>
-    <th>Noon</th>
-    <th>Evening</th>
-    <th>Before Bed</th>
-    <th></th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </thead>
   <tfoot>
-  <tr>
-    <th>Id</th>
-    <th>Medication</th>
-    <th>Morning</th>
-    <th>Noon</th>
-    <th>Evening</th>
-    <th>Before Bed</th>
-    <th></th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </tfoot>
   <tbody>
   <% medication_schedules.each do |medication_schedule|  %>
@@ -42,8 +26,8 @@
       <td><%= medication_schedule.evening.to_i %></td>
       <td><%= medication_schedule.before_bed.to_i %></td>
       <th>
-        <%= link_to "Edit", routes.path("edit_medication_schedule", id: medication_schedule.id), class: "button is-link" %>
-        <%= link_to "Delete", routes.path("delete_medication_schedule", id: medication_schedule.id), class: "button is-danger" %>
+        <%= link_to t("edit"), routes.path("edit_medication_schedule", id: medication_schedule.id), class: "button is-link" %>
+        <%= link_to t("destroy"), routes.path("delete_medication_schedule", id: medication_schedule.id), class: "button is-danger" %>
       </th>
     </tr>
   <% end %>

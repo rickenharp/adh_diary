@@ -1,4 +1,4 @@
-<h1 class="title">Reports</h1>
+<h1 class="title"><%= t('report') %></h1>
 
 <% if 0 < previous_week.count %>
   <%= link_to previous_week.week, routes.path(:report, week: previous_week.week) %>
@@ -13,58 +13,58 @@
 <% end %>
 <table class="table">
   <tr>
-    <td>Week</td>
-    <td>from <%= entry.from %> to <%= entry.to %></td>
+    <td><%= t('entry.week.full') %></td>
+    <td>from <%= report.from %> to <%= report.to %></td>
   </tr>
   <tr>
-    <td>Medication</td>
-    <td><%= entry.medication %></td>
+    <td><%= t('entry.medication.full') %></td>
+    <td><%= report.medication %></td>
   </tr>
   <tr>
-    <td>Attention</td>
-    <td><%= AdhDiary::Types::Strength[entry.attention] %></td>
+    <td><%= t('entry.attention_span.full') %></td>
+    <td><%= t("entry.strengths")[report.attention] %></td>
   </tr>
   <tr>
-    <td>Organisation</td>
-    <td><%= AdhDiary::Types::Strength[entry.organisation] %></td>
+    <td><%= t('entry.organisation.full') %></td>
+    <td><%= t("entry.strengths")[report.organisation] %></td>
   </tr>
   <tr>
-    <td>Mood Swings</td>
-    <td><%= AdhDiary::Types::Strength[entry.mood_swings] %></td>
+    <td><%= t('entry.mood_swings.full') %></td>
+    <td><%= t("entry.strengths")[report.mood_swings] %></td>
   </tr>
   <tr>
-    <td>Stress Sensitivity</td>
-    <td><%= AdhDiary::Types::Strength[entry.stress_sensitivity] %></td>
+    <td><%= t('entry.stress_sensitivity.full') %></td>
+    <td><%= t("entry.strengths")[report.stress_sensitivity] %></td>
   </tr>
   <tr>
-    <td>Irritability</td>
-    <td><%= AdhDiary::Types::Strength[entry.irritability] %></td>
+    <td><%= t('entry.irritability.full') %></td>
+    <td><%= t("entry.strengths")[report.irritability] %></td>
   </tr>
   <tr>
-    <td>Restlessness</td>
-    <td><%= AdhDiary::Types::Strength[entry.restlessness] %></td>
+    <td><%= t('entry.restlessness.full') %></td>
+    <td><%= t("entry.strengths")[report.restlessness] %></td>
   </tr>
   <tr>
-    <td>Impulsivity</td>
-    <td><%= AdhDiary::Types::Strength[entry.impulsivity] %></td>
+    <td><%= t('entry.impulsivity.full') %></td>
+    <td><%= t("entry.strengths")[report.impulsivity] %></td>
   </tr>
   <tr>
-    <td>Side Effects</td>
-    <td><%= entry.side_effects %></td>
+    <td><%= t('entry.side_effects.full') %></td>
+    <td><%= report.side_effects %></td>
   </tr>
   <tr>
-    <td>Blood Pressure</td>
+    <td><%= t('entry.blood_pressure.full') %></td>
     <td>
       <ul>
-        <% entry.blood_pressure.split(',').each do |datum| %>
+        <% report.blood_pressure.split(',').each do |datum| %>
           <li><%= datum %></li>
         <% end %>
       </ul>
     </td>
   </tr>
   <tr>
-    <td>Weight</td>
-    <td><%= entry.weight %></td>
+    <td><%= t('entry.weight.full') %></td>
+    <td><%= report.weight %></td>
   </tr>
 </table>
 

@@ -20,6 +20,10 @@ module AdhDiary
       def by_email(email)
         users.where(email:).one
       end
+
+      def update_locale(lang)
+        users.where(id: user.id).changeset(:update, locale: lang.to_s).commit
+      end
     end
   end
 end

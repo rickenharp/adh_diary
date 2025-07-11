@@ -5,6 +5,8 @@ CREATE TABLE `users`(
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `password_salt` varchar(255) NOT NULL
+  ,
+  `locale` varchar(255) DEFAULT('en')
 );
 CREATE UNIQUE INDEX `users_email_index` ON `users`(`email`);
 CREATE TABLE `medications`(
@@ -137,4 +139,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250707162552_make_user_medications_foreign_key.rb'),
 ('20250708121437_add_medication_schedule.rb'),
 ('20250709152754_switch_entries_to_medication_schedule.rb'),
-('20250709203920_add_weekly_report_view.rb');
+('20250709203920_add_weekly_report_view.rb'),
+('20250710102932_add_locale_to_user.rb');

@@ -29,21 +29,34 @@
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
           <a class="navbar-item" href="/">
-            Home
+            <%= t("home") %>
           </a>
-          <a class="navbar-item" href="/entries">
-            Entries
+          <a class="navbar-item" href="<%= routes.path(:entries) %>">
+            <%= t("entries") %>
           </a>
-          <a class="navbar-item" href="/medications">
-            Medications
+          <a class="navbar-item" href="<%= routes.path(:medications) %>">
+            <%= t("medications") %>
           </a>
-          <a class="navbar-item" href="/medication_schedules">
-            Medication Schedules
+          <a class="navbar-item" href="<%= routes.path(:medication_schedules) %>">
+            <%= t("medication_schedules") %>
           </a>
-          <a class="navbar-item" href="/reports">
-            Reports
+          <a class="navbar-item" href="<%= routes.path(:reports) %>">
+            <%= t("reports") %>
           </a>
         </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <%= t('language') %>
+          </a>
+
+          <div class="navbar-dropdown">
+            <% languages.each do |language| %>
+              <a class="navbar-item" href="/language/<%= language %>">
+                <%= image_tag("#{language}.png") %> <%= t(language) %>
+              </a>
+            <% end %>
+
+          </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
@@ -51,17 +64,17 @@
                 <%= link_to("Sign up", routes.path(:sign_up), class:"button is-light is-primary") %>
               <% end %>
               <% if warden.user %>
-                <%= form_for :logout, 'logout', method: :delete do %>
-                  <button type="submit">Logout</button>
+                <%= form_for :logout, routes.path(:logout), method: :delete do %>
+                  <button type="submit"><%= t("log_out") %></button>
                 <% end %>
               <% else %>
-                <a class="button is-primary" href="/login">Login</a>
+                <a class="button is-primary" href="<%= routes.path(:login) %>"><%= t("log_in") %></a>
               <% end %>
 
             </div>
           </div>
         </div>
-
+        </div>
       </div>
     </div>
   </nav>

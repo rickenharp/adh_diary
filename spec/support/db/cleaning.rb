@@ -21,13 +21,14 @@ RSpec.configure do |config|
 
   config.before :suite do
     all_databases.call.each do |db|
+      db.run "PRAGMA foreign_keys = 0"
       DatabaseCleaner[:sequel, db: db].clean_with :truncation, except: ["schema_migrations"]
+      db.run "PRAGMA foreign_keys = 1"
     end
   end
 
   config.before :each, :db do |example|
-    strategy = example.metadata[:js] ? :truncation : :transaction
-
+    strategy = example.metadata[:js] ? :deletion : :transaction
     all_databases.call.each do |db|
       DatabaseCleaner[:sequel, db: db].strategy = strategy
       DatabaseCleaner[:sequel, db: db].start
@@ -36,7 +37,9 @@ RSpec.configure do |config|
 
   config.after :each, :db do
     all_databases.call.each do |db|
+      db.run "PRAGMA foreign_keys = 0"
       DatabaseCleaner[:sequel, db: db].clean
+      db.run "PRAGMA foreign_keys = 1"
     end
   end
 end

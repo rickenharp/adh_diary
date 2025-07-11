@@ -1,28 +1,20 @@
-<h1 class="title">Medications</h1>
+<h1 class="title"><%= t("medications") %></h1>
 
 <p class="buttons">
   <a class="button" href="<%= routes.path("new_medication") %>">
     <span class="icon">
       <i class="fab fa-plus"></i>
     </span>
-    <span>Add Medication</span>
+    <span><%= t("add_medication") %></span>
   </a>
 </p>
 
 <table class="table">
   <thead>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th></th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </thead>
   <tfoot>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th></th>
-  </tr>
+    <%= render 'table_header_footer' %>
   </tfoot>
   <tbody>
   <% medications.each do |medication|  %>
@@ -30,8 +22,8 @@
     <th><%= medication.id %></th>
     <td><%= medication.name %></td>
     <th>
-      <%= link_to "Edit", routes.path("edit_medication", id: medication.id), class: "button is-link" %>
-      <%= link_to "Delete", routes.path("delete_medication", id: medication.id), class: "button is-danger" %>
+      <%= link_to t("edit"), routes.path("edit_medication", id: medication.id), class: "button is-link" %>
+      <%= link_to t("destroy"), routes.path("delete_medication", id: medication.id), class: "button is-danger" %>
     </th>
   </tr>
   <% end %>
