@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/rickenharp/adh_diary/compare/v0.2.1...v0.3.0) (2025-07-11)
+
+
+### Features
+
+* actually switch to medication_schedule ([1110f19](https://github.com/rickenharp/adh_diary/commit/1110f19288152c982957b3897ef8e839956c15c5))
+* add i18n ([10d9219](https://github.com/rickenharp/adh_diary/commit/10d9219a41649642fb89d807d12c0ac8a789af1d))
+* add medication schedule deletion ([c4c67e0](https://github.com/rickenharp/adh_diary/commit/c4c67e026aff9cf0a8e99ea45a431bf8509ef50e))
+* add medication schedule index ([15ce13b](https://github.com/rickenharp/adh_diary/commit/15ce13b624deadc04b746e15812d072275e1ee9d))
+* add most of the medication schedule CRUD ([075677e](https://github.com/rickenharp/adh_diary/commit/075677eef05e299a974a36cf086b44a1a3916882))
+* extract medication to own table ([65c47f1](https://github.com/rickenharp/adh_diary/commit/65c47f184f18799bb68ad86c0650c8d78d7bde07))
+
+
+### Bug Fixes
+
+* scope database queries to logged in user ([78280fb](https://github.com/rickenharp/adh_diary/commit/78280fbe3f18ef7a05019027de0d5cebf143bc40))
+
 ## [0.2.1](https://github.com/rickenharp/adh_diary/compare/v0.2.0...v0.2.1) (2025-07-05)
 
 
