@@ -8,7 +8,7 @@ module AdhDiary
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def name_input(f)
-            prepare_scope(f, :name, icon_name: "pills")
+            prepare_scope(f, :name, label: i18n.t("medication.name"), icon_name: "pills")
               .render("shared/forms/text_field")
           end
 

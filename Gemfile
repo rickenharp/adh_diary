@@ -31,6 +31,7 @@ group :development, :test do
   gem "irb"
   gem "pry"
   gem "launchy"
+  gem "i18n-missing_translations"
 end
 
 group :cli, :development do
@@ -49,6 +50,11 @@ group :test do
   # Web integration
   gem "capybara"
   gem "rack-test"
+  gem "cuprite", "~> 0.17"
 end
 
 gem "dry-effects", "~> 0.5.0"
+
+gem "i18n", "~> 1.14"
+
+gem "rack-unpoly", "~> 0.5.0"

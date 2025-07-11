@@ -1,0 +1,103 @@
+en:
+  en: English
+  de: German
+  home: "Home"
+  welcome: "Welcome to ADHDiary"
+  log_in: "Log in"
+  please_log_in: "Please log in"
+  log_out: "Log out"
+  first: "First"
+  last: "Last"
+  previous: "Previous"
+  next: "Next"
+  edit: "Edit"
+  edit_medication_schedule: "Edit Medication Schedule"
+  edit_medication: "Edit Medication"
+  add_medication: "Add Medication"
+  delete_named: "Delete %{name}?"
+  destroy: "Destroy"
+  create: "Create"
+  confirm: "Confirm"
+  cancel: "Cancel"
+  add_entry: "Add Entry"
+  new_entry: "New Entry"
+  entries: "Entries"
+  medications: "Medications"
+  medication_schedules: "Medication schedules"
+  new_medication_schedule: "New Medication Schedule"
+  reports: "Reports"
+  edit_entry_for: "Edit entry for %{date}"
+  update: "Update"
+  entry:
+    week:
+      full: "Week"
+      short: "Week"
+    date:
+      full: "Date"
+      short: "Date"
+    medication:
+      full: "Medication"
+      short: "Medication"
+    medication_schedule:
+      full: "Medication schedule"
+      short: "Medication schedule"
+    attention_span:
+      full: "Attention Span"
+      short: "Att"
+    organisation:
+      full: "Organisation"
+      short: "Org"
+    mood_swings:
+      full: "Mood Swings"
+      short: "Mood"
+    stress_sensitivity:
+      full: "Stress Sensitivity"
+      short: "Stress"
+    irritability:
+      full: "Irritability"
+      short: "Irr"
+    restlessness:
+      full: "Restlessness"
+      short: "Rest"
+    impulsivity:
+      full: "Impulsivity"
+      short: "Imp"
+    side_effects:
+      full: "Side Effects"
+      short: "SE"
+    blood_pressure:
+      full: "Blood Pressure"
+      short: "BP"
+    weight:
+      full: "Weight"
+      short: "Weight"
+    actions:
+      full: "Actions"
+      short: "Actions"
+    strengths:
+      - "none"
+      - "mild"
+      - "moderate"
+      - "medium"
+      - "stronger"
+      - "severe"
+  medication_schedule:
+    id: "Id"
+    medication: "Medication"
+    morning: "Morning"
+    noon: "Noon"
+    evening: "Evening"
+    before_bed: "Before bed"
+  medication:
+    name: "Name"
+    id: "Id"
+  new_medication: "New medication"
+  report: "Report"
+  user:
+    name: Name
+    email: Email
+    password: Password
+    password_confirmation: Password Confirmation
+  sign_up: "Sign Up"
+  language: "Language"
+  could_not_change_language: "Could not change language"

@@ -24,7 +24,9 @@ RSpec.feature "Auth", db: true do
 
     fill_in "email", with: user.email
     fill_in "password", with: password
-    click_link_or_button("Log in")
+    within("form") do
+      click_link_or_button("Log in")
+    end
 
     expect(page).to have_content "Login successful"
   end

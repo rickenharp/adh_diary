@@ -1,3 +1,3 @@
-<h1 class="title">Edit Medication Schedule</h1>
+<h1 class="title"><%= t("edit_medication_schedule") %></h1>
 
-<%= form.html_form(url: routes.path(:update_medication_schedule, id: medication_schedule.id), action: "Update", http_method: "patch") %>
+<%= form.html_form(url: routes.path(:update_medication_schedule, id: medication_schedule.id), action: t("update"), http_method: "patch") %>

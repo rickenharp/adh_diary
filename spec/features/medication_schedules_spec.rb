@@ -68,7 +68,7 @@ RSpec.feature "Medication schedules", db: true do
       visit "/medication_schedules"
 
       within all("tbody/tr")[0] do
-        click_on "Delete"
+        click_on "Destroy"
       end
 
       expect(page).to have_content "Delete Lisdexamfetamin 30-0-0-0?"

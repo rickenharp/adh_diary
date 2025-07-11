@@ -4,7 +4,8 @@
   "type": "module",
   "dependencies": {
     "bulma": "^1.0.4",
-    "hanami-assets": "^2.2.1"
+    "hanami-assets": "^2.2.1",
+    "unpoly": "^3.11.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

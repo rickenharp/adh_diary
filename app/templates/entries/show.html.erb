@@ -2,47 +2,47 @@
 
 <table class="table">
   <tr>
-    <th>Medication schedule</th>
+    <th><%= t("entry.medication_schedule.full") %></th>
     <td><%= entry.medication_schedule.long_name %></td>
   </tr>
   <tr>
-    <th>Attention</th>
-    <td><%= entry.attention %></td>
+    <th><%= t("entry.attention_span.full") %></th>
+    <td><%= t("entry.strengths")[entry.attention] %></td>
   </tr>
   <tr>
-    <th>Organisation</th>
-    <td><%= entry.organisation %></td>
+    <th><%= t("entry.organisation.full") %></th>
+    <td><%= t("entry.strengths")[entry.organisation] %></td>
   </tr>
   <tr>
-    <th>Mood Swings</th>
-    <td><%= entry.mood_swings %></td>
+    <th><%= t("entry.mood_swings.full") %></th>
+    <td><%= t("entry.strengths")[entry.mood_swings] %></td>
   </tr>
   <tr>
-   <th>Stress Sensitivity</th>
-   <td><%= entry.stress_sensitivity %></td>
+   <th><%= t("entry.stress_sensitivity.full") %></th>
+   <td><%= t("entry.strengths")[entry.stress_sensitivity] %></td>
   </tr>
   <tr>
-   <th>Irritability</th>
-   <td><%= entry.irritability %></td>
+   <th><%= t("entry.irritability.full") %></th>
+   <td><%= t("entry.strengths")[entry.irritability] %></td>
   </tr>
   <tr>
-    <th>Restlessness</th>
-    <td><%= entry.restlessness %></td>
+    <th><%= t("entry.restlessness.full") %></th>
+    <td><%= t("entry.strengths")[entry.restlessness] %></td>
   </tr>
   <tr>
-    <th>Impulsivity</th>
-    <td><%= entry.impulsivity %></td>
+    <th><%= t("entry.impulsivity.full") %></th>
+    <td><%= t("entry.strengths")[entry.impulsivity] %></td>
   </tr>
   <tr>
-    <th>Side Effects</th>
+    <th><%= t("entry.side_effects.full") %></th>
     <td><%= entry.side_effects %></td>
   </tr>
   <tr>
-    <th>Blood Pressure</th>
+    <th><%= t("entry.blood_pressure.full") %></th>
     <td><%= entry.blood_pressure %></td>
   </tr>
   <tr>
-    <th>Weight</th>
+    <th><%= t("entry.weight.full") %></th>
     <td><%= entry.weight %></td>
   </tr>
 </table>

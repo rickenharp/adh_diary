@@ -49,7 +49,7 @@ RSpec.feature "Medications", db: true do
 
       visit "/medications"
       within all("tbody/tr")[1] do
-        click_on "Delete"
+        click_on "Destroy"
       end
 
       expect(page).to have_content "Delete Medikinet?"

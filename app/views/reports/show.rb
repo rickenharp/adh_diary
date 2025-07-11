@@ -8,7 +8,7 @@ module AdhDiary
       class Show < AdhDiary::View
         include Deps["repos.weekly_report_repo"]
 
-        expose :entry do |week:|
+        expose :report do |week:|
           weekly_report_repo.get(week)
         end
 

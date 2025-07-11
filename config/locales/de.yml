@@ -1,0 +1,102 @@
+de:
+  en: Englisch
+  de: Deutsch
+  home: "Start"
+  welcome: "Willkommen beim ADHDiary"
+  log_in: "Einloggen"
+  please_log_in: "Bitte loggen Sie sich ein"
+  log_out: "Ausloggen"
+  first: "Anfang"
+  last: "Ende"
+  previous: "Vorher"
+  next: "Nächster"
+  edit: "Editieren"
+  edit_medication_schedule: "Medikamentenplan editieren"
+  edit_medication: "Medikament editieren"
+  add_medication: "Medikament hinzufügen"
+  delete_named: "%{name} löschen?"
+  destroy: "Löschen"
+  create: "Anlegen"
+  confirm: "Bestätigen"
+  cancel: "Abbrechen"
+  add_entry: "Eintrag hinzufügen"
+  new_entry: "Neuer Eintrag"
+  entries: "Einträge"
+  medications: "Medikamente"
+  medication_schedules: "Medikamentenpläne"
+  new_medication_schedule: "Neuer Medikamentenplan"
+  reports: "Berichte"
+  edit_entry_for: "Eintrag für %{date} editieren"
+  update: "Aktualisieren"
+  entry:
+    week:
+      full: "Woche"
+      short: "Woche"
+    date:
+      full: "Datum"
+      short: "Datum"
+    medication:
+      full: "Medikament"
+      short: "Medikament"
+    medication_schedule:
+      full: "Medikamentenplan"
+      short: "Medikamentenplan"
+    attention_span:
+      full: "Aufmerksamkeitsprobleme"
+      short: "Auf"
+    organisation:
+      full: "Organisation"
+      short: "Org"
+    mood_swings:
+      full: "Stimmungsschwankungen"
+      short: "Stimm"
+    stress_sensitivity:
+      full: "Stressempfindlichkeit"
+      short: "Stress"
+    irritability:
+      full: "Gereiztheit"
+      short: "Reiz"
+    restlessness:
+      full: "Unruhe"
+      short: "Unruhe"
+    impulsivity:
+      full: "Impulsivität"
+      short: "Imp"
+    side_effects:
+      full: "Nebenwirkungen"
+      short: "NW"
+    blood_pressure:
+      full: "Blutdruck"
+      short: "BD"
+    weight:
+      full: "Gewicht"
+      short: "Gewicht"
+    actions:
+      full: "Aktionen"
+      short: "Aktionen"
+    strengths:
+      - "gar nicht"
+      - "leicht"
+      - "mäßig"
+      - "mittel"
+      - "stärker"
+      - "stark"
+  medication_schedule:
+    id: "Id"
+    medication: "Medikament"
+    morning: "morgens"
+    noon: "mittags"
+    evening: "abends"
+    before_bed: "vor dem Schlafen"
+  medication:
+    name: "Name"
+    id: "Id"
+  new_medication: "Neues Medikament"
+  report: "Bericht"
+  user:
+    name: Name
+    email: Email
+    password: Passwort
+    password_confirmation: Passwort bestätigen
+  sign_up: "Anmelden"
+  language: "Sprache"

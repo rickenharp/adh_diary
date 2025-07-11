@@ -10,8 +10,19 @@ module AdhDiary
     include Dry::Monads[:result]
 
     # handle_exception ROM::TupleCountMismatchError => :handle_not_found
+    before :set_locale
 
     private
+
+    def set_locale(request, response)
+      locale = if request.env["warden"].user
+        request.env["warden"].user.locale.to_sym
+      else
+        :en
+      end
+      AdhDiary::App["logger"].info("Setting locale: #{locale}")
+      I18n.locale = locale
+    end
 
     def handle_not_found(request, response, exception)
       response.status = 404
