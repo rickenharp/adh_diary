@@ -13,9 +13,7 @@ await assets.run({
       if (args.watch) {
       } else {
       }
-    // esbuildOptions.loader['.png'] = 'copy';
     esbuildOptions.loader['.ico'] = 'file';
-    esbuildOptions.logLevel = 'verbose';
     console.log(esbuildOptions);
     return esbuildOptions;
   }
