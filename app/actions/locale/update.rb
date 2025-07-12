@@ -2,12 +2,12 @@
 
 module AdhDiary
   module Actions
-    module Language
-      class Update < AdhDiary::AuthenticatedAction
+    module Locale
+      class Update < AdhDiary::Action
         include Dry::Effects.Reader(:user)
         include Deps["repos.user_repo", "i18n"]
 
-        contract Language::UpdateContract
+        contract Locale::UpdateContract
 
         def handle(request, response)
           referer = if request.referer
@@ -17,11 +17,11 @@ module AdhDiary
           end
 
           if request.params.valid?
-            lang = request.params[:lang]
-            user_repo.update_locale(lang)
-            i18n.locale = lang
+            language = request.params[:language]
+            response.session[:language] = language
+            user_repo.update_locale(language) if user
           else
-            response.flash[:alert] = I18n.t("could_not_change_language")
+            response.flash[:alert] = I18n.t("could_not_change_locale")
           end
           response.redirect referer.request_uri
         end

@@ -1,0 +1,12 @@
+<%= form_for routes.path("locale"), method: "post" do |f| %>
+  <div class="field has-addons is-horizontal">
+    <div class="control">
+      <div class="select is-small">
+        <%= f.select(:language, languages_for_select, options: {selected: current_language}) %>
+      </div>
+    </div>
+    <div class="control">
+      <%= f.submit t("choose"), class: "button is-small is-primary" %>
+    </div>
+  </div>
+<% end %>

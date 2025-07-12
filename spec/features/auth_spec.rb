@@ -24,7 +24,7 @@ RSpec.feature "Auth", db: true do
 
     fill_in "email", with: user.email
     fill_in "password", with: password
-    within("form") do
+    within("form#login") do
       click_link_or_button("Log in")
     end
 

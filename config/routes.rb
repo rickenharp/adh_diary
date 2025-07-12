@@ -14,7 +14,7 @@ module AdhDiary
     post "/sessions", to: "sessions.create", as: "create_session"
     delete "/logout", to: "sessions.destroy", as: "logout"
 
-    get "/language/:lang", to: "language.update", as: "language"
+    post "/locale", to: "locale.update", as: "locale"
 
     get "/entries", to: "entries.index", as: "entries"
     get "/entries/new", to: "entries.new", as: "new_entry"

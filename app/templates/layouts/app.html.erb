@@ -44,19 +44,9 @@
             <%= t("reports") %>
           </a>
         </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            <%= t('language') %>
-          </a>
-
-          <div class="navbar-dropdown">
-            <% languages.each do |language| %>
-              <a class="navbar-item" href="/language/<%= language %>">
-                <%= image_tag("#{language}.png") %> <%= t(language) %>
-              </a>
-            <% end %>
-
-          </div>
+        <div class="navbar-item ">
+          <%= render 'locale_switcher' %>
+        </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">

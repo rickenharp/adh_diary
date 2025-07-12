@@ -3,6 +3,12 @@
 RSpec.describe AdhDiary::Action do
   include Warden::Test::Helpers
   let(:params) { {"warden" => double("warden", user: double("user", locale: "en"))} }
+  let(:i18n) { spy("i18n", default_locale: :en) }
+  subject { described_class.new(i18n: i18n) }
+
+  before do
+    allow(i18n).to receive(:locale=)
+  end
 
   it "works" do
     response = subject.call(params)
@@ -10,10 +16,7 @@ RSpec.describe AdhDiary::Action do
   end
 
   it "sets the locale" do
-    i18n_spy = spy("i18n")
-    stub_const("::I18n", i18n_spy)
-    allow(I18n).to receive(:locale)
     subject.call(params)
-    expect(i18n_spy).to have_received(:locale=).with(:en)
+    expect(i18n).to have_received(:locale=).with(:en)
   end
 end
