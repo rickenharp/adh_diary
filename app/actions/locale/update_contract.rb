@@ -2,16 +2,15 @@
 
 module AdhDiary
   module Actions
-    module Language
+    module Locale
       class UpdateContract < Dry::Validation::Contract
         include Deps["i18n"]
 
         params do
-          required(:lang).filled(:symbol)
+          required(:language).filled(:symbol)
         end
 
-        rule(:lang) do |context:|
-          # context[:available_locales] ||= i18n.available_locales
+        rule(:language) do |context:|
           key.failure("is invalid") unless i18n.available_locales.include?(value)
         end
       end

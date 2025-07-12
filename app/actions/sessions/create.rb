@@ -26,6 +26,7 @@ module AdhDiary
           if user
             response.flash[:notice] = "Login successful"
             request.session[:user_id] = user.id
+            request.session[:language] = user.locale
             response.redirect "/"
           else
             response.flash.now[:alert] = "Email or password is invalid"

@@ -100,4 +100,5 @@ en:
     password_confirmation: Password Confirmation
   sign_up: "Sign Up"
   language: "Language"
-  could_not_change_language: "Could not change language"
+  could_not_change_locale: "Could not change locale"
+  choose: "Choose"

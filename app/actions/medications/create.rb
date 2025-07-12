@@ -4,7 +4,7 @@ module AdhDiary
   module Actions
     module Medications
       class Create < AdhDiary::AuthenticatedAction
-        include Deps["repos.medication_repo", "routes"]
+        include Deps["repos.medication_repo"]
 
         params do
           required(:medication).hash do

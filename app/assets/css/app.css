@@ -1,6 +1,14 @@
 @import 'bulma/css/bulma.css';
 @import 'unpoly/unpoly.css';
 
+/*:root {*/
+/*  --bulma-primary: hsl(277, 99%, 31%);*/
+/*  --bulma-primary-h: 277;*/
+/*  --bulma-primary-s: 99%;*/
+/*  --bulma-primary-l: 31%;*/
+/*  --bulma-primary-invert-l: 100%;*/
+/*}*/
+
 div.unused {
   background-image: url('../images/de.png');
   .foo {
@@ -9,6 +17,8 @@ div.unused {
   .bar {
     background-image: url('../images/favicon.ico');
   }
+
+
 
 }
 body {

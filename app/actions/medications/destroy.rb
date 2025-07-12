@@ -4,7 +4,7 @@ module AdhDiary
   module Actions
     module Medications
       class Destroy < AdhDiary::AuthenticatedAction
-        include Deps["routes", "repos.medication_repo"]
+        include Deps["repos.medication_repo"]
 
         before :validate_params
 

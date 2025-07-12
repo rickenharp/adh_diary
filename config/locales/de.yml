@@ -100,3 +100,5 @@ de:
     password_confirmation: Passwort bestätigen
   sign_up: "Anmelden"
   language: "Sprache"
+  choose: "Wählen"
+  could_not_change_locale: "Konnte Gebiet nicht wechseln"

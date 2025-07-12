@@ -12,12 +12,6 @@ module AdhDiary
 
     before :authenticate_user
 
-    def call(env)
-      with_user(env["warden"].user) do
-        super
-      end
-    end
-
     private
 
     def authenticate_user(request, response)

@@ -13,6 +13,14 @@ module AdhDiary
         I18n.available_locales
       end
 
+      def languages_for_select
+        languages.each_with_object({}) { |lang, hash| hash[t(lang)] = lang }
+      end
+
+      def current_language
+        i18n.locale
+      end
+
       def warden
         request.env["warden"]
       end
