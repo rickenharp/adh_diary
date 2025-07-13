@@ -1,7 +1,22 @@
 <h1 class="title"><% t("reports") %></h1>
 
-<ul>
-  <% weeks.each do |week| %>
-    <li><%= link_to week[:week], routes.path(:report, week: week[:week]) %></li>
+<table class="table">
+  <thead>
+  <%= render 'table_header_footer' %>
+  </thead>
+  <tfoot>
+  <%= render 'table_header_footer' %>
+  </tfoot>
+  <tbody>
+  <% weeks.each do |week|  %>
+    <tr>
+      <td><%= link_to week.week, routes.path(:report, week: week.week) %></td>
+      <td><%=  week.from %></td>
+      <td><%=  week.to %></td>
+      <th>
+        <%= link_to "PDF", routes.path("report_pdf", week: week.week) , class: "button is-link" %>
+      </th>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>

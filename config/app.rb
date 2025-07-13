@@ -3,6 +3,7 @@
 require "hanami"
 require "warden"
 require "rack/unpoly/middleware"
+
 begin
   require "amazing_print"
   require "pry"

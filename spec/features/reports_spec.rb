@@ -1,24 +1,17 @@
 # frozen_string_literal: true
 
 require "rspec"
+require "mimemagic"
 
-RSpec.feature "Entries", db: true do
-  let(:password) { "password" }
-  let(:user) { Factory.create(:user) }
-  let(:medication) { Factory.create(:medication, name: "Lisdexamfetamin") }
-  let(:medication_schedule) { Factory.create(:medication_schedule, medication: medication, morning: 30, user: user) }
+RSpec.feature "Weekly Reports", db: true do
+  include_context "report data"
 
   before(:each) do
     login_as(user)
+    generate_entries
   end
 
   scenario "visiting the reports page shows an entry" do
-    start_date = Date.parse("2025-06-02")
-    end_date = Date.parse("2025-06-15")
-    (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule)
-    end
-
     visit "/reports"
 
     expect(page).to have_content "2025-W22"
@@ -26,17 +19,22 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "visiting the report detail page shows an entry" do
-    start_date = Date.parse("2025-06-02")
-    end_date = Date.parse("2025-06-15")
-    (start_date..end_date).each do |date|
-      Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule)
-    end
-
     visit "/reports/2025-W22"
 
     expect(page).to have_content "from 2025-06-02 to 2025-06-08"
     expect(page).to have_content "Blood Pressure"
     expect(page).to have_content "Weight"
     expect(page).to have_link "2025-W23", href: "/reports/2025-W23"
+  end
+
+  scenario "PDF generation" do
+    visit "/reports"
+
+    within all("tbody/tr")[0] do
+      click_on "PDF"
+    end
+    expect(page.response_headers["Content-Type"]).to match(%r{application/pdf})
+    expect(page.response_headers["Content-Disposition"]).to eq("inline; filename=\"2025-W22.pdf\"")
+    expect(MimeMagic.by_magic(page.body)).to eq("application/pdf")
   end
 end

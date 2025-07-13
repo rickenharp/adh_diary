@@ -7,7 +7,7 @@ module AdhDiary
         include Deps["repos.weekly_report_repo"]
 
         expose :weeks do
-          weekly_report_repo.weeks
+          weekly_report_repo.all
         end
       end
     end

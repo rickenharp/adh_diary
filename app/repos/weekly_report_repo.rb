@@ -12,7 +12,7 @@ module AdhDiary
       end
 
       def for_week(week)
-        weekly_reports.where(user_id: user.id, week: week)
+        weekly_reports.where(user_id: user.id, week: week).combine(:user)
       end
 
       def get(week)
