@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/rickenharp/adh_diary/compare/v0.4.0...v0.4.1) (2025-07-13)
+
+
+### Bug Fixes
+
+* add missing translations ([741833f](https://github.com/rickenharp/adh_diary/commit/741833f87217b514ff919989925998a6751ecd7e))
+
 ## [0.4.0](https://github.com/rickenharp/adh_diary/compare/v0.3.0...v0.4.0) (2025-07-13)
 
 
