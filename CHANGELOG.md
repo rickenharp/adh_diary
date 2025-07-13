@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/rickenharp/adh_diary/compare/v0.3.0...v0.4.0) (2025-07-13)
+
+
+### Features
+
+* add pdf report generation ([eae9ce8](https://github.com/rickenharp/adh_diary/commit/eae9ce807973c9b3455aaa110868a054051f56c1)), closes [#37](https://github.com/rickenharp/adh_diary/issues/37)
+
 ## [0.3.0](https://github.com/rickenharp/adh_diary/compare/v0.2.1...v0.3.0) (2025-07-11)
 
 
