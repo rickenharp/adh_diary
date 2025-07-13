@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/jeremyevans/tilt
+  revision: 6862d6cefa7cc5036819e887107e8a512e029af0
+  branch: master
+  specs:
+    tilt (2.6.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,6 +240,9 @@ GEM
     lumberjack (1.2.10)
     matrix (0.4.2)
     method_source (1.1.0)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     mustermann (3.0.3)
@@ -269,8 +279,15 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
+    pdf-core (0.10.0)
     pp (0.6.2)
       prettyprint
+    prawn (2.5.0)
+      matrix (~> 0.4)
+      pdf-core (~> 0.10.0)
+      ttfunk (~> 1.8)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     prettyprint (0.2.0)
     prism (1.4.0)
     pry (0.15.2)
@@ -396,8 +413,9 @@ GEM
     stringio (3.1.7)
     temple (0.10.3)
     thor (1.3.2)
-    tilt (2.6.0)
     transproc (1.1.1)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -448,6 +466,9 @@ DEPENDENCIES
   i18n-missing_translations
   irb
   launchy
+  mimemagic (~> 0.4.3)
+  prawn (~> 2.5)
+  prawn-table (~> 0.2.2)
   pry
   puma
   rack-test
@@ -457,6 +478,7 @@ DEPENDENCIES
   rom-factory
   sqlite3
   standard
+  tilt!
   warden
 
 BUNDLED WITH

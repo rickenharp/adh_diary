@@ -1,4 +1,7 @@
 en:
+  general:
+    from: "from"
+    to: "to"
   en: English
   de: German
   home: "Home"

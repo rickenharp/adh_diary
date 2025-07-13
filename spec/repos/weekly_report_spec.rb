@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AdhDiary::Repos::WeeklyReportRepo, db: true do
-  let(:user) { Factory.create(:user) }
+  include_context "report data"
 
   user_provider = Object.new.extend(Dry::Effects::Handler.Reader(:user, as: :call))
 
@@ -10,14 +10,11 @@ RSpec.describe AdhDiary::Repos::WeeklyReportRepo, db: true do
   end
 
   before do
-    start_date = Date.parse("2025-06-23")
-    end_date = Date.parse("2025-06-29")
-
-    medication = Factory.create(:medication)
-    medication_schedule = Factory.create(:medication_schedule, user: user, medication: medication)
-    (start_date..end_date).each_with_index do |date, i|
-      Factory.create(:entry, user: user, date: date, medication_schedule: medication_schedule, blood_pressure: i)
-    end
+    generate_entries(
+      from: Date.parse("2025-06-23"),
+      to: Date.parse("2025-06-29"),
+      additional_data: {blood_pressure: (0..)}
+    )
   end
 
   describe "weeks" do

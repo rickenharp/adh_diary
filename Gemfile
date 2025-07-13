@@ -20,6 +20,8 @@ gem "sqlite3"
 gem "warden"
 gem "bcrypt"
 
+gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
+
 group :development do
   gem "hanami-webconsole", "~> 2.2"
   gem "amazing_print"
@@ -51,6 +53,8 @@ group :test do
   gem "capybara"
   gem "rack-test"
   gem "cuprite", "~> 0.17"
+
+  gem "mimemagic", "~> 0.4.3"
 end
 
 gem "dry-effects", "~> 0.5.0"
@@ -58,3 +62,7 @@ gem "dry-effects", "~> 0.5.0"
 gem "i18n", "~> 1.14"
 
 gem "rack-unpoly", "~> 0.5.0"
+
+gem "prawn", "~> 2.5"
+
+gem "prawn-table", "~> 0.2.2"
