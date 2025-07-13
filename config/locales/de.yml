@@ -1,4 +1,7 @@
 de:
+  general:
+    from: "von"
+    to: "bis"
   en: Englisch
   de: Deutsch
   home: "Start"
