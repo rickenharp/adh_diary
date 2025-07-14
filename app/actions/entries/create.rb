@@ -9,10 +9,10 @@ module AdhDiary
         def handle(request, response)
           case create.call(request.params)
           in Success(entry)
-            response.flash[:notice] = "Entry created"
+            response.flash[:notice] = flash_message(success: true)
             response.redirect_to routes.path(:entries)
           in Failure(validation)
-            response.flash.now[:alert] = "Could not create entry"
+            response.flash.now[:alert] = flash_message(success: false)
             errors = validation.errors[:entry].to_h
 
             response.render(

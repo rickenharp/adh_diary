@@ -15,10 +15,10 @@ module AdhDiary
 
         def handle(request, response)
           if request.params[:action] == "confirm"
-            response.flash[:notice] = "Medication deleted"
+            response.flash[:notice] = flash_message(success: true)
             medication_repo.delete(request.params[:id])
           else
-            response.flash[:notice] = "Medication not deleted"
+            response.flash[:notice] = flash_message(success: false)
           end
           response.redirect_to routes.path(:medications)
         end

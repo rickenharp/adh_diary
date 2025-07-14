@@ -2,6 +2,16 @@ en:
   general:
     from: "from"
     to: "to"
+    successful_create: "%{item} successfully created"
+    not_create: "%{item} could not be created"
+    successful_update: "%{item} successfully updated"
+    not_update: "%{item} could not be updated"
+    successful_destroy: "%{item} successfully deleted"
+    not_destroy: "%{item} could not be deleted"
+    entry: "entry"
+    medication_schedule: "medication schedule"
+    medication: "medication"
+    user: "user"
   en: English
   de: German
   home: "Home"

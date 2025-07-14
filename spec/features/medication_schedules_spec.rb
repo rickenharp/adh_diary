@@ -87,18 +87,18 @@ RSpec.feature "Medication schedules", db: true do
       select "Lisdexamfetamin", from: "medication_schedule[medication_id]"
 
       click_on("Create")
-      expect(page).to have_content "Medication schedule was successfully created"
+      expect(page).to have_content "Medication schedule successfully created"
       expect(page).to have_content "Lisdexamfetamin"
     end
 
-    scenario "create invalid medication" do
+    scenario "create invalid medication schedule" do
       visit "/medication_schedules"
 
       click_on("Add Medication Schedule")
       fill_in "medication_schedule[morning]", with: nil
 
       click_on("Create")
-      expect(page).to have_content "Could not create medication schedule"
+      expect(page).to have_content "Medication schedule could not be created"
       expect(page).to have_content "must be filled"
     end
 
@@ -120,7 +120,7 @@ RSpec.feature "Medication schedules", db: true do
       fill_in "medication_schedule[morning]", with: nil
 
       click_on("Update")
-      expect(page).to have_content "Could not update medication schedule"
+      expect(page).to have_content "Medication schedule could not be updated"
       expect(page).to have_content "must be filled"
     end
   end

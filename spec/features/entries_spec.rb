@@ -47,7 +47,7 @@ RSpec.feature "Entries", db: true do
 
     click_on("Create")
 
-    expect(page).to have_content "Entry created"
+    expect(page).to have_content "Entry successfully created"
     expect(page).to have_content "2025-06-08"
     expect(page).to have_selector "td.attention", text: "none"
     expect(page).to have_selector "td.organisation", text: "mild"
@@ -79,7 +79,7 @@ RSpec.feature "Entries", db: true do
 
     click_on("Create")
 
-    expect(page).to have_content "Could not create entry"
+    expect(page).to have_content "Entry could not be created"
     expect(page).to have_content "already exists"
   end
 
@@ -90,7 +90,7 @@ RSpec.feature "Entries", db: true do
 
     click_on("Create")
 
-    expect(page).to have_content "Could not create entry"
+    expect(page).to have_content "Entry could not be created"
     expect(page).to have_field "Date", with: "2025-06-08"
     expect(page).to have_field "Weight", with: ""
   end
@@ -107,7 +107,7 @@ RSpec.feature "Entries", db: true do
 
     click_on("Update")
 
-    expect(page).to have_content "Entry updated"
+    expect(page).to have_content "Entry successfully updated"
 
     visit "/entries/#{entry.id}"
 
@@ -126,7 +126,7 @@ RSpec.feature "Entries", db: true do
     fill_in "entry[date]", with: "2025-06-08"
 
     click_on("Update")
-    expect(page).to have_content "Could not update entry"
+    expect(page).to have_content "Entry could not be updated"
     expect(page).to have_content "already exists"
   end
 
@@ -134,9 +134,9 @@ RSpec.feature "Entries", db: true do
     entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
     visit "/entries/#{entry.id}/edit"
     click_on("Update")
-    expect(page).to have_content "Entry updated"
+    expect(page).to have_content "Entry successfully updated"
     page.find("button.delete").click
-    expect(page).to_not have_content "Entry updated"
+    expect(page).to_not have_content "Entry successfully updated"
   end
 
   scenario "remember last used medication schedule" do

@@ -55,7 +55,7 @@ RSpec.feature "Medications", db: true do
       expect(page).to have_content "Delete Medikinet?"
 
       click_on("Confirm")
-      expect(page).to have_content "Medication deleted"
+      expect(page).to have_content "Medication successfully deleted"
       expect(page).not_to have_content "Medikinet"
     end
 
@@ -67,7 +67,7 @@ RSpec.feature "Medications", db: true do
       fill_in "medication[name]", with: "Lisdexamfetamin"
 
       click_on("Create")
-      expect(page).to have_content "Medication was successfully created"
+      expect(page).to have_content "Medication successfully created"
       expect(page).to have_content "Lisdexamfetamin"
     end
 
@@ -77,7 +77,7 @@ RSpec.feature "Medications", db: true do
       click_on("Add Medication")
 
       click_on("Create")
-      expect(page).to have_content "Could not create medication"
+      expect(page).to have_content "Medication could not be created"
       expect(page).to have_content "must be filled"
     end
 
@@ -99,7 +99,7 @@ RSpec.feature "Medications", db: true do
       fill_in "medication[name]", with: ""
 
       click_on("Update")
-      expect(page).to have_content "Could not update medication"
+      expect(page).to have_content "Medication could not be updated"
       expect(page).to have_content "must be filled"
     end
   end
