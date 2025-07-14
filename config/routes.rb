@@ -25,6 +25,7 @@ module AdhDiary
     get "/reports", to: "reports.index", as: "reports"
     get "/reports/:week", to: "reports.show", as: "report"
     get "/reports/:week/pdf", to: "reports.pdf", as: "report_pdf"
+    post "/reports/export", to: "reports.export", as: "reports_export"
 
     get "/medications", to: "medications.index", as: "medications"
     get "/medications/:id/delete", to: "medications.delete", as: "delete_medication"
