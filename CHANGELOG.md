@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/rickenharp/adh_diary/compare/v0.4.1...v0.5.0) (2025-07-14)
+
+
+### Features
+
+* add MIT license ([c2c8b9b](https://github.com/rickenharp/adh_diary/commit/c2c8b9b257d51d98e4efd81e2cc180dfb793ad89))
+
 ## [0.4.1](https://github.com/rickenharp/adh_diary/compare/v0.4.0...v0.4.1) (2025-07-13)
 
 
