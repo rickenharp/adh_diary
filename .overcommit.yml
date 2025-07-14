@@ -37,6 +37,10 @@ CommitMsg:
     required_executable: 'npx'
     command: ['npx', '--no', '--', 'commitlint', '--edit']
 
+PrePush:
+  CustomScript:
+    enabled: true
+    required_executable: ./.git-hooks/pre_push/pre-push-check-untracked
 PostCheckout:
   ALL: # Special hook name that customizes all hooks of this type
     quiet: true # Change all post-checkout hooks to only display output on failure
