@@ -21,6 +21,7 @@ gem "warden"
 gem "bcrypt"
 
 gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
+gem "rubyzip", "~> 2.4"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"

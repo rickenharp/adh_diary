@@ -11,8 +11,8 @@ RSpec.describe AdhDiary::Repos::WeeklyReportRepo, db: true do
 
   before do
     generate_entries(
-      from: Date.parse("2025-06-23"),
-      to: Date.parse("2025-06-29"),
+      from: "2025-06-23",
+      to: "2025-06-29",
       additional_data: {blood_pressure: (0..)}
     )
   end

@@ -8,6 +8,9 @@ SPEC_ROOT = Pathname(__dir__).realpath.freeze
 ENV["HANAMI_ENV"] ||= "test"
 require "hanami/prepare"
 
+require "dry/system/stubs"
+Hanami.app.container.enable_stubs!
+
 require "i18n/missing_translations"
 module I18n
   class MyExceptionHandler < ExceptionHandler

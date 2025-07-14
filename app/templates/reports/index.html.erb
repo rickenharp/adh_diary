@@ -8,15 +8,28 @@
   <%= render 'table_header_footer' %>
   </tfoot>
   <tbody>
+  <%= form_for routes.path("reports_export"), method: "post" do |f|%>
   <% weeks.each do |week|  %>
     <tr>
-      <td><%= link_to week.week, routes.path(:report, week: week.week) %></td>
+      <td>
+        <label class="checkbox">
+          <%= f.check_box("export.ids", name: "export[ids][]", value: week.week) %>
+          <%= link_to week.week, routes.path(:report, week: week.week) %>
+        </label>
+      </td>
       <td><%=  week.from %></td>
       <td><%=  week.to %></td>
       <th>
         <%= link_to "PDF", routes.path("report_pdf", week: week.week) , class: "button is-link" %>
       </th>
     </tr>
+  <% end %>
+  <tr>
+    <td><%= f.submit "Export", class: "button is-warning" %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
   <% end %>
   </tbody>
 </table>

@@ -28,10 +28,10 @@ RSpec.shared_context "report data", shared_context: :db do
     end
   end
 
-  def generate_entries(from: Date.parse("2025-06-02"), to: Date.parse("2025-06-15"), additional_data: {})
+  def generate_entries(from: "2025-06-02", to: "2025-06-15", additional_data: {})
     additional_data_provider = additional_data_class.new(additional_data)
 
-    (from..to).each do |date|
+    (Date.parse(from)..Date.parse(to)).each do |date|
       Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule, **additional_data_provider.next)
     end
   end

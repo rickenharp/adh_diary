@@ -14,7 +14,7 @@ await assets.run({
       } else {
       }
     esbuildOptions.loader['.ico'] = 'file';
-    console.log(esbuildOptions);
+    // console.log(esbuildOptions);
     return esbuildOptions;
   }
 });

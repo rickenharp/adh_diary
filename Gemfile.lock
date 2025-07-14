@@ -385,6 +385,7 @@ GEM
       rubocop-ast (>= 1.38.0, < 2.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    rubyzip (2.4.1)
     sequel (5.93.0)
       bigdecimal
     shellany (0.0.1)
@@ -476,6 +477,7 @@ DEPENDENCIES
   rackup (~> 1.0)
   rake
   rom-factory
+  rubyzip (~> 2.4)
   sqlite3
   standard
   tilt!
