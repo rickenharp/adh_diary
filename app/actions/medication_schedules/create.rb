@@ -20,10 +20,10 @@ module AdhDiary
         def handle(request, response)
           if request.params.valid?
             medication_schedule_repo.create(request.params[:medication_schedule].to_h)
-            response.flash[:notice] = "Medication schedule was successfully created"
+            response.flash[:notice] = response.flash[:notice] = flash_message(success: true)
             response.redirect routes.path("medication_schedules")
           else
-            response.flash.now[:alert] = "Could not create medication schedule"
+            response.flash.now[:alert] = response.flash[:notice] = response.flash[:notice] = flash_message(success: false)
             errors = request.params.errors[:medication_schedule].to_h
 
             response.render(

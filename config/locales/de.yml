@@ -2,6 +2,16 @@ de:
   general:
     from: "von"
     to: "bis"
+    successful_create: "%{item} erfolgreich angelegt"
+    not_create: "%{item} konnte nicht angelegt werden"
+    successful_update: "%{item} erfolgreich aktualisiert"
+    not_update: "%{item} konnte nicht aktualisiert werden"
+    successful_destroy: "%{item} erfolgreich gelöscht"
+    not_destroy: "%{item} konnte nicht gelöscht werden"
+    entry: "Eintrag"
+    medication_schedule: "Medikamentenplan"
+    medication: "Medikament"
+    user: "Anwender"
   en: Englisch
   de: Deutsch
   home: "Start"

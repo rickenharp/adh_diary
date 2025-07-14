@@ -21,10 +21,10 @@ module AdhDiary
         def handle(request, response)
           if request.params.valid?
             medication_schedule_repo.update(request.params[:id], request.params[:medication_schedule])
-            request.flash[:notice] = "Medication schedule successfully updated"
+            request.flash[:notice] = flash_message(success: true)
             response.redirect "/medication_schedules"
           else
-            request.flash.now[:alert] = "Could not update medication schedule"
+            request.flash.now[:alert] = flash_message(success: false)
             errors = request.params.errors[:medication_schedule].to_h
 
             response.render(
