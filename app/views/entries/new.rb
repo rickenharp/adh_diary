@@ -6,12 +6,21 @@ module AdhDiary
   module Views
     module Entries
       class New < AdhDiary::View
-        include Deps["repos.entry_repo"]
+        include Dry::Monads[:result]
+        include Deps["repos.entry_repo", "withings.get_measurements"]
 
         expose :entry do
+          measurements = case get_measurements.call(user)
+          in Success(measurements)
+            measurements
+          in Failure
+            {weight: 0, blood_pressure: ""}
+          end
           OpenStruct.new(
             medication_schedule_id: entry_repo.last_entry&.medication_schedule_id,
-            date: Date.today
+            date: Date.today,
+            weight: measurements[:weight],
+            blood_pressure: measurements[:blood_pressure]
           )
         end
 

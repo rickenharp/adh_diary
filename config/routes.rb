@@ -42,5 +42,8 @@ module AdhDiary
     post "/medication_schedules", to: "medication_schedules.create", as: "create_medication_schedule"
     get "/medication_schedules/:id/delete", to: "medication_schedules.delete", as: "delete_medication_schedule"
     delete "/medication_schedules/:id", to: "medication_schedules.destroy", as: "destroy_medication_schedule"
+
+    get "/auth/developer/callback", to: "auth.developer.callback"
+    get "/auth/withings/callback", to: "auth.withings.callback"
   end
 end

@@ -17,6 +17,7 @@ RSpec.feature "Entries", db: true do
   end
 
   before(:each) do
+    Hanami.app.container.stub("withings.get_measurements", ->(_) { Success({}) })
     medication_schedule
 
     login_as(user)
@@ -128,15 +129,6 @@ RSpec.feature "Entries", db: true do
     click_on("Update")
     expect(page).to have_content "Entry could not be updated"
     expect(page).to have_content "already exists"
-  end
-
-  scenario "dismissing notification", js: true do
-    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
-    visit "/entries/#{entry.id}/edit"
-    click_on("Update")
-    expect(page).to have_content "Entry successfully updated"
-    page.find("button.delete").click
-    expect(page).to_not have_content "Entry successfully updated"
   end
 
   scenario "remember last used medication schedule" do

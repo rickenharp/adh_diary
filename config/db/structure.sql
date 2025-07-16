@@ -128,6 +128,19 @@ GROUP BY
 ORDER BY
   `entries`.`date`
 /* weekly_reports(user_id,week,"from","to",attention,organisation,mood_swings,stress_sensitivity,irritability,restlessness,impulsivity,side_effects,blood_pressure,weight,medication) */;
+CREATE TABLE `identities`(
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user_id` integer REFERENCES `users`,
+  `provider` varchar(255),
+  `uid` varchar(255),
+  `token` varchar(255),
+  `refresh_token` varchar(255),
+  `expires_at` timestamp
+);
+CREATE UNIQUE INDEX `identities_user_id_provider_index` ON `identities`(
+  `user_id`,
+  `provider`
+);
 INSERT INTO schema_migrations (filename) VALUES
 ('20250609113142_create_entries.rb'),
 ('20250611091712_create_users.rb'),
@@ -140,4 +153,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250708121437_add_medication_schedule.rb'),
 ('20250709152754_switch_entries_to_medication_schedule.rb'),
 ('20250709203920_add_weekly_report_view.rb'),
-('20250710102932_add_locale_to_user.rb');
+('20250710102932_add_locale_to_user.rb'),
+('20250715143059_add_identities.rb');

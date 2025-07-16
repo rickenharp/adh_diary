@@ -1,2 +1,5 @@
+[task_config]
+includes = ["bin"]
+
 [tools]
 node = "22"

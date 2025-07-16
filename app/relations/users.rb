@@ -5,6 +5,7 @@ module AdhDiary
         associations do
           has_many :entries
           has_many :medication_schedules
+          has_many :identities
         end
       end
     end

@@ -19,9 +19,20 @@ gem "sqlite3"
 
 gem "warden"
 gem "bcrypt"
+gem "omniauth"
+gem "omniauth-oauth2-generic"
+gem "omniauth-oauth2"
 
 gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
 gem "rubyzip", "~> 2.4"
+gem "dry-effects", "~> 0.5.0"
+gem "i18n", "~> 1.14"
+gem "rack-unpoly", "~> 0.5.0"
+gem "prawn", "~> 2.5"
+gem "prawn-table", "~> 0.2.2"
+gem "faraday", "~> 2.13"
+gem "gitlab-chronic", "~> 0.10.6"
+gem "gitlab_chronic_duration", "~> 0.12.0"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"
@@ -57,13 +68,3 @@ group :test do
 
   gem "mimemagic", "~> 0.4.3"
 end
-
-gem "dry-effects", "~> 0.5.0"
-
-gem "i18n", "~> 1.14"
-
-gem "rack-unpoly", "~> 0.5.0"
-
-gem "prawn", "~> 2.5"
-
-gem "prawn-table", "~> 0.2.2"

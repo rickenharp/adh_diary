@@ -14,7 +14,7 @@ module AdhDiary
       end
 
       def by_id(id)
-        users.by_pk(id).one!
+        users.by_pk(id).combine(:identities).one!
       end
 
       def by_email(email)
@@ -24,6 +24,10 @@ module AdhDiary
       def update_locale(lang)
         users.where(id: user.id).changeset(:update, locale: lang.to_s).commit
       end
+
+      # def update_withings_token(token)
+      #   users.where(id: user.id).changeset(:update, withings_token: token).commit
+      # end
     end
   end
 end
