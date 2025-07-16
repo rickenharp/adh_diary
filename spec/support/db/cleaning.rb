@@ -28,9 +28,9 @@ RSpec.configure do |config|
   end
 
   config.before :each, :db do |example|
-    strategy = example.metadata[:js] ? :deletion : :transaction
+    # strategy = example.metadata[:js] ? :deletion : :transaction
     all_databases.call.each do |db|
-      DatabaseCleaner[:sequel, db: db].strategy = strategy
+      DatabaseCleaner[:sequel, db: db].strategy = :truncation
       DatabaseCleaner[:sequel, db: db].start
     end
   end

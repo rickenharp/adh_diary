@@ -1,1 +1,9 @@
 <h1 class="title"><%= t("welcome") %></h1>
+
+<%= form_for "/auth/developer", method: "post", class: "form" do |f| %>
+  <%= f.submit "Login", class: "button" %>
+<% end %>
+
+<%= form_for "/auth/withings", method: "post", class: "form" do |f| %>
+  <%= f.submit "Login Withings", class: "button" %>
+<% end %>

@@ -6,5 +6,8 @@ module AdhDiary
     #
     # setting :my_flag, default: false, constructor: Types::Params::Bool
     setting :session_secret, constructor: Types::String
+    setting :withings_client_id, constructor: Types::String
+    setting :withings_client_secret, constructor: Types::String
+    setting :oauth_debug, default: false, constructor: Types::Params::Bool
   end
 end
