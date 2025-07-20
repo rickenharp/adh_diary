@@ -78,7 +78,6 @@ module AdhDiary
       }
     ]
 
-    ap withings_options
     config.middleware.use OmniAuth::Builder do
       provider :developer
       # provider :withings,
