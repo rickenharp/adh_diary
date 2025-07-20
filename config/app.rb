@@ -27,6 +27,10 @@ module AdhDiary
       end
     end
 
+    if settings.oauth_debug
+      Hanami.app.config.logger.level
+    end
+
     Dry::Validation.load_extensions(:monads)
     config.actions.sessions = :cookie, {
       key: "adh_diary.session",
