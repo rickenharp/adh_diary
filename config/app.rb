@@ -31,6 +31,10 @@ module AdhDiary
       Hanami.app.config.logger.level = :debug
     end
 
+    if Hanami.env?(:production)
+      OmniAuth.config.full_host = "https://adh-diary.rickenharp.cloud"
+    end
+
     Dry::Validation.load_extensions(:monads)
     config.actions.sessions = :cookie, {
       key: "adh_diary.session",
@@ -63,8 +67,9 @@ module AdhDiary
       {
         scope: "user.info,user.metrics,user.activity",
         authorize_options: %i[scope state mode],
-        # request_path: "http://adh-diary.daho.im:2300/auth/withings/callback",
-        client_options: {connection_opts: oauth2_connection_options},
+        client_options: {
+          connection_opts: oauth2_connection_options
+        },
         token_params: {
           action: "requesttoken",
           client_id: settings.withings_client_id,
@@ -72,6 +77,8 @@ module AdhDiary
         }
       }
     ]
+
+    ap withings_options
     config.middleware.use OmniAuth::Builder do
       provider :developer
       # provider :withings,
