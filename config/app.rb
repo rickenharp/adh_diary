@@ -17,13 +17,15 @@ end
 module AdhDiary
   class App < Hanami::App
     def self.oauth2_connection_options
-      if settings.oauth_debug
-        {
-          proxy: "http://localhost:9090",
-          ssl: {verify: false}
-        }
-      else
-        {}
+      environment(:development) do
+        if settings.oauth_debug
+          {
+            proxy: "http://localhost:9090",
+            ssl: {verify: false}
+          }
+        else
+          {}
+        end
       end
     end
 
