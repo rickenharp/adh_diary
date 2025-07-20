@@ -28,7 +28,7 @@ module AdhDiary
     end
 
     if settings.oauth_debug
-      Hanami.app.config.logger.level
+      Hanami.app.config.logger.level = :debug
     end
 
     Dry::Validation.load_extensions(:monads)
