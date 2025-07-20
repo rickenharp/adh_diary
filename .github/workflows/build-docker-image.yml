@@ -37,6 +37,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
