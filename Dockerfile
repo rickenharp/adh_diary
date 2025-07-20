@@ -41,7 +41,7 @@ COPY . .
 
 RUN npm install
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN WITHINGS_SECRET_ID=1 WITHINGS_CLIENT_ID=1 SESSION_SECRET=1 bundle exec hanami assets compile
+RUN WITHINGS_CLIENT_SECRET=1 WITHINGS_CLIENT_ID=1 SESSION_SECRET=1 bundle exec hanami assets compile
 
 
 
