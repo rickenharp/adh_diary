@@ -9,7 +9,6 @@ module AdhDiary
       include Deps["repos.user_repo"]
 
       def call(user)
-        ap user
         access_token = user.access_token_for("withings")
         if access_token.expired?
           access_token.refresh!

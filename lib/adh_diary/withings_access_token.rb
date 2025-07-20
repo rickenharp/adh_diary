@@ -3,7 +3,7 @@ module AdhDiary
   class WithingsAccessToken < OAuth2::AccessToken
     class << self
       def from_hash(client, hash)
-        super(client, hash[:body]).tap { ap it }
+        super(client, hash[:body])
       end
 
       def get(path, opts = {action: "get"}, &block)
