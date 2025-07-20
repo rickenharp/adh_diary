@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/rickenharp/adh_diary/compare/v0.5.0...v0.6.0) (2025-07-20)
+
+
+### Features
+
+* add Withings integration ([d13f135](https://github.com/rickenharp/adh_diary/commit/d13f1352f5bea520ee0157b6859c70cec76f3bc2))
+
 ## [0.5.0](https://github.com/rickenharp/adh_diary/compare/v0.4.1...v0.5.0) (2025-07-14)
 
 
