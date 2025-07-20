@@ -1,20 +1,15 @@
 name: build-docker-image
 
 on:
-  workflow_run:
-    workflows: [ "ci" ]
-#    branches: [ main ]
-    types:
-      - completed
-#  workflow_dispatch:
-#  push:
-#    branches:
-#      - 'main'
-#    tags:
-#      - 'v*'
-#  pull_request:
-#    branches:
-#      - 'main'
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'main'
 
 
 env:
@@ -22,19 +17,29 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  on-failure:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'The triggering workflow failed'
   build-and-push-image:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: read
       packages: write
 
     steps:
+      - name: ensure image has been created
+        uses: lewagon/wait-on-check-action@v1.4.0
+        if: github.event_name != 'pull_request'
+        with:
+          ref: ${{ github.sha }}
+          check-name: tests
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 30
+      - name: ensure image has been created
+        uses: lewagon/wait-on-check-action@v1.4.0
+        if: github.event_name == 'pull_request'
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          check-name: tests
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 30
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
