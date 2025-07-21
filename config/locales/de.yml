@@ -55,16 +55,16 @@ de:
       full: "Medikamentenplan"
       short: "Medikamentenplan"
     attention_span:
-      full: "Aufmerksamkeitsprobleme"
+      full: "Aufmerksamkeits­probleme"
       short: "Auf"
     organisation:
       full: "Organisation"
       short: "Org"
     mood_swings:
-      full: "Stimmungsschwankungen"
+      full: "Stimmungs­schwankungen"
       short: "Stimm"
     stress_sensitivity:
-      full: "Stressempfindlichkeit"
+      full: "Stress­empfindlichkeit"
       short: "Stress"
     irritability:
       full: "Gereiztheit"
