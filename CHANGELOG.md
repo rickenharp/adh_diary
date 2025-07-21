@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.1](https://github.com/rickenharp/adh_diary/compare/v0.6.0...v0.6.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* add debug information ([abeb7d4](https://github.com/rickenharp/adh_diary/commit/abeb7d4d0f9e18fae7ff5a2b9cdd98dde9f3ee07))
+* error handling for GetMeasurements ([67e1167](https://github.com/rickenharp/adh_diary/commit/67e11677a8c477f9cae38bf377a579349a352071))
+* even more fixes ([a36439f](https://github.com/rickenharp/adh_diary/commit/a36439f089c791cd4ca211588de6449103f37a26))
+* ffs ([94059fd](https://github.com/rickenharp/adh_diary/commit/94059fd9561be303df60824d57f9a232bdf35421))
+* fix debug information ([26a0218](https://github.com/rickenharp/adh_diary/commit/26a0218ce290fd91a038eaf23c8e044c76571d00))
+* **i18n:** add soft hyphens in german translation ([164a615](https://github.com/rickenharp/adh_diary/commit/164a6156b4e6d1afd360f7eae3191e61d7adbbe4))
+* more fixes ([63c8f44](https://github.com/rickenharp/adh_diary/commit/63c8f443bd7b96f34e8b0f28f6a226e46bf05aca))
+* set full_host in production ([4ffeaef](https://github.com/rickenharp/adh_diary/commit/4ffeaefef55d76ad3c273360a4ec08757bb96302))
+* shorten wait interval ([dc2b873](https://github.com/rickenharp/adh_diary/commit/dc2b8734eb46d5a8cc19a622d44d351a285c91d6))
+* switch log level to debug in debug mode ([90a3da1](https://github.com/rickenharp/adh_diary/commit/90a3da129aceecee805ffc0bf3ff2bb458b81679))
+
 ## [0.6.0](https://github.com/rickenharp/adh_diary/compare/v0.5.0...v0.6.0) (2025-07-20)
 
 
