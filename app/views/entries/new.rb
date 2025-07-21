@@ -7,13 +7,14 @@ module AdhDiary
     module Entries
       class New < AdhDiary::View
         include Dry::Monads[:result]
-        include Deps["repos.entry_repo", "withings.get_measurements"]
+        include Deps["repos.entry_repo", "withings.get_measurements", "logger"]
 
         expose :entry do
           measurements = case get_measurements.call(user)
           in Success(measurements)
             measurements
-          in Failure
+          in Failure(failure)
+            logger.info("Got #{failure} while trying access Withings API")
             {weight: 0, blood_pressure: ""}
           end
           OpenStruct.new(

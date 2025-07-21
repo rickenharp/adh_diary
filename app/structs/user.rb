@@ -6,6 +6,7 @@ module AdhDiary
       include Deps["oauth2_client"]
       def access_token_for(provider)
         identity = identities.find { it.provider == "withings" }
+        return nil if identity.nil?
         WithingsAccessToken.from_hash(oauth2_client, {body: identity.to_h})
       end
     end
