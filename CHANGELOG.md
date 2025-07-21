@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.2](https://github.com/rickenharp/adh_diary/compare/v0.6.1...v0.6.2) (2025-07-21)
+
+
+### Bug Fixes
+
+* fix darkmode colorsw ([b701b0c](https://github.com/rickenharp/adh_diary/commit/b701b0c47b939d7c0043407f08916b989d0e0971))
+* oauth and Withings API should work now ([9fdbdac](https://github.com/rickenharp/adh_diary/commit/9fdbdac436e1249d4e6e10518ddf2005f8e46ab0))
+
 ## [0.6.1](https://github.com/rickenharp/adh_diary/compare/v0.6.0...v0.6.1) (2025-07-21)
 
 
