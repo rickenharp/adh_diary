@@ -10,9 +10,9 @@ module AdhDiary
     include Dry::Monads[:result]
     include Dry::Effects::Handler.Reader(:user)
     include Dry::Effects::Reader(:user)
-    include Deps["i18n", "inflector"]
+    include Deps["i18n", "inflector", "sentry"]
 
-    # handle_exception ROM::TupleCountMismatchError => :handle_not_found
+    handle_exception StandardError => :handle_standard_error
     before :set_locale
 
     def call(env)
@@ -41,6 +41,17 @@ module AdhDiary
     end
 
     private
+
+    def handle_standard_error(request, response, exception)
+      if Hanami.env?(:development)
+        raise exception
+      else
+        sentry.capture_exception(exception)
+
+        response.status = 500
+        response.body = "Sorry, something went wrong handling your request"
+      end
+    end
 
     def set_locale(request, response)
       i18n.locale = request.session[:language] || i18n.default_locale

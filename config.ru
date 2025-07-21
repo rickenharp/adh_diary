@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "sentry-ruby"
+
+use Sentry::Rack::CaptureExceptions
+
 require "hanami/boot"
 
 OmniAuth.config.logger = Hanami.app["logger"]
