@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   <head>
     <meta charset="UTF-8">
     <meta name="x-environment" content="<%= Hanami.env %>">
@@ -12,7 +12,7 @@
   </head>
   <body>
   <!-- START NAV -->
-  <nav class="navbar is-white">
+  <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item brand-text" href="/">
@@ -61,10 +61,8 @@
               <% else %>
                 <a class="button is-primary" href="<%= routes.path(:login) %>"><%= t("log_in") %></a>
               <% end %>
-
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
