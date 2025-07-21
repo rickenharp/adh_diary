@@ -36,11 +36,11 @@ module OmniAuth
       #   }
       # end
 
-      # extra do
-      #   {
-      #     "raw_info" => raw_info
-      #   }
-      # end
+      extra do
+        {
+          "raw_info" => raw_info
+        }
+      end
 
       def build_access_token
         verifier = request.params["code"]
@@ -48,7 +48,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info = {}
+        @raw_info = {"token" => access_token}
       end
     end
   end
