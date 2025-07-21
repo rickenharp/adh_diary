@@ -68,3 +68,5 @@ group :test do
 
   gem "mimemagic", "~> 0.4.3"
 end
+
+gem "sentry-ruby", "~> 5.26"
