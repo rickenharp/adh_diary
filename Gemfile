@@ -37,6 +37,8 @@ gem "gitlab_chronic_duration", "~> 0.12.0"
 group :development do
   gem "hanami-webconsole", "~> 2.2"
   gem "amazing_print"
+  gem "yard"
+  gem "maruku"
 end
 
 group :development, :test do
