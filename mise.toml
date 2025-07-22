@@ -3,3 +3,4 @@ includes = ["bin"]
 
 [tools]
 node = "22"
+ruby = "3.4"

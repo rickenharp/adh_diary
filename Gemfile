@@ -13,7 +13,6 @@ gem "hanami-view", "~> 2.2"
 gem "dry-types", "~> 1.7"
 gem "dry-operation"
 gem "puma"
-gem "rackup", "~> 1.0"
 gem "rake"
 gem "sqlite3"
 
@@ -37,6 +36,7 @@ gem "gitlab_chronic_duration", "~> 0.12.0"
 group :development do
   gem "hanami-webconsole", "~> 2.2"
   gem "amazing_print"
+  gem "yard"
 end
 
 group :development, :test do
