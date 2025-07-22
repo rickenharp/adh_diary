@@ -12,8 +12,7 @@ module AdhDiary
               update: {
                 token: Sequel[:excluded][:token],
                 refresh_token: Sequel[:excluded][:refresh_token],
-                expires_at: Sequel[:excluded][:expires_at],
-                uid: Sequel[:excluded][:uid]
+                expires_at: Sequel[:excluded][:expires_at]
               }
             ).insert(tuples)
           end
