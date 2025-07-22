@@ -51,13 +51,12 @@ module AdhDiary
       def ensure_fresh_token(access_token, user)
         if access_token.expired?
           fresh_token = access_token.refresh
-          identity_repo.upsert(fresh_token)
           identity_repo.upsert(
             user_id: user.id,
             provider: "withings",
-            token: access_token.token,
-            refresh_token: access_token.refresh_token,
-            expires_at: access_token.expires_at
+            token: fresh_token.token,
+            refresh_token: fresh_token.refresh_token,
+            expires_at: fresh_token.expires_at
           )
         else
           fresh_token = access_token
