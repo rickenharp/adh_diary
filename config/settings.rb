@@ -10,5 +10,6 @@ module AdhDiary
     setting :withings_client_secret, constructor: Types::String
     setting :oauth_debug, default: false, constructor: Types::Params::Bool
     setting :host_name, default: nil, constructor: Types::String.optional
+    setting :deployment, default: Hanami.env.to_s, constructor: Types::String
   end
 end
