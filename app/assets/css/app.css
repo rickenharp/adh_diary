@@ -17,12 +17,8 @@ div.unused {
   .bar {
     background-image: url('../images/favicon.ico');
   }
-
-
-
 }
-/*body {*/
-/*  background-color: #fff;*/
-/*  color: #000;*/
-/*  font-family: sans-serif;*/
-/*}*/
+
+html.deployment-development body, html.deployment-staging body {
+  font-family: "Comic Sans MS", serif;
+}
