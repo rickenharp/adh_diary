@@ -10,6 +10,7 @@ jobs:
   tests:
     env:
       HANAMI_ENV: test
+      TZ: Europe/Berlin
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
