@@ -11,8 +11,8 @@ Hanami.app.register_provider(:withings_conn) do
         action: "getmeas",
         meastypes: AdhDiary::Withings::MEASUREMENT_TYPES.values.map(&:to_s).join(","),
         category: 1,
-        startdate: Chronic.parse("yesterday at midnight").to_i,
-        enddate: (Chronic.parse("today at midnight") - 1).to_i
+        startdate: Chronic.parse("yesterday at midnight", now: target[:time]).to_i,
+        enddate: (Chronic.parse("today at midnight", now: target[:time]) - 1).to_i
       }
     )
 
