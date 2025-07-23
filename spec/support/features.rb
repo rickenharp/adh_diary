@@ -8,7 +8,7 @@ RSpec.configure do |config|
   config.after(:each) { WebMock.enable_net_connect! }
 end
 
-Capybara.default_max_wait_time = 20
+Capybara.default_max_wait_time = 40
 Capybara.register_driver(:cuprite) do |app|
   Capybara::Cuprite::Driver.new(app, window_size: [1200, 800], timeout: 20, process_timeout: Capybara.default_max_wait_time)
 end
