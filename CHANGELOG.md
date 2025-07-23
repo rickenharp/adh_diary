@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.0](https://github.com/rickenharp/adh_diary/compare/v0.6.2...v0.7.0) (2025-07-23)
+
+
+### Features
+
+* deployment is now a setting ([ca43d94](https://github.com/rickenharp/adh_diary/commit/ca43d94931e8653c08953ba3905c31b6e5bb537b))
+* make host_name configurable ([681fa4b](https://github.com/rickenharp/adh_diary/commit/681fa4b4073eb4d34b9e5331ff8d575a92346c74))
+
+
+### Bug Fixes
+
+* handle token refresh correctly ([d8a9790](https://github.com/rickenharp/adh_diary/commit/d8a9790fce71017c9dd0116efc9f0b1cc27eb8d2))
+
 ## [0.6.2](https://github.com/rickenharp/adh_diary/compare/v0.6.1...v0.6.2) (2025-07-21)
 
 
