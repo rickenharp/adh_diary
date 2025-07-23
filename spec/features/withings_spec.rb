@@ -1,0 +1,173 @@
+require "gitlab-chronic"
+
+RSpec.feature "Withings integration", db: true do
+  let(:user) { Factory.create(:user, name: "Some Guy", identities: []) }
+  let(:identity_relation) { Hanami.app["relations.identities"] }
+
+  around do |example|
+    WebMock.disable_net_connect!
+    OmniAuth.config.test_mode = true
+    old_validation_phase = OmniAuth.config.request_validation_phase
+    OmniAuth.config.request_validation_phase = nil
+    Hanami.app.container.stub("settings", OpenStruct.new(withings_client_id: "xxclientidxx", withings_client_secret: "xxclientsecretxx")) do
+      example.run
+    end
+    OmniAuth.config.request_validation_phase = old_validation_phase
+    OmniAuth.config.test_mode = false
+    WebMock.enable_net_connect!
+  end
+
+  before(:each) do
+    OmniAuth.config.mock_auth[:withings] = OmniAuth::AuthHash.new({
+      provider: "withings",
+      uid: "1234567890",
+      credentials: {
+        token: "initial token",
+        refresh_token: "initial refresh token",
+        expires_at: Chronic.parse("in 1 hour")
+      }
+    })
+  end
+
+  scenario "creating an identity" do
+    login_as(user)
+    visit "/"
+
+    expect { click_button("Connect with Withings") }.to change { identity_relation.where(user_id: user.id, provider: "withings").count }.by(1)
+    identity = identity_relation.where(user_id: user.id, provider: "withings").one!
+
+    expect(identity).to include(token: "initial token", refresh_token: "initial refresh token", uid: "1234567890")
+
+    expect(page).to have_content "Successfully connected to Withings"
+  end
+
+  context "with fresh token" do
+    scenario "getting data from withings" do
+      identity = Factory.create(
+        :identity,
+        user: user,
+        provider: "withings",
+        token: "initial token",
+        refresh_token: "initial refresh token",
+        expires_at: Chronic.parse("in 1 hour")
+      )
+      user.identities << identity
+
+      login_as(user)
+
+      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=1753307999&meastypes=1,9,10&startdate=1753221600")
+        .with(
+          headers: {
+            "Authorization" => "Bearer initial token"
+          }
+        )
+        .to_return(status: 200, body: measure_body(weight: 60.5, systolic: 110, diastolic: 70), headers: {})
+      visit "/entries/new"
+
+      expect(page).to have_field("Weight", with: "60.5")
+      expect(page).to have_field("Blood Pressure", with: "110/70")
+    end
+  end
+
+  context "with expired token" do
+    scenario "getting data from withings" do
+      identity = Factory.create(
+        :identity,
+        user: user,
+        provider: "withings",
+        token: "initial token",
+        refresh_token: "initial refresh token",
+        expires_at: Chronic.parse("1 hour ago")
+      )
+      user.identities << identity
+
+      login_as(user)
+
+      stub_request(:post, "https://wbsapi.withings.net/v2/oauth2/")
+        .with(
+          body: {
+            "action" => "requesttoken",
+            "client_id" => "xxclientidxx",
+            "client_secret" => "xxclientsecretxx",
+            "grant_type" => "refresh_token",
+            "refresh_token" => "initial refresh token"
+          },
+          headers: {
+            "Authorization" => "Basic Og==",
+            "Content-Type" => "application/x-www-form-urlencoded"
+          }
+        )
+        .to_return(status: 200, body: refresh_body, headers: {"content-type" => "application/json"})
+
+      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=1753307999&meastypes=1,9,10&startdate=1753221600")
+        .with(
+          headers: {
+            "Authorization" => "Bearer fresh token"
+          }
+        )
+        .to_return(status: 200, body: measure_body(weight: 60.5, systolic: 110, diastolic: 70), headers: {})
+
+      visit "/entries/new"
+
+      expect(page).to have_field("Weight", with: "60.5")
+      expect(page).to have_field("Blood Pressure", with: "110/70")
+    end
+  end
+
+  def measure_body(weight:, systolic:, diastolic:)
+    <<~JSON
+          {
+        "status": 0,
+        "body": {
+          "measuregrps": [
+            {
+              "measures": [
+                {
+                  "value": #{diastolic * 1_000},
+                  "type": 9,
+                  "unit": -3,
+                  "algo": 0,
+                  "fm": 3
+                },
+                {
+                  "value": #{systolic * 1_000},
+                  "type": 10,
+                  "unit": -3,
+                  "algo": 0,
+                  "fm": 3
+                }
+              ]
+            },
+            {
+              "measures": [
+                {
+                  "value": #{weight * 1_000},
+                  "type": 1,
+                  "unit": -3,
+                  "algo": 3,
+                  "fm": 3
+                }
+              ]
+            }
+          ]
+        }
+      }
+    JSON
+  end
+
+  def refresh_body
+    <<~JSON
+      {
+        "status": 0,
+        "body": {
+          "userid": 1,
+          "access_token": "fresh token",
+          "refresh_token": "fresh refresh token",
+          "scope": "user.info,user.metrics,user.activity",
+          "expires_in": 10800,
+          "token_type": "Bearer"
+        }
+      }
+    JSON
+  end
+end
