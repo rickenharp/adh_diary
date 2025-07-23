@@ -9,5 +9,6 @@ module AdhDiary
     setting :withings_client_id, constructor: Types::String
     setting :withings_client_secret, constructor: Types::String
     setting :oauth_debug, default: false, constructor: Types::Params::Bool
+    setting :host_name, default: nil, constructor: Types::String.optional
   end
 end
