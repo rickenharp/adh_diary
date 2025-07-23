@@ -10,8 +10,10 @@ RSpec.feature "Withings integration", db: true do
     OmniAuth.config.test_mode = true
     old_validation_phase = OmniAuth.config.request_validation_phase
     OmniAuth.config.request_validation_phase = nil
-    Hanami.app.container.stub("settings", OpenStruct.new(withings_client_id: "xxclientidxx", withings_client_secret: "xxclientsecretxx")) do
-      example.run
+    Hanami.app.container.stub("time", Time.at(1753292590)) do
+      Hanami.app.container.stub("settings", OpenStruct.new(withings_client_id: "xxclientidxx", withings_client_secret: "xxclientsecretxx")) do
+        example.run
+      end
     end
     OmniAuth.config.request_validation_phase = old_validation_phase
     OmniAuth.config.test_mode = false
