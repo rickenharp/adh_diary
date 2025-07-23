@@ -60,4 +60,4 @@ ENTRYPOINT ["/hanami/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 
-CMD ["bundle", "exec", "hanami", "server"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
