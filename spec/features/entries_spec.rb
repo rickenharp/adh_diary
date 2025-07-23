@@ -16,8 +16,13 @@ RSpec.feature "Entries", db: true do
     )
   end
 
+  around(:each) do |example|
+    Hanami.app.container.stub("withings.get_measurements", ->(_) { Success({}) }) do
+      example.run
+    end
+  end
+
   before(:each) do
-    Hanami.app.container.stub("withings.get_measurements", ->(_) { Success({}) })
     medication_schedule
 
     login_as(user)

@@ -1,4 +1,5 @@
 require "oauth2/access_token"
+
 module AdhDiary
   class WithingsAccessToken < OAuth2::AccessToken
     class << self
@@ -8,10 +9,11 @@ module AdhDiary
     end
 
     def refresh(params = {}, access_token_opts = {}, &block)
+      settings = AdhDiary::App["settings"]
       additional_params = {
         action: "requesttoken",
-        client_id: Hanami.app.settings.withings_client_id,
-        client_secret: Hanami.app.settings.withings_client_secret
+        client_id: settings.withings_client_id,
+        client_secret: settings.withings_client_secret
       }
       super(params.merge(additional_params), access_token_opts, &block)
     end

@@ -1,9 +1,12 @@
 <h1 class="title"><%= t("welcome") %></h1>
 
-<%= form_for "/auth/developer", method: "post", class: "form" do |f| %>
-  <%= f.submit "Login", class: "button" %>
-<% end %>
-
+<% if warden.user %>
 <%= form_for "/auth/withings", method: "post", class: "form" do |f| %>
-  <%= f.submit "Login Withings", class: "button" %>
+  <%= f.submit "Connect with Withings", class: "button is-primary is-outlined" do %>
+      <span class="icon is-small">
+      <i class="fas fa-link"></i>
+    </span>
+    <span>Connect with Withings</span>
+  <% end %>
+<% end %>
 <% end %>
