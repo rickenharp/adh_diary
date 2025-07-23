@@ -3,6 +3,7 @@ require "gitlab-chronic"
 RSpec.feature "Withings integration", db: true do
   let(:user) { Factory.create(:user, name: "Some Guy", identities: []) }
   let(:identity_relation) { Hanami.app["relations.identities"] }
+  let(:expiry) { Chronic.parse("in 1 hour") }
 
   around do |example|
     WebMock.disable_net_connect!
@@ -24,7 +25,7 @@ RSpec.feature "Withings integration", db: true do
       credentials: {
         token: "initial token",
         refresh_token: "initial refresh token",
-        expires_at: Chronic.parse("in 1 hour")
+        expires_at: expiry
       }
     })
   end
@@ -49,7 +50,7 @@ RSpec.feature "Withings integration", db: true do
         provider: "withings",
         token: "initial token",
         refresh_token: "initial refresh token",
-        expires_at: Chronic.parse("in 1 hour")
+        expires_at: expiry
       )
       user.identities << identity
 
@@ -70,6 +71,7 @@ RSpec.feature "Withings integration", db: true do
   end
 
   context "with expired token" do
+    let(:expiry) { Chronic.parse("1 hour ago") }
     scenario "getting data from withings" do
       identity = Factory.create(
         :identity,
@@ -77,7 +79,7 @@ RSpec.feature "Withings integration", db: true do
         provider: "withings",
         token: "initial token",
         refresh_token: "initial refresh token",
-        expires_at: Chronic.parse("1 hour ago")
+        expires_at: expiry
       )
       user.identities << identity
 

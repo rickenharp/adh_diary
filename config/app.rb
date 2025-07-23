@@ -31,8 +31,8 @@ module AdhDiary
       Hanami.app.config.logger.level = :debug
     end
 
-    if Hanami.env?(:production)
-      OmniAuth.config.full_host = "https://adh-diary.rickenharp.cloud"
+    if settings.host_name
+      OmniAuth.config.full_host = "https://#{settings.host_name}"
     end
 
     Dry::Validation.load_extensions(:monads)
