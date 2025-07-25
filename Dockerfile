@@ -2,7 +2,7 @@
 # check=error=true
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.4-slim
+ARG RUBY_VERSION=3.4.5-slim
 FROM docker.io/library/ruby:${RUBY_VERSION} AS base
 
 # Hanami app lives here
