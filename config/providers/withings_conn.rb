@@ -1,7 +1,6 @@
 Hanami.app.register_provider(:withings_conn) do
   prepare do
     require "faraday"
-    require "gitlab-chronic"
   end
 
   start do
@@ -10,9 +9,7 @@ Hanami.app.register_provider(:withings_conn) do
       params: {
         action: "getmeas",
         meastypes: AdhDiary::Withings::MEASUREMENT_TYPES.values.map(&:to_s).join(","),
-        category: 1,
-        startdate: Chronic.parse("yesterday at midnight", now: target[:time]).to_i,
-        enddate: (Chronic.parse("today at midnight", now: target[:time]) - 1).to_i
+        category: 1
       }
     )
 

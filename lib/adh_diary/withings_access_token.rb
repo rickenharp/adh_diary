@@ -8,6 +8,10 @@ module AdhDiary
       end
     end
 
+    def expired?
+      expires? && (expires_at <= Hanami.app["now"].call.to_i)
+    end
+
     def refresh(params = {}, access_token_opts = {}, &block)
       settings = AdhDiary::App["settings"]
       additional_params = {
