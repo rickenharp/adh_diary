@@ -44,23 +44,24 @@ RSpec.feature "Weekly Reports", db: true do
 
   context "export" do
     scenario "PDF bulk export" do
-      Hanami.app.container.stub("time", time)
-      generate_entries(from: "2025-05-01", to: "2025-05-18")
-      login_as(user)
+      AdhDiary::Now.override!(Time.utc(2025, 7, 14, 12, 0)) do
+        generate_entries(from: "2025-05-01", to: "2025-05-18")
+        login_as(user)
 
-      visit "/reports"
+        visit "/reports"
 
-      check("2025-W17")
-      check("2025-W19")
+        check("2025-W17")
+        check("2025-W19")
 
-      click_on("Export")
-      expect(MimeMagic.by_magic(page.body)).to eq("application/zip")
-      expect(page.response_headers["Content-Type"]).to match(%r{application/zip})
-      expect(page.response_headers["Content-Disposition"]).to eq("attachment; filename=\"export-2025-07-14-12-00.zip\"")
-      Zip::File.open_buffer(page.body) do |zip_file|
-        expect(zip_file.dir.entries(".")).to eq(["2025-W17.pdf", "2025-W19.pdf"])
-        zip_file.dir.foreach(".") do |pdf_file_name|
-          expect(MimeMagic.by_magic(zip_file.file.read(pdf_file_name))).to eq("application/pdf")
+        click_on("Export")
+        expect(MimeMagic.by_magic(page.body)).to eq("application/zip")
+        expect(page.response_headers["Content-Type"]).to match(%r{application/zip})
+        expect(page.response_headers["Content-Disposition"]).to eq("attachment; filename=\"export-2025-07-14-12-00.zip\"")
+        Zip::File.open_buffer(page.body) do |zip_file|
+          expect(zip_file.dir.entries(".")).to eq(["2025-W17.pdf", "2025-W19.pdf"])
+          zip_file.dir.foreach(".") do |pdf_file_name|
+            expect(MimeMagic.by_magic(zip_file.file.read(pdf_file_name))).to eq("application/pdf")
+          end
         end
       end
     end

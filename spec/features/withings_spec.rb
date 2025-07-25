@@ -1,23 +1,24 @@
-require "gitlab-chronic"
-
 RSpec.feature "Withings integration", db: true do
   let(:user) { Factory.create(:user, name: "Some Guy", identities: []) }
   let(:identity_relation) { Hanami.app["relations.identities"] }
-  let(:expiry) { Chronic.parse("in 1 hour") }
+  let(:now) { Time.utc(2025, 7, 22, 14, 56) }
+  let(:expiry) { now + 60 * 60 }
+  let(:startdate) { Time.utc(2025, 7, 22, 0, 0) }
+  let(:enddate) { Time.utc(2025, 7, 22, 23, 59) }
 
   around do |example|
+    AdhDiary::Now.override!(now)
     WebMock.disable_net_connect!
     OmniAuth.config.test_mode = true
     old_validation_phase = OmniAuth.config.request_validation_phase
     OmniAuth.config.request_validation_phase = nil
-    Hanami.app.container.stub("time", Time.at(1753292590)) do
-      Hanami.app.container.stub("settings", OpenStruct.new(withings_client_id: "xxclientidxx", withings_client_secret: "xxclientsecretxx")) do
-        example.run
-      end
+    Hanami.app.container.stub("settings", OpenStruct.new(withings_client_id: "xxclientidxx", withings_client_secret: "xxclientsecretxx")) do
+      example.run
     end
     OmniAuth.config.request_validation_phase = old_validation_phase
     OmniAuth.config.test_mode = false
     WebMock.enable_net_connect!
+    AdhDiary::Now.reset!
   end
 
   before(:each) do
@@ -46,19 +47,21 @@ RSpec.feature "Withings integration", db: true do
 
   context "with fresh token" do
     scenario "getting data from withings" do
-      identity = Factory.create(
+      identity = Factory[
         :identity,
         user: user,
         provider: "withings",
         token: "initial token",
         refresh_token: "initial refresh token",
         expires_at: expiry
-      )
+      ]
+      expect(identity.expires_at).to eq(expiry)
+
       user.identities << identity
 
       login_as(user)
 
-      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=1753307999&meastypes=1,9,10&startdate=1753221600")
+      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=#{enddate.to_i}&meastypes=1,9,10&startdate=#{startdate.to_i}")
         .with(
           headers: {
             "Authorization" => "Bearer initial token"
@@ -73,7 +76,7 @@ RSpec.feature "Withings integration", db: true do
   end
 
   context "with expired token" do
-    let(:expiry) { Chronic.parse("1 hour ago") }
+    let(:expiry) { now - 60 * 60 }
     scenario "getting data from withings" do
       identity = Factory.create(
         :identity,
@@ -103,7 +106,7 @@ RSpec.feature "Withings integration", db: true do
         )
         .to_return(status: 200, body: refresh_body, headers: {"content-type" => "application/json"})
 
-      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=1753307999&meastypes=1,9,10&startdate=1753221600")
+      stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=#{enddate.to_i}&meastypes=1,9,10&startdate=#{startdate.to_i}")
         .with(
           headers: {
             "Authorization" => "Bearer fresh token"

@@ -6,7 +6,7 @@ module AdhDiary
   module Actions
     module Reports
       class Export < AdhDiary::Action
-        include Deps["views.reports.index", "views.reports.pdf", "time"]
+        include Deps["views.reports.index", "views.reports.pdf", "now"]
 
         params do
           required(:export).hash do
@@ -17,7 +17,7 @@ module AdhDiary
         def handle(request, response)
           if request.params.valid?
             response.format = :zip
-            response.set_header "Content-Disposition", "attachment; filename=\"export-#{time.strftime("%Y-%m-%d-%H-%M")}.zip\""
+            response.set_header "Content-Disposition", "attachment; filename=\"export-#{now.call.strftime("%Y-%m-%d-%H-%M")}.zip\""
 
             zip_file = Zip::OutputStream.write_buffer do |zip|
               request.params[:export][:ids].each do |week|

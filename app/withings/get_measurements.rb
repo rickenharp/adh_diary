@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "faraday"
-require "gitlab-chronic"
 
 module AdhDiary
   module Withings

@@ -1,4 +1,5 @@
 Hanami.app.configure_provider :db do
+  Sequel.application_timezone = :utc
   config.gateway :default do |gw|
     # The default PostgreSQL configuration would look like this
     gw.adapter :sql do |sql|

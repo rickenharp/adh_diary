@@ -21,6 +21,10 @@ module AdhDiary
         end
       end
 
+      def by_id(id)
+        identities.by_pk(id).one!
+      end
+
       # def update_token(token)
       #   identities.where(user_id: user.id, provider: "withings").changeset(:update, access_token: token.token, refresh_token: token.refresh_token, expires_at: token.expires_at).commit
       # end

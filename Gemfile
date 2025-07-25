@@ -31,8 +31,7 @@ gem "rack-unpoly", "~> 0.5.0"
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "faraday", "~> 2.13"
-gem "gitlab-chronic", "~> 0.10.6"
-gem "gitlab_chronic_duration", "~> 0.12.0"
+gem "sentry-ruby", "~> 5.26"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"
@@ -71,5 +70,3 @@ group :test do
   gem "mimemagic", "~> 0.4.3"
   gem "webmock", "~> 3.25.1"
 end
-
-gem "sentry-ruby", "~> 5.26"
