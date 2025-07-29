@@ -21,12 +21,12 @@ RSpec.describe AdhDiary::Repos::WeeklyReportRepo, db: true do
     it "returns available weeks" do
       result = subject.weeks
 
-      expect(result.map(&:week)).to eq ["2025-W25"]
+      expect(result.map(&:week)).to eq ["2025-W26"]
     end
   end
 
   it "orders the blood pressure" do
-    report = subject.get("2025-W25")
-    expect(report.blood_pressure).to eq("0,1,2,3,4,5,6")
+    report = subject.get("2025-W26")
+    expect(report.blood_pressure).to eq(%w[0 1 2 3 4 5 6])
   end
 end

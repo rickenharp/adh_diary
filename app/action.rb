@@ -15,8 +15,8 @@ module AdhDiary
     handle_exception StandardError => :handle_standard_error
     before :set_locale
 
-    def call(env)
-      with_user(env["warden"].user) do
+    def handle(request, response)
+      with_user(request.env["warden"].user) do
         super
       end
     end
@@ -43,7 +43,7 @@ module AdhDiary
     private
 
     def handle_standard_error(request, response, exception)
-      if Hanami.env?(:development)
+      if Hanami.env?(:development, :test)
         raise exception
       else
         sentry.capture_exception(exception)

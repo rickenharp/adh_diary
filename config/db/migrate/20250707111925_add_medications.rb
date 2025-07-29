@@ -7,7 +7,7 @@ ROM::SQL.migration do
   up do
     transaction do
       create_table :medications do
-        column :id, Integer, primary_key: true
+        primary_key :id
         column :name, String, null: false, unique: true
       end
       execute <<~SQL

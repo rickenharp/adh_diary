@@ -16,7 +16,7 @@ module AdhDiary
             provider: "withings",
             token: fresh_token.token,
             refresh_token: fresh_token.refresh_token,
-            expires_at: fresh_token.expires_at
+            expires_at: Time.at(fresh_token.expires_at, in: "UTC")
           )
         else
           fresh_token = access_token

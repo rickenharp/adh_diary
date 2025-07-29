@@ -81,12 +81,11 @@ pdf.font("Noto Sans") do
   pdf.move_down(10)
   pdf.text("Außerdem messen Sie bitte ihren <b>Blutdruck</b> bzw. lassen ihn messen (in der medikamentösen Einstellungsphase möglichst täglich) und Ihr <b>Körpergewicht</b>", inline_format: true)
   pdf.move_down(10)
-  blood_pressures = weekly_report.blood_pressure.split(",")
 
-  biometrics_table = blood_pressures.map.with_index do |bp, index|
+  biometrics_table = weekly_report.blood_pressure.map.with_index do |bp, index|
     if index.zero?
        [
-         {content: "<b>Blutdruck</b>", rowspan: blood_pressures.size, valign: :center },
+         {content: "<b>Blutdruck</b>", rowspan: weekly_report.blood_pressure.size, valign: :center },
          { content: bp, align: :right }
        ]
      else

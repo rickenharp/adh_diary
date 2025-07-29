@@ -18,17 +18,18 @@ RSpec.feature "Weekly Reports", db: true do
     scenario "visiting the reports page shows an entry" do
       visit "/reports"
 
-      expect(page).to have_content "2025-W22"
       expect(page).to have_content "2025-W23"
+      expect(page).to have_content "2025-W24"
     end
 
     scenario "visiting the report detail page shows an entry" do
-      visit "/reports/2025-W22"
+      visit "/reports/2025-W23"
 
       expect(page).to have_content "from 2025-06-02 to 2025-06-08"
       expect(page).to have_content "Blood Pressure"
       expect(page).to have_content "Weight"
-      expect(page).to have_link "2025-W23", href: "/reports/2025-W23"
+      expect(page).to_not have_link "2025-W22", href: "/reports/2025-W22"
+      expect(page).to have_link "2025-W24", href: "/reports/2025-W24"
     end
 
     scenario "PDF generation" do
@@ -37,7 +38,7 @@ RSpec.feature "Weekly Reports", db: true do
         click_on "PDF"
       end
       expect(page.response_headers["Content-Type"]).to match(%r{application/pdf})
-      expect(page.response_headers["Content-Disposition"]).to eq("inline; filename=\"2025-W22.pdf\"")
+      expect(page.response_headers["Content-Disposition"]).to eq("inline; filename=\"2025-W23.pdf\"")
       expect(MimeMagic.by_magic(page.body)).to eq("application/pdf")
     end
   end
@@ -50,15 +51,15 @@ RSpec.feature "Weekly Reports", db: true do
 
         visit "/reports"
 
-        check("2025-W17")
-        check("2025-W19")
+        check("2025-W18")
+        check("2025-W20")
 
         click_on("Export")
         expect(MimeMagic.by_magic(page.body)).to eq("application/zip")
         expect(page.response_headers["Content-Type"]).to match(%r{application/zip})
         expect(page.response_headers["Content-Disposition"]).to eq("attachment; filename=\"export-2025-07-14-12-00.zip\"")
         Zip::File.open_buffer(page.body) do |zip_file|
-          expect(zip_file.dir.entries(".")).to eq(["2025-W17.pdf", "2025-W19.pdf"])
+          expect(zip_file.dir.entries(".")).to eq(["2025-W18.pdf", "2025-W20.pdf"])
           zip_file.dir.foreach(".") do |pdf_file_name|
             expect(MimeMagic.by_magic(zip_file.file.read(pdf_file_name))).to eq("application/pdf")
           end

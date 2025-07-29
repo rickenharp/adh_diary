@@ -34,39 +34,38 @@ ROM::SQL.migration do
 
     create_or_replace_view(
       :weekly_reports,
-      ROM::SQL.current_gateway[:entries].left_join(:medications).select {
+      ROM::SQL.current_gateway[:entries].select {
         [
-          user_id,
-          function(:strftime, "%Y-W%W", date).as(:week),
+          entries[:user_id].as(:user_id),
+          to_char(:date, 'IYYY-"W"IW').as(:week),
           min(date).as(:from),
           max(date).as(:to),
-          function(:round, function(:avg, attention)).as(:attention),
-          function(:round, function(:avg, organisation)).as(:organisation),
-          function(:round, function(:avg, mood_swings)).as(:mood_swings),
-          function(:round, function(:avg, stress_sensitivity)).as(:stress_sensitivity),
-          function(:round, function(:avg, irritability)).as(:irritability),
-          function(:round, function(:avg, restlessness)).as(:restlessness),
-          function(:round, function(:avg, impulsivity)).as(:impulsivity),
+          round(avg(attention)).cast(:integer).as(:attention),
+          round(avg(organisation)).cast(:integer).as(:organisation),
+          round(avg(mood_swings)).cast(:integer).as(:mood_swings),
+          round(avg(stress_sensitivity)).cast(:integer).as(:stress_sensitivity),
+          round(avg(irritability)).cast(:integer).as(:irritability),
+          round(avg(restlessness)).cast(:integer).as(:restlessness),
+          round(avg(impulsivity)).cast(:integer).as(:impulsivity),
 
-          group_concat(nullif(side_effects, "")).as(:side_effects),
-          group_concat(blood_pressure).order(:date).as(:blood_pressure),
-          function(:json_extract, function(:json_group_array, weight), "$[#-1]").as(:weight),
-          function(
-            :replace,
-            group_concat(
-              concat(
-                Sequel[:medications][:name], " ",
-                Sequel[:medication_schedules][:morning], "-",
-                Sequel[:medication_schedules][:noon], "-",
-                Sequel[:medication_schedules][:evening], "-",
-                Sequel[:medication_schedules][:before_bed]
-              )
-            ).order(:date).distinct,
-            ",",
-            ", "
-          ).as(:medication)
+          string_agg(nullif(:side_effects, ""), ",").as(:side_effects),
+          array_agg(:blood_pressure).order(:date).as(:blood_pressure),
+          array_agg(:weight).order(:date).sql_subscript(1).as("weight"),
+
+          array_agg(
+            concat(
+              medications[:name], " ",
+              medication_schedules[:morning], "-",
+              medication_schedules[:noon], "-",
+              medication_schedules[:evening], "-",
+              medication_schedules[:before_bed]
+            )
+          ).order(:date).as(:medication)
+
         ]
-      }.group { week }
+      }
+              .left_join(:medication_schedules, id: :medication_schedule_id).left_join(:medications, id: :medication_id)
+              .group { [to_char(:date, 'IYYY-"W"IW'), entries[:user_id], :date] }
     )
   end
 

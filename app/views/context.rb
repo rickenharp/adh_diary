@@ -4,6 +4,7 @@ module AdhDiary
   module Views
     class Context < Hanami::View::Context
       include Deps["i18n"]
+      include Dry::Effects::Reader(:user)
 
       def t(...)
         i18n.translate(...)
@@ -23,6 +24,10 @@ module AdhDiary
 
       def warden
         request.env["warden"]
+      end
+
+      def current_user
+        user
       end
     end
   end

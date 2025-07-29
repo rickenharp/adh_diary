@@ -1,5 +1,6 @@
 Hanami.app.configure_provider :db do
-  Sequel.application_timezone = :utc
+  Sequel.default_timezone = :utc
+  Sequel.extension :pg_array_ops, :core_extensions
   config.gateway :default do |gw|
     # The default PostgreSQL configuration would look like this
     gw.adapter :sql do |sql|
@@ -17,8 +18,8 @@ Hanami.app.configure_provider :db do
       # Sequel extensions are registered with a single symbolic name
       # sql.extension supports multiple arguments, and you can call it
       # multiple times. We split these up into two simply for readability.
-      # sql.extension :caller_logging, :error_sql, :sql_comments
-      # sql.extension :pg_array, :pg_enum, :pg_json, :pg_range
+      sql.extension :caller_logging, :error_sql, :sql_comments
+      sql.extension :pg_array, :pg_enum, :pg_json, :pg_range
     end
   end
 end
