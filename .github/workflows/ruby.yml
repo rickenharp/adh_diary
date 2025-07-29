@@ -18,10 +18,12 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
     env:
       HANAMI_ENV: test
       TZ: Europe/Berlin
-      DATABASE_URL: postgres://postgres:postgres@postgres/adh_diary_test
+      DATABASE_URL: postgres://postgres:postgres@localhost/adh_diary_test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
