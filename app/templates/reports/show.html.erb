@@ -56,7 +56,7 @@
     <td><%= t('entry.blood_pressure.full') %></td>
     <td>
       <ul>
-        <% report.blood_pressure.split(',').each do |datum| %>
+        <% report.blood_pressure.each do |datum| %>
           <li><%= datum %></li>
         <% end %>
       </ul>

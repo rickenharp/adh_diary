@@ -316,6 +316,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pdf-core (0.10.0)
+    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prawn (2.5.0)
@@ -526,6 +527,7 @@ DEPENDENCIES
   omniauth
   omniauth-oauth2
   omniauth-oauth2-generic
+  pg
   prawn (~> 2.5)
   prawn-table (~> 0.2.2)
   pry

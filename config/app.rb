@@ -3,7 +3,7 @@
 require "hanami"
 require "warden"
 require "omniauth"
-# require "omniauth-oauth2-generic"
+require "user_dry_effect"
 require "rack/unpoly/middleware"
 require "omniauth/strategies/withings"
 
@@ -53,6 +53,7 @@ module AdhDiary
       "https://cdnjs.cloudflare.com",
       "data:"
     ].join(" ")
+
     config.middleware.use Warden::Manager do |manager|
       manager.default_strategies :password
       manager.failure_app =
@@ -60,6 +61,7 @@ module AdhDiary
           AdhDiary::Actions::AuthFailure::Show.new.call(env)
         end
     end
+
     # OmniAuth::AuthenticityTokenProtection.default_options(key: "_csrf_token", authenticity_param: "_csrf_token")
 
     withings_options = [
@@ -93,5 +95,6 @@ module AdhDiary
     end
 
     config.middleware.use Rack::Unpoly::Middleware
+    config.middleware.use UserDryEffect
   end
 end
