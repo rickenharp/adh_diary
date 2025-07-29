@@ -1,0 +1,40 @@
+x-database-password: &database-password ${DATABASE_PASSWORD:-password}
+x-database-port: &database-port ${DATABASE_PORT:-5432}
+x-database-user: &database-user ${DATABASE_USER:-postgres}
+
+
+x-env-files: &env-files
+  env_file:
+    - path: ../.env
+      required: true
+    - path: ../.env.local
+      required: true
+
+name: adh_diary
+
+services:
+  postgres:
+    <<: *env-files
+    container_name: adh_diary-postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PGPORT: *database-port
+      POSTGRES_PASSWORD: *database-password
+      POSTGRES_USER: *database-user
+    healthcheck:
+      interval: 10s
+      retries: 5
+      test: sh -c "pg_isready -U $$POSTGRES_USER -p $$PGPORT"
+      timeout: 5s
+    image: postgres:16
+    ports:
+      - mode: host
+        protocol: tcp
+        published: *database-port
+        target: *database-port
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+    name: adh_diary-postgres-data-16
