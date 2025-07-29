@@ -46,5 +46,6 @@ module AdhDiary
     get "/auth/developer/callback", to: "auth.developer.callback"
     get "/auth/withings/callback", to: "auth.withings.callback"
     get "/boom", to: "boom.index"
+    get "/debug", to: "debug.index"
   end
 end
