@@ -11,6 +11,8 @@ module AdhDiary
             request.env['HTTP_X_FORWARDED_SCHEME'] == #{request.env["HTTP_X_FORWARDED_SCHEME"]}
             request.env['HTTP_X_FORWARDED_PROTO'] == #{request.env["HTTP_X_FORWARDED_PROTO"]}
             request.env['rack.url_scheme'] == #{request.env["rack.url_scheme"]}
+            -----
+            #{request.env.awesome_inspect}
           TEXT
           response.body = output
           response.content_type = "text/plain"
