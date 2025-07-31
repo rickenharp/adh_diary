@@ -51,6 +51,7 @@ module AdhDiary
     config.actions.content_security_policy[:font_src] = [
       "'self'",
       "https://cdnjs.cloudflare.com",
+      "https://fonts.gstatic.com",
       "data:"
     ].join(" ")
 
