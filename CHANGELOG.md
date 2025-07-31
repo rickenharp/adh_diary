@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/rickenharp/adh_diary/compare/v0.7.1...v1.0.0) (2025-07-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* the underlying database engine has changed
+
+### Features
+
+* switching to postgresql ([3e981ff](https://github.com/rickenharp/adh_diary/commit/3e981ff48d22a9471d28f168c7bd2e57b7da8f14))
+
 ## [0.7.1](https://github.com/rickenharp/adh_diary/compare/v0.7.0...v0.7.1) (2025-07-25)
 
 
