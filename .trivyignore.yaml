@@ -1,3 +1,5 @@
+vulnerabilities:
+  - id: CVE-2025-47907
 secrets:
   - id: private-key
     paths:
