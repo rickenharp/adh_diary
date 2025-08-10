@@ -25,7 +25,7 @@ gem "omniauth-oauth2-generic"
 gem "omniauth-oauth2"
 
 gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
-gem "rubyzip", "~> 2.4"
+gem "rubyzip", "~> 3.0"
 gem "dry-effects", "~> 0.5.0"
 gem "i18n", "~> 1.14"
 gem "rack-unpoly", "~> 0.5.0"

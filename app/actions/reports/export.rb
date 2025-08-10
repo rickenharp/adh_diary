@@ -22,7 +22,7 @@ module AdhDiary
             zip_file = Zip::OutputStream.write_buffer do |zip|
               request.params[:export][:ids].each do |week|
                 zip.put_next_entry("#{week}.pdf")
-                zip.print pdf.call(format: :pdf, layout: false, week: week).to_s
+                zip.write pdf.call(format: :pdf, layout: false, week: week).to_s
               end
             end
             response.body = zip_file.string
