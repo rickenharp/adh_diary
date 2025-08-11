@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/rickenharp/adh_diary/compare/v1.0.0...v1.0.1) (2025-08-11)
+
+
+### Bug Fixes
+
+* add form_action csp settings ([acaec08](https://github.com/rickenharp/adh_diary/commit/acaec08439960426abfb4baa2352589de58d9870))
+
 ## [1.0.0](https://github.com/rickenharp/adh_diary/compare/v0.7.1...v1.0.0) (2025-07-31)
 
 
