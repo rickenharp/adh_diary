@@ -48,6 +48,10 @@ module AdhDiary
     config.actions.content_security_policy[:connect_src] = [
       "'self'"
     ].join(" ")
+    config.actions.content_security_policy[:form_action] = [
+      "https://account.withings.com/",
+      "'self'"
+    ].join(" ")
     config.actions.content_security_policy[:font_src] = [
       "'self'",
       "https://cdnjs.cloudflare.com",
