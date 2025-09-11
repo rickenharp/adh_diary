@@ -6,6 +6,7 @@ module AdhDiary
       module Forms
         class Entry < AdhDiary::Views::Part
           include Deps["repos.medication_schedule_repo"]
+
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def date_input(f)

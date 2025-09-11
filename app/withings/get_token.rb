@@ -4,6 +4,7 @@ module AdhDiary
   module Withings
     class GetToken
       include Dry::Monads[:result]
+
       def call(user:)
         if (access_token = user.access_token_for("withings"))
           Success(access_token)

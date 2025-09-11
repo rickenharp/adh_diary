@@ -6,6 +6,7 @@ module AdhDiary
 
     def self.override!(fake_start_time, &block)
       raise "Overriding time is not allowed in production!" if Hanami.env == :production
+
       @instance = Now.new(fake_start_time)
       if block_given?
         result = block.call

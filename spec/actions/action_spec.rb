@@ -2,6 +2,7 @@
 
 RSpec.describe AdhDiary::Action do
   include Warden::Test::Helpers
+
   let(:params) { {"warden" => double("warden", user: double("user", locale: "en"))} }
   let(:i18n) { spy("i18n", default_locale: :en) }
   subject { described_class.new(i18n: i18n) }
