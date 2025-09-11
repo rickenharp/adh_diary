@@ -6,6 +6,7 @@ module AdhDiary
       module Withings
         class Callback < AdhDiary::Action
           include Deps["repos.identity_repo"]
+
           def handle(request, response)
             identity_repo.upsert(
               user_id: user.id,

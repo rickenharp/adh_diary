@@ -4,6 +4,7 @@ require "bcrypt"
 module AdhDiary
   class BcryptStrategy < Warden::Strategies::Base
     include Deps["repos.user_repo"]
+
     def valid?
       params["email"] || params["password"]
     end
@@ -14,6 +15,7 @@ module AdhDiary
       if user && user.password_hash == BCrypt::Engine.hash_secret(request.params["password"], user.password_salt)
         return success!(user)
       end
+
       fail!("Could not log in")
     end
   end

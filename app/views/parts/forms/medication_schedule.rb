@@ -6,6 +6,7 @@ module AdhDiary
       module Forms
         class MedicationSchedule < AdhDiary::Views::Part
           include Deps["repos.medication_schedule_repo", "repos.medication_repo"]
+
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def medication_id_input(f)

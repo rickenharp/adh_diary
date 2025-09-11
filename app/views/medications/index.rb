@@ -5,6 +5,7 @@ module AdhDiary
     module Medications
       class Index < AdhDiary::View
         include Deps["repos.medication_repo"]
+
         expose :medications do
           medication_repo.all
         end
