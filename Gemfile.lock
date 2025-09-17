@@ -365,7 +365,7 @@ GEM
     regexp_parser (2.11.2)
     reline (0.6.1)
       io-console (~> 0.5)
-    rexml (3.4.1)
+    rexml (3.4.4)
     rom (5.4.2)
       rom-changeset (~> 5.4)
       rom-core (~> 5.4)
