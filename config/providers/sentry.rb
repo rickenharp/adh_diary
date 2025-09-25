@@ -11,7 +11,7 @@ Hanami.app.register_provider(:sentry) do
       # see https://docs.sentry.io/platforms/ruby/data-management/data-collected/ for more info
       config.send_default_pii = true
       config.environment = Hanami.env.to_s
-      config.enabled_environments = %w[production staging]
+      # config.enabled_environments = %w[production staging]
     end
 
     register :sentry, Sentry
