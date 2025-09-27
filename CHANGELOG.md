@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/rickenharp/adh_diary/compare/v1.1.0...v1.2.0) (2025-09-27)
+
+
+### Features
+
+* limit pagination to max of 5 links ([ad9a22f](https://github.com/rickenharp/adh_diary/commit/ad9a22fee82dc529f8770ed22a44bc147a1be749))
+
 ## [1.1.0](https://github.com/rickenharp/adh_diary/compare/v1.0.1...v1.1.0) (2025-09-27)
 
 
