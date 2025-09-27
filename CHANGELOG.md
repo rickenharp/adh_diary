@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/rickenharp/adh_diary/compare/v1.0.1...v1.1.0) (2025-09-27)
+
+
+### Features
+
+* add automatic update of collations ([fa13e3f](https://github.com/rickenharp/adh_diary/commit/fa13e3f67b4a08dc1bf05651884b88fa0047a821)), closes [#110](https://github.com/rickenharp/adh_diary/issues/110)
+* remove sqlite ([5e589fe](https://github.com/rickenharp/adh_diary/commit/5e589fe63ec3c4f0e67dfc5f0684cb99c37983e9)), closes [#109](https://github.com/rickenharp/adh_diary/issues/109)
+
 ## [1.0.1](https://github.com/rickenharp/adh_diary/compare/v1.0.0...v1.0.1) (2025-08-11)
 
 
