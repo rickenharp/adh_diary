@@ -15,7 +15,6 @@ gem "dry-operation"
 gem "puma"
 gem "rackup", "= 1.0.0"
 gem "rake"
-gem "sqlite3"
 gem "pg"
 
 gem "warden"
