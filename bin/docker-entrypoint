@@ -9,9 +9,9 @@ fi
 # If running the rails server then create or migrate existing database
 if [ "${*: -3:1}" == "puma" ]; then
   # Handle collation mismatches from updating the docker image
-  psql "postgres://postgres@${DATABASE_HOST}/postgres" -c "REINDEX DATABASE postgres;" -c "ALTER DATABASE postgres REFRESH COLLATION VERSION;"
-  psql "postgres://postgres@${DATABASE_HOST}/template1" -c "REINDEX DATABASE template1;" -c "ALTER DATABASE template1 REFRESH COLLATION VERSION;"
-  psql "${DATABASE_URL}" -c "REINDEX DATABASE adh_diary;" -c "ALTER DATABASE adh_diary REFRESH COLLATION VERSION;"
+  PGPASSWORD="${DATABASE_PASSWORD}" psql -U "${DATABASE_USER}" -h "${DATABASE_HOST}" -d postgres -c "REINDEX DATABASE postgres;" -c "ALTER DATABASE postgres REFRESH COLLATION VERSION;"
+  PGPASSWORD="${DATABASE_PASSWORD}" psql -U "${DATABASE_USER}" -h "${DATABASE_HOST}" -d template1 -c "REINDEX DATABASE template1;" -c "ALTER DATABASE template1 REFRESH COLLATION VERSION;"
+  PGPASSWORD="${DATABASE_PASSWORD}" psql -U "${DATABASE_USER}" -h "${DATABASE_HOST}" -d "${DATABASE_USER}" -c "REINDEX DATABASE \"${DATABASE_USER}\";" -c "ALTER DATABASE \"${DATABASE_USER}\" REFRESH COLLATION VERSION;"
 
   bundle exec hanami db prepare --env=production
 fi
