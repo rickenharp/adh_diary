@@ -1,24 +1,53 @@
+x-database-password: &database-password ${DATABASE_PASSWORD:-password}
+x-database-port: &database-port ${DATABASE_PORT:-5432}
+x-database-user: &database-user ${DATABASE_USER:-postgres}
+x-database-host: &database-host ${DATABASE_HOST:-postgres}
+
+x-env-files: &env-files
+  env_file:
+    - path: ./.env
+      required: true
+    - path: ./.env.local
+      required: true
+
+name: adh_diary
+
 services:
-  adh-diary:
-    restart: unless-stopped
-    image: ghcr.io/rickenharp/adh_diary:main
+  postgres:
+    <<: *env-files
+    container_name: adh_diary-postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PGPORT: *database-port
+      POSTGRES_PASSWORD: *database-password
+      POSTGRES_USER: *database-user
+    healthcheck:
+      interval: 10s
+      retries: 5
+      test: sh -c "pg_isready -U $$POSTGRES_USER -p $$PGPORT"
+      timeout: 5s
+    image: postgres:16
+    ports:
+      - mode: host
+        protocol: tcp
+        published: *database-port
+        target: *database-port
     volumes:
-      - "./database:/hanami/db"
-    env_file:
-      - path: ./.env
-        required: true
+      - db-data:/var/lib/postgresql/data
+
+  adh-diary:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    <<: *env-files
+    restart: unless-stopped
+    image: ghcr.io/rickenharp/adh_diary:latest
     environment:
       HANAMI_ENV: production
       HANAMI_SERVE_ASSETS: "true"
-      DATABASE_URL: "sqlite:///hanami/db/adh_diary.sqlite"
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.adh-diary.rule=Host(`adh-diary.rickenharp.cloud`)
-      - traefik.http.routers.adh-diary.entrypoints=anubis # Listening on the exclusive Anubis Network
-      - traefik.http.services.adh-diary.loadbalancer.server.port=2300
-      - traefik.http.routers.adh-diary.service=adh-diary # Telling Traefik to use the above specified port
-    networks:
-      - proxy
-networks:
-  proxy:
-    external: true
+      DATABASE_HOST: adh_diary-postgres
+      DATABASE_URL: "postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@adh_diary-postgres/${DATABASE_NAME}"
+
+volumes:
+  db-data:
+    name: adh_diary-postgres-data-16

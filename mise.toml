@@ -7,3 +7,13 @@ includes = ["bin"]
 
 [tools]
 node = "22"
+
+[tasks.docker_build]
+alias = "db"
+description = "Build the docker image"
+run = "docker build  -t ghcr.io/rickenharp/adh_diary ."
+
+[tasks.docker_run]
+alias = "dr"
+description = "Run the docker image"
+run = "docker run -it -p 2300:2300 --name ghcr.io/rickenharp/adh_diary -e DATABASE_URL=${DATABASE_URL} -e HANAMI_SERVE_ASSETS=true -e SESSION_SECRET=${SESSION_SECRET} -e WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID} -e WITHINGS_CLIENT_SECRET=${WITHINGS_CLIENT_SECRET} --rm adh_diary-slim:latest"
