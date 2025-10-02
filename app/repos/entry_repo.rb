@@ -4,23 +4,23 @@ module AdhDiary
   module Repos
     class EntryRepo < AdhDiary::DB::Repo
       def all(order: :asc, page: 1)
-        entries.combine(medication_schedules: :medications).where(user_id: user.id).order { (order == :asc) ? date.asc : date.desc }.page(page)
+        entries.combine(medication_schedules: :medications).where(account_id: account.id).order { (order == :asc) ? date.asc : date.desc }.page(page)
       end
 
       def last_entry
-        entries.where(user_id: user.id).order { date.desc }.limit(1).one
+        entries.where(account_id: account.id).order { date.desc }.limit(1).one
       end
 
       def get(id)
-        entries.where(user_id: user.id).combine(medication_schedules: :medications).by_pk(id).one!
+        entries.where(account_id: account.id).combine(medication_schedules: :medications).by_pk(id).one!
       end
 
       def on(date)
-        entries.where(user_id: user.id).combine(medication_schedules: :medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
+        entries.where(account_id: account.id).combine(medication_schedules: :medications).where(Sequel.lit("date(date) = ?", date.to_date.to_s))
       end
 
       def weeks_base
-        entries.where(user_id: user.id).select { [function(:strftime, "%Y-W%W", date).as(:week)] }.group { week }.order(:date)
+        entries.where(account_id: account.id).select { [function(:strftime, "%Y-W%W", date).as(:week)] }.group { week }.order(:date)
       end
 
       def weeks
@@ -32,7 +32,7 @@ module AdhDiary
       end
 
       def for_week(the_week)
-        entries.left_join(:medications).where(Sequel[:entries][:user_id] => user.id).select {
+        entries.left_join(:medications).where(Sequel[:entries][:account_id] => account.id).select {
           [
             function(:strftime, "%Y-W%W", date).as(:week),
             integer.min(date).as(:from),
@@ -67,15 +67,15 @@ module AdhDiary
       end
 
       def create(attributes)
-        entries.changeset(:create, attributes.merge(user_id: user.id)).commit
+        entries.changeset(:create, attributes.merge(account_id: account.id)).commit
       end
 
       def update(id, attributes)
-        entries.where(user_id: user.id).by_pk(id).changeset(:update, attributes).commit
+        entries.where(account_id: account.id).by_pk(id).changeset(:update, attributes).commit
       end
 
       def delete(id)
-        entries.where(user_id: user.id).by_pk(id).changeset(:delete).commit
+        entries.where(account_id: account.id).by_pk(id).changeset(:delete).commit
       end
     end
   end

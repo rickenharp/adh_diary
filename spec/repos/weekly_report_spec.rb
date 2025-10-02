@@ -3,10 +3,10 @@
 RSpec.describe AdhDiary::Repos::WeeklyReportRepo, db: true do
   include_context "report data"
 
-  user_provider = Object.new.extend(Dry::Effects::Handler.Reader(:user, as: :call))
+  account_provider = Object.new.extend(Dry::Effects::Handler.Reader(:account, as: :call))
 
   around do |example|
-    user_provider.call(user, &example)
+    account_provider.call(account, &example)
   end
 
   before do

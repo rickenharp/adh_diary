@@ -2,9 +2,6 @@
 _.file = [".env", ".env.local"]
 _.path = ["/opt/homebrew/opt/postgresql@16/bin"]
 
-[task_config]
-includes = ["bin"]
-
 [tools]
 node = "22"
 

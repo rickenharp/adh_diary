@@ -3,13 +3,13 @@
 module AdhDiary
   module Repos
     class IdentityRepo < AdhDiary::DB::Repo
-      include Deps["repos.user_repo"]
+      include Deps["repos.account_repo"]
 
       commands :upsert, :create
 
       def new_from_omniauth(auth)
-        user = user_repo.get(user.id)
-        new_identity = identities.changeset(:create, provider: auth[:provider], uid: auth[:uid]).associate(user)
+        account = account_repo.get(account.id)
+        new_identity = identities.changeset(:create, provider: auth[:provider], uid: auth[:uid]).associate(account)
         new_identity.commit
       end
 
@@ -26,7 +26,7 @@ module AdhDiary
       end
 
       # def update_token(token)
-      #   identities.where(user_id: user.id, provider: "withings").changeset(:update, access_token: token.token, refresh_token: token.refresh_token, expires_at: token.expires_at).commit
+      #   identities.where(account_id: account.id, provider: "withings").changeset(:update, access_token: token.token, refresh_token: token.refresh_token, expires_at: token.expires_at).commit
       # end
     end
   end

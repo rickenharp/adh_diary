@@ -1,9 +1,9 @@
 require "ostruct"
 
 RSpec.shared_context "report data", shared_context: :db do
-  let(:user) { Factory.create(:user) }
+  let(:account) { Factory.create(:account) }
   let(:medication) { Factory.create(:medication) }
-  let(:medication_schedule) { Factory.create(:medication_schedule, user: user, medication: medication) }
+  let(:medication_schedule) { Factory.create(:medication_schedule, account: account, medication: medication) }
 
   # "Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should."
   let(:additional_data_class) do
@@ -32,7 +32,7 @@ RSpec.shared_context "report data", shared_context: :db do
     additional_data_provider = additional_data_class.new(additional_data)
 
     (Date.parse(from)..Date.parse(to)).each do |date|
-      Factory.create(:entry, date: date, user: user, medication_schedule: medication_schedule, **additional_data_provider.next)
+      Factory.create(:entry, date: date, account: account, medication_schedule: medication_schedule, **additional_data_provider.next)
     end
   end
 end

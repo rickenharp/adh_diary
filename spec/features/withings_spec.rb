@@ -1,5 +1,5 @@
 RSpec.feature "Withings integration", db: true do
-  let(:user) { Factory.create(:user, name: "Some Guy", identities: []) }
+  let(:account) { Factory.create(:account, name: "Some Guy", identities: []) }
   let(:identity_relation) { Hanami.app["relations.identities"] }
   let(:now) { Time.utc(2025, 7, 22, 14, 56) }
   let(:expiry) { now + 60 * 60 }
@@ -34,11 +34,11 @@ RSpec.feature "Withings integration", db: true do
   end
 
   scenario "creating an identity" do
-    login_as(user)
+    login_as(account)
     visit "/"
 
-    expect { click_button("Connect with Withings") }.to change { identity_relation.where(user_id: user.id, provider: "withings").count }.by(1)
-    identity = identity_relation.where(user_id: user.id, provider: "withings").one!
+    expect { click_button("Connect with Withings") }.to change { identity_relation.where(account_id: account.id, provider: "withings").count }.by(1)
+    identity = identity_relation.where(account_id: account.id, provider: "withings").one!
 
     expect(identity).to include(token: "initial token", refresh_token: "initial refresh token", uid: "1234567890")
 
@@ -49,7 +49,7 @@ RSpec.feature "Withings integration", db: true do
     scenario "getting data from withings" do
       identity = Factory[
         :identity,
-        user: user,
+        account: account,
         provider: "withings",
         token: "initial token",
         refresh_token: "initial refresh token",
@@ -57,9 +57,9 @@ RSpec.feature "Withings integration", db: true do
       ]
       expect(identity.expires_at).to eq(expiry)
 
-      user.identities << identity
+      account.identities << identity
 
-      login_as(user)
+      login_as(account)
 
       stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=#{enddate.to_i}&meastypes=1,9,10&startdate=#{startdate.to_i}")
         .with(
@@ -80,15 +80,15 @@ RSpec.feature "Withings integration", db: true do
     scenario "getting data from withings" do
       identity = Factory.create(
         :identity,
-        user: user,
+        account: account,
         provider: "withings",
         token: "initial token",
         refresh_token: "initial refresh token",
         expires_at: expiry
       )
-      user.identities << identity
+      account.identities << identity
 
-      login_as(user)
+      login_as(account)
 
       stub_request(:post, "https://wbsapi.withings.net/v2/oauth2/")
         .with(
@@ -167,10 +167,10 @@ RSpec.feature "Withings integration", db: true do
       {
         "status": 0,
         "body": {
-          "userid": 1,
+          "accountid": 1,
           "access_token": "fresh token",
           "refresh_token": "fresh refresh token",
-          "scope": "user.info,user.metrics,user.activity",
+          "scope": "account.info,account.metrics,account.activity",
           "expires_in": 10800,
           "token_type": "Bearer"
         }

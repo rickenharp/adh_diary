@@ -14,7 +14,7 @@ pdf.font("Noto Sans") do
     pdf.text("<b>ADHS-Wochenprotokoll/-Monatsprotokoll</b>", inline_format: true)
   end
   pdf.move_down(10)
-  pdf.text("Von #{weekly_report.user.name}")
+  pdf.text("Von #{weekly_report.account.name}")
   pdf.move_down(10)
   pdf.text("Woche vom #{weekly_report.from.strftime("%d.%m.%Y")} bis #{weekly_report.to.strftime("%d.%m.%Y")}")
   pdf.move_down(10)

@@ -6,6 +6,6 @@ require "dry-effects"
 
 module AdhDiary
   class View < Hanami::View
-    include Dry::Effects.Reader(:user)
+    include Dry::Effects.Reader(:account)
   end
 end

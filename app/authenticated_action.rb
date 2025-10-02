@@ -8,13 +8,13 @@ require "dry-effects"
 
 module AdhDiary
   class AuthenticatedAction < AdhDiary::Action
-    include Dry::Effects::Handler.Reader(:user)
+    include Dry::Effects::Handler.Reader(:account)
 
-    before :authenticate_user
+    before :authenticate_account
 
     private
 
-    def authenticate_user(request, response)
+    def authenticate_account(request, response)
       response.redirect_to("/login") unless request.env["warden"].user
     end
   end

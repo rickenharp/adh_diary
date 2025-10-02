@@ -11,7 +11,7 @@ de:
     entry: "Eintrag"
     medication_schedule: "Medikamentenplan"
     medication: "Medikament"
-    user: "Anwender"
+    account: "Anwender"
   en: Englisch
   de: Deutsch
   home: "Start"
@@ -106,7 +106,7 @@ de:
     id: "Id"
   new_medication: "Neues Medikament"
   report: "Bericht"
-  user:
+  account:
     name: Name
     email: Email
     password: Passwort

@@ -1,6 +1,6 @@
 <h1 class="title"><%= t("welcome") %></h1>
 
-<% if current_user %>
+<% if current_account %>
 <%= form_for "/auth/withings", method: "post", class: "form" do |f| %>
   <%= f.submit "Connect with Withings", class: "button is-primary is-outlined" do %>
       <span class="icon is-small">

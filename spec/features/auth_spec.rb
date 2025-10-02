@@ -3,14 +3,14 @@ require "bcrypt"
 RSpec.feature "Auth", db: true do
   let(:password) { "setec astronomy" }
   # let(:email) { "user@example.com" }
-  let(:user) do
+  let(:account) do
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    Factory.create(:user, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
+    Factory.create(:account, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
   end
 
   before(:each) do
-    user
+    account
   end
 
   scenario "visiting the entries page unauthenticated redirects to login" do
@@ -22,7 +22,7 @@ RSpec.feature "Auth", db: true do
   scenario "logging in works" do
     visit "/entries"
 
-    fill_in "email", with: user.email
+    fill_in "email", with: account.email
     fill_in "password", with: password
     within("form#login") do
       click_link_or_button("Log in")

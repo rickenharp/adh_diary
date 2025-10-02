@@ -1,9 +1,9 @@
 RSpec.feature "Medications", db: true do
-  let(:user) do
-    Factory.create(:user, name: "Some Guy")
+  let(:account) do
+    Factory.create(:account, name: "Some Guy")
   end
 
-  context "unauthenticated user" do
+  context "unauthenticated account" do
     scenario "index redirects to login" do
       visit "/medications"
 
@@ -31,9 +31,9 @@ RSpec.feature "Medications", db: true do
     end
   end
 
-  context "authenticated user" do
+  context "authenticated account" do
     before(:each) do
-      login_as user
+      login_as account
     end
 
     scenario "index shows all medications" do

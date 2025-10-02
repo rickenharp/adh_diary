@@ -1,19 +1,19 @@
 require "dry/effects"
 
-class UserDryEffect
-  include Dry::Effects::Handler.Reader(:user)
+class AccountDryEffect
+  include Dry::Effects::Handler.Reader(:account)
 
   def initialize(app)
     @app = app
   end
 
   def call(env)
-    with_user(detect_user(env)) do
+    with_account(detect_account(env)) do
       @app.call(env)
     end
   end
 
-  def detect_user(env)
+  def detect_account(env)
     env["warden"].user
   end
 end

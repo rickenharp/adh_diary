@@ -8,11 +8,11 @@ module AdhDiary
       include Dry::Monads[:result]
       include Deps["repos.identity_repo"]
 
-      def call(access_token:, user:)
+      def call(access_token:, account:)
         if access_token.expired?
           fresh_token = access_token.refresh
           identity_repo.upsert(
-            user_id: user.id,
+            account_id: account.id,
             provider: "withings",
             token: fresh_token.token,
             refresh_token: fresh_token.refresh_token,

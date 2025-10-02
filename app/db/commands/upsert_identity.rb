@@ -4,7 +4,7 @@ module AdhDiary
       class UpsertIdentity < ROM::SQL::Postgres::Commands::Upsert
         relation :identities
         register_as :upsert
-        conflict_target [:user_id, :provider]
+        conflict_target [:account_id, :provider]
         update_statement token: Sequel[:excluded][:token], refresh_token: Sequel[:excluded][:refresh_token], expires_at: Sequel[:excluded][:expires_at]
 
         # def execute(tuples)

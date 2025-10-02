@@ -2,7 +2,7 @@
 
 module AdhDiary
   module Structs
-    class User < AdhDiary::DB::Struct
+    class Account < AdhDiary::DB::Struct
       # include Deps["oauth2_client"]
       def access_token_for(provider)
         oauth2_client = Hanami.app["oauth2_client"]

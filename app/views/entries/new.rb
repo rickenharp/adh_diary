@@ -10,7 +10,7 @@ module AdhDiary
         include Deps["repos.entry_repo", "withings.get_measurements", "logger"]
 
         expose :entry do
-          measurements = case get_measurements.call(user)
+          measurements = case get_measurements.call(account)
           in Success(measurements)
             measurements
           in Failure(failure)

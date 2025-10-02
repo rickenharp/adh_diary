@@ -6,7 +6,7 @@ require "dry-effects"
 module AdhDiary
   module DB
     class Repo < Hanami::DB::Repo
-      include Dry::Effects.Reader(:user)
+      include Dry::Effects.Reader(:account)
     end
   end
 end

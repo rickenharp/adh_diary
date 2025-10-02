@@ -4,12 +4,12 @@ RSpec.feature "Signup", db: true do
   let(:name) { "Some Guy" }
 
   scenario "signing up works" do
-    visit "/users/new"
+    visit "/accounts/new"
 
-    fill_in "user[name]", with: name
-    fill_in "user[email]", with: email
-    fill_in "user[password]", with: password
-    fill_in "user[password_confirmation]", with: password
+    fill_in "account[name]", with: name
+    fill_in "account[email]", with: email
+    fill_in "account[password]", with: password
+    fill_in "account[password_confirmation]", with: password
 
     click_link_or_button("Log in")
 

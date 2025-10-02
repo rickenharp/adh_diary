@@ -51,10 +51,10 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <% unless current_user %>
+              <% unless current_account %>
                 <%= link_to("Sign up", routes.path(:sign_up), class:"button is-light is-primary") %>
               <% end %>
-              <% if current_user %>
+              <% if current_account %>
                 <%= form_for :logout, routes.path(:logout), method: :delete do %>
                   <button type="submit"><%= t("log_out") %></button>
                 <% end %>
