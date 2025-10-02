@@ -4,7 +4,7 @@ require "rspec"
 
 RSpec.feature "Entries", db: true do
   let(:password) { "password" }
-  let(:user) { Factory.create(:user) }
+  let(:account) { Factory.create(:account) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
   let(:medication_schedule) do
@@ -12,7 +12,7 @@ RSpec.feature "Entries", db: true do
       :medication_schedule,
       medication: lisdexamfetamin,
       morning: 30,
-      user: user
+      account: account
     )
   end
 
@@ -25,11 +25,11 @@ RSpec.feature "Entries", db: true do
   before(:each) do
     medication_schedule
 
-    login_as(user)
+    login_as(account)
   end
 
   scenario "visiting the entries page shows an entry" do
-    Factory.create(:entry, date: "2025-06-09", user: user)
+    Factory.create(:entry, date: "2025-06-09", account: account)
     visit "/entries"
 
     expect(page).to have_content "2025-06-09"
@@ -67,7 +67,7 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "creating an entry with existing date" do
-    Factory.create(:entry, date: "2025-06-09", user: user)
+    Factory.create(:entry, date: "2025-06-09", account: account)
     visit "/entries/new"
 
     fill_in "entry[date]", with: "2025-06-09"
@@ -102,7 +102,7 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "editing an entry" do
-    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
+    entry = Factory.create(:entry, date: "2025-06-09", account: account, medication_schedule: medication_schedule)
 
     visit "/entries/#{entry.id}/edit"
 
@@ -121,8 +121,8 @@ RSpec.feature "Entries", db: true do
   end
 
   scenario "editing an entry invalidly" do
-    Factory.create(:entry, date: "2025-06-08", user: user, medication_schedule: medication_schedule)
-    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
+    Factory.create(:entry, date: "2025-06-08", account: account, medication_schedule: medication_schedule)
+    entry = Factory.create(:entry, date: "2025-06-09", account: account, medication_schedule: medication_schedule)
 
     visit "/entries/#{entry.id}/edit"
 
@@ -141,7 +141,7 @@ RSpec.feature "Entries", db: true do
       :medication_schedule,
       medication: lisdexamfetamin,
       morning: 40,
-      user: user
+      account: account
     )
     visit "/entries/new"
 

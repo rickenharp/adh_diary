@@ -1,6 +1,6 @@
 require "bcrypt"
 
-Factory.define(:user, struct_namespace: AdhDiary::Structs) do |f|
+Factory.define(:account, struct_namespace: AdhDiary::Structs) do |f|
   f.name { fake(:name, :name) }
   f.email { fake(:internet, :email) }
   f.password_salt { fake(:lorem, :sentence) }

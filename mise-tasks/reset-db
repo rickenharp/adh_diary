@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#MISE description="Reset the database to a well-known state"
+#MISE alias="rdb"
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ "${TRACE-0}" == "1" ]]; then
+  set -o xtrace
+fi
+
+main() {
+  bundle exec hanami db drop
+  bundle exec hanami db create
+  psql "$DATABASE_URL" < /Users/alex/Downloads/adh_diary_2025-09-27T11:05:01+02:00.sql
+}
+
+main "$@"

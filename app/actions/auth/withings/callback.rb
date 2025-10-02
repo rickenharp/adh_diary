@@ -9,7 +9,7 @@ module AdhDiary
 
           def handle(request, response)
             identity_repo.upsert(
-              user_id: user.id,
+              account_id: account.id,
               provider: "withings",
               token: request.env["omniauth.auth"]["credentials"]["token"],
               refresh_token: request.env["omniauth.auth"]["credentials"]["refresh_token"],

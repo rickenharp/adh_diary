@@ -3,7 +3,7 @@
 require "hanami"
 require "warden"
 require "omniauth"
-require "user_dry_effect"
+require "account_dry_effect"
 require "rack/unpoly/middleware"
 require "omniauth/strategies/withings"
 
@@ -100,6 +100,6 @@ module AdhDiary
     end
 
     config.middleware.use Rack::Unpoly::Middleware
-    config.middleware.use UserDryEffect
+    config.middleware.use AccountDryEffect
   end
 end

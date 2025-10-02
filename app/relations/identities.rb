@@ -5,7 +5,7 @@ module AdhDiary
     class Identities < AdhDiary::DB::Relation
       schema :identities, infer: true do
         associations do
-          belongs_to :user
+          belongs_to :account
         end
       end
     end

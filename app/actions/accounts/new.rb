@@ -2,7 +2,7 @@ require "bcrypt"
 
 module AdhDiary
   module Actions
-    module Users
+    module Accounts
       class New < AdhDiary::Action
         def handle(request, response)
         end

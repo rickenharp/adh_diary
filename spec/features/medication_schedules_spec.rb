@@ -1,17 +1,17 @@
 RSpec.feature "Medication schedules", db: true do
-  let(:user) do
-    Factory.create(:user, name: "Some Guy")
+  let(:account) do
+    Factory.create(:account, name: "Some Guy")
   end
 
-  let(:other_user) do
-    Factory.create(:user, name: "Some Other Guy")
+  let(:other_account) do
+    Factory.create(:account, name: "Some Other Guy")
   end
 
   let(:medication) do
     Factory.create(:medication, name: "Lisdexamfetamin")
   end
 
-  context "unauthenticated user" do
+  context "unauthenticated account" do
     scenario "index redirects to login" do
       visit "/medication_schedules"
 
@@ -32,21 +32,21 @@ RSpec.feature "Medication schedules", db: true do
     end
 
     scenario "edit redirects to login" do
-      medication_schedule = Factory.create(:medication_schedule, user: user, medication: medication)
+      medication_schedule = Factory.create(:medication_schedule, account: account, medication: medication)
       visit "/medication_schedules/#{medication_schedule.id}/edit"
 
       expect(page).to have_content "Please log in"
     end
   end
 
-  context "authenticated user" do
+  context "authenticated account" do
     before(:each) do
-      login_as user
+      login_as account
     end
 
     scenario "index shows all medication_schedules" do
-      Factory.create(:medication_schedule, user: user, medication: medication)
-      Factory.create(:medication_schedule, user: other_user, medication: medication, morning: 70)
+      Factory.create(:medication_schedule, account: account, medication: medication)
+      Factory.create(:medication_schedule, account: other_account, medication: medication, morning: 70)
 
       visit "/medication_schedules"
 
@@ -57,7 +57,7 @@ RSpec.feature "Medication schedules", db: true do
     scenario "delete medication schedule" do
       Factory.create(
         :medication_schedule,
-        user: user,
+        account: account,
         medication: medication,
         morning: 30,
         noon: 0,
@@ -103,7 +103,7 @@ RSpec.feature "Medication schedules", db: true do
     end
 
     scenario "edit medication schedule" do
-      medication_schedule = Factory.create(:medication_schedule, medication: medication, user: user, morning: 30)
+      medication_schedule = Factory.create(:medication_schedule, medication: medication, account: account, morning: 30)
       visit "/medication_schedules/#{medication_schedule.id}/edit"
 
       fill_in "medication_schedule[morning]", with: 40
@@ -114,7 +114,7 @@ RSpec.feature "Medication schedules", db: true do
     end
 
     scenario "invalid edit medication" do
-      medication_schedule = Factory.create(:medication_schedule, medication: medication, user: user, morning: 30)
+      medication_schedule = Factory.create(:medication_schedule, medication: medication, account: account, morning: 30)
       visit "/medication_schedules/#{medication_schedule.id}/edit"
 
       fill_in "medication_schedule[morning]", with: nil

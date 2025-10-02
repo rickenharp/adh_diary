@@ -4,7 +4,7 @@ require "rspec"
 
 RSpec.feature "Entries JS", db: true, js: true do
   let(:password) { "password" }
-  let(:user) { Factory.create(:user) }
+  let(:account) { Factory.create(:account) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
   let(:medication_schedule) do
@@ -12,7 +12,7 @@ RSpec.feature "Entries JS", db: true, js: true do
       :medication_schedule,
       medication: lisdexamfetamin,
       morning: 30,
-      user: user
+      account: account
     )
   end
 
@@ -26,7 +26,7 @@ RSpec.feature "Entries JS", db: true, js: true do
     # Hanami.app.container.stub("withings.get_measurements", ->(_) { Success({}) })
     medication_schedule
 
-    login_as(user)
+    login_as(account)
   end
 
   # after(:each) do
@@ -34,7 +34,7 @@ RSpec.feature "Entries JS", db: true, js: true do
   # end
 
   scenario "dismissing notification" do
-    entry = Factory.create(:entry, date: "2025-06-09", user: user, medication_schedule: medication_schedule)
+    entry = Factory.create(:entry, date: "2025-06-09", account: account, medication_schedule: medication_schedule)
     visit "/entries/#{entry.id}/edit"
     click_on("Update")
     expect(page).to have_content "Entry successfully updated"

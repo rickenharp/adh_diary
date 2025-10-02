@@ -4,5 +4,5 @@ Factory.define(:identity) do |f|
   f.token "decafbad"
   f.refresh_token "deadbeef"
   f.expires_at { Hanami.app["now"].call + 60 * 60 * 2 }
-  f.association(:user)
+  f.association(:account)
 end

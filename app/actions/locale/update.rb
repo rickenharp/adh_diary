@@ -4,8 +4,8 @@ module AdhDiary
   module Actions
     module Locale
       class Update < AdhDiary::Action
-        include Dry::Effects.Reader(:user)
-        include Deps["repos.user_repo", "i18n"]
+        include Dry::Effects.Reader(:account)
+        include Deps["repos.account_repo", "i18n"]
 
         contract Locale::UpdateContract
 
@@ -19,7 +19,7 @@ module AdhDiary
           if request.params.valid?
             language = request.params[:language]
             response.session[:language] = language
-            user_repo.update_locale(language) if user
+            account_repo.update_locale(language) if account
           else
             response.flash[:alert] = I18n.t("could_not_change_locale")
           end

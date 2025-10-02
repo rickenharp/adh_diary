@@ -6,7 +6,7 @@ module AdhDiary
       schema :medication_schedules, infer: true do
         associations do
           belongs_to :medication
-          belongs_to :user
+          belongs_to :account
           has_many :entries
         end
       end

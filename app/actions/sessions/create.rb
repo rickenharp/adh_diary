@@ -3,7 +3,7 @@ module AdhDiary
     module Sessions
       class Create < AdhDiary::Action
         include Deps[
-          user_repo: "repos.user_repo",
+          account_repo: "repos.account_repo",
           view: "views.login.new"
                 ]
 
@@ -16,17 +16,17 @@ module AdhDiary
           # halt 422, {errors: request.params.errors}.to_json unless request.params.valid?
 
           if request.params.valid?
-            user = request.env["warden"].authenticate!
+            account = request.env["warden"].authenticate!
           end
 
           # if request.params.valid?
-          #   user = user_repo.by_email(request.params[:email])
+          #   account = account_repo.by_email(request.params[:email])
           # end
 
-          if user
+          if account
             response.flash[:notice] = "Login successful"
-            request.session[:user_id] = user.id
-            request.session[:language] = user.locale
+            request.session[:account_id] = account.id
+            request.session[:language] = account.locale
             response.redirect "/"
           else
             response.flash.now[:alert] = "Email or password is invalid"

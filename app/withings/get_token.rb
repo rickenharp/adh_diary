@@ -5,8 +5,8 @@ module AdhDiary
     class GetToken
       include Dry::Monads[:result]
 
-      def call(user:)
-        if (access_token = user.access_token_for("withings"))
+      def call(account:)
+        if (access_token = account.access_token_for("withings"))
           Success(access_token)
         else
           Failure(:no_token)

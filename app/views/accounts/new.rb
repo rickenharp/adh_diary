@@ -2,9 +2,9 @@
 
 module AdhDiary
   module Views
-    module Users
+    module Accounts
       class New < AdhDiary::View
-        expose(:form, as: Parts::Forms::User) do |values: {}, errors: {}|
+        expose(:form, as: Parts::Forms::Account) do |values: {}, errors: {}|
           {
             values: values,
             errors: errors

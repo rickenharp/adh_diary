@@ -4,26 +4,26 @@ module AdhDiary
   module Views
     module Parts
       module Forms
-        class User < AdhDiary::Views::Part
+        class Account < AdhDiary::Views::Part
           SCOPE_CLASS = Scopes::Shared::Forms::Input
 
           def name_input(f)
-            prepare_scope(f, :name, label: i18n.t("user.name"), icon_name: "user")
+            prepare_scope(f, :name, label: i18n.t("account.name"), icon_name: "user")
               .render("shared/forms/text_field")
           end
 
           def email_input(f)
-            prepare_scope(f, :email, label: i18n.t("user.email"), icon_name: "envelope")
+            prepare_scope(f, :email, label: i18n.t("account.email"), icon_name: "envelope")
               .render("shared/forms/email_field")
           end
 
           def password_input(f)
-            prepare_scope(f, :password, label: i18n.t("user.password"), icon_name: "key")
+            prepare_scope(f, :password, label: i18n.t("account.password"), icon_name: "key")
               .render("shared/forms/password_field")
           end
 
           def password_confirmation_input(f)
-            prepare_scope(f, :password_confirmation, label: i18n.t("user.password_confirmation"), icon_name: "key")
+            prepare_scope(f, :password_confirmation, label: i18n.t("account.password_confirmation"), icon_name: "key")
               .render("shared/forms/password_field")
           end
 

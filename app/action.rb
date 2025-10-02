@@ -8,15 +8,15 @@ module AdhDiary
   class Action < Hanami::Action
     # Provide `Success` and `Failure` for pattern matching on operation results
     include Dry::Monads[:result]
-    include Dry::Effects::Handler.Reader(:user)
-    include Dry::Effects::Reader(:user)
+    include Dry::Effects::Handler.Reader(:account)
+    include Dry::Effects::Reader(:account)
     include Deps["i18n", "inflector", "sentry"]
 
     handle_exception StandardError => :handle_standard_error
     before :set_locale
 
     def handle(request, response)
-      with_user(request.env["warden"].user) do
+      with_account(request.env["warden"].user) do
         super
       end
     end

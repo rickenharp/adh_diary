@@ -2,14 +2,14 @@ require "bcrypt"
 
 RSpec.describe "AuthenticationSpec", :db, type: :request do
   context "when action inherits from authenticated action" do
-    context "when user is logged in" do
+    context "when account is logged in" do
       let(:password) { "setec astronomy" }
-      let!(:user) do
-        Factory[:user, name: "Guy", email: "my@guy.com"]
+      let!(:account) do
+        Factory[:account, name: "Guy", email: "my@guy.com"]
       end
 
       it "succeeds" do
-        login_as user
+        login_as account
 
         get "/entries"
 
@@ -17,7 +17,7 @@ RSpec.describe "AuthenticationSpec", :db, type: :request do
       end
     end
 
-    context "when there is no user" do
+    context "when there is no account" do
       it "rejects the request, redirects" do
         get "/entries"
 

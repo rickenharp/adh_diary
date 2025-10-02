@@ -2,13 +2,14 @@
 
 source "https://rubygems.org"
 
-gem "hanami", "~> 2.2"
-gem "hanami-assets", "~> 2.2"
-gem "hanami-controller", "~> 2.2"
-gem "hanami-db", "~> 2.2"
-gem "hanami-router", "~> 2.2"
-gem "hanami-validations", "~> 2.2"
-gem "hanami-view", "~> 2.2"
+gem "hanami", github: "hanami/hanami", branch: "main"
+gem "hanami-cli", github: "rickenharp/cli", branch: "main"
+gem "hanami-assets", github: "hanami/assets", branch: "main"
+gem "hanami-controller", github: "hanami/controller", branch: "main"
+gem "hanami-db", github: "hanami/db", branch: "main"
+gem "hanami-router", github: "hanami/router", branch: "main"
+gem "hanami-validations", github: "hanami/validations", branch: "main"
+gem "hanami-view", github: "hanami/view", branch: "main"
 
 gem "dry-types", "~> 1.7"
 gem "dry-operation"

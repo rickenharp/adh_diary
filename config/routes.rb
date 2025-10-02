@@ -5,9 +5,9 @@ module AdhDiary
     # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
     root to: "home.index"
 
-    # New user registration
-    get "/users/new", to: "users.new", as: "sign_up"
-    post "/users", to: "users.create", as: "create_user"
+    # New account registration
+    get "/accounts/new", to: "accounts.new", as: "sign_up"
+    post "/accounts", to: "accounts.create", as: "create_account"
 
     # Session management
     get "/login", to: "login.new", as: "login"
