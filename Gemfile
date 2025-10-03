@@ -2,19 +2,18 @@
 
 source "https://rubygems.org"
 
-gem "hanami", github: "hanami/hanami", branch: "main"
-gem "hanami-cli", github: "rickenharp/cli", branch: "main"
-gem "hanami-assets", github: "hanami/assets", branch: "main"
-gem "hanami-controller", github: "hanami/controller", branch: "main"
-gem "hanami-db", github: "hanami/db", branch: "main"
-gem "hanami-router", github: "hanami/router", branch: "main"
-gem "hanami-validations", github: "hanami/validations", branch: "main"
-gem "hanami-view", github: "hanami/view", branch: "main"
+gem "hanami", "~> 2.3.0.beta"
+gem "hanami-cli", "~> 2.3.0.beta"
+gem "hanami-assets", "~> 2.3.0.beta"
+gem "hanami-controller", "~> 2.3.0.beta"
+gem "hanami-db", "~> 2.3.0.beta"
+gem "hanami-router", "~> 2.3.0.beta"
+gem "hanami-validations", "~> 2.3.0.beta"
+gem "hanami-view", "~> 2.3.0.beta"
 
 gem "dry-types", "~> 1.7"
 gem "dry-operation"
 gem "puma"
-gem "rackup", "= 1.0.0"
 gem "rake"
 gem "pg"
 
@@ -35,7 +34,7 @@ gem "faraday", "~> 2.13"
 gem "sentry-ruby", "~> 5.26"
 
 group :development do
-  gem "hanami-webconsole", "~> 2.2"
+  gem "hanami-webconsole", "~> 2.3.0.beta"
   gem "amazing_print"
   gem "yard"
   gem "maruku"
@@ -51,11 +50,11 @@ group :development, :test do
 end
 
 group :cli, :development do
-  gem "hanami-reloader", "~> 2.2"
+  gem "hanami-reloader", "~> 2.3.0.beta"
 end
 
 group :cli, :development, :test do
-  gem "hanami-rspec", "~> 2.2"
+  gem "hanami-rspec", "~> 2.3.0.beta"
 end
 
 group :test do
