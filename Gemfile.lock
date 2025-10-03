@@ -1,105 +1,9 @@
 GIT
-  remote: https://github.com/hanami/assets.git
-  revision: 3198170a4ffc388dff9c2dfa826cd2182edab8c2
-  branch: main
-  specs:
-    hanami-assets (2.2.0)
-      zeitwerk (~> 2.6)
-
-GIT
-  remote: https://github.com/hanami/controller.git
-  revision: de405c15242a6697fb6285d5c155f61a27bd6bfa
-  branch: main
-  specs:
-    hanami-controller (2.2.0)
-      dry-configurable (~> 1.0, < 2)
-      dry-core (~> 1.0)
-      hanami-utils (~> 2.2)
-      rack (>= 2.1)
-      zeitwerk (~> 2.6)
-
-GIT
-  remote: https://github.com/hanami/db.git
-  revision: 14f29d2a5404d1f8305d88ba7958bff40cbb494c
-  branch: main
-  specs:
-    hanami-db (2.2.1)
-      rom (~> 5.4, >= 5.4.1)
-      rom-sql (~> 3.7)
-      zeitwerk (~> 2.6)
-
-GIT
-  remote: https://github.com/hanami/hanami.git
-  revision: 4f08096848590c4cf3b87d79ec720913b2e85b80
-  branch: main
-  specs:
-    hanami (2.2.1)
-      bundler (>= 1.16, < 3)
-      dry-configurable (~> 1.0, >= 1.2.0, < 2)
-      dry-core (~> 1.0, < 2)
-      dry-inflector (~> 1.0, >= 1.1.0, < 2)
-      dry-logger (~> 1.0, < 2)
-      dry-monitor (~> 1.0, >= 1.0.1, < 2)
-      dry-system (~> 1.1)
-      hanami-cli (~> 2.2.1)
-      hanami-utils (~> 2.2)
-      json (>= 2.7.2)
-      rack-session
-      zeitwerk (~> 2.6)
-
-GIT
-  remote: https://github.com/hanami/router.git
-  revision: b6c9f683c2c6b81de83dec34e344bfddd268730f
-  branch: main
-  specs:
-    hanami-router (2.2.0)
-      csv (~> 3.3)
-      mustermann (~> 3.0)
-      mustermann-contrib (~> 3.0)
-      rack (>= 2.0)
-
-GIT
-  remote: https://github.com/hanami/validations.git
-  revision: 20ce9b2b95a2d4807e80f56562305e7f20847f98
-  branch: main
-  specs:
-    hanami-validations (2.2.0)
-      dry-validation (>= 1.10, < 2)
-
-GIT
-  remote: https://github.com/hanami/view.git
-  revision: 95f7fcb625efa91a2e87e3b17c1f11d722e47964
-  branch: main
-  specs:
-    hanami-view (2.2.1)
-      dry-configurable (~> 1.0)
-      dry-core (~> 1.0)
-      dry-inflector (~> 1.0, < 2)
-      temple (~> 0.10.0, >= 0.10.2)
-      tilt (~> 2.3)
-      zeitwerk (~> 2.6)
-
-GIT
   remote: https://github.com/jeremyevans/tilt
   revision: 6862d6cefa7cc5036819e887107e8a512e029af0
   branch: master
   specs:
     tilt (2.6.1)
-
-GIT
-  remote: https://github.com/rickenharp/cli.git
-  revision: c622ecd0b3b2af327e11f86c0ba0958ac3e7c3e6
-  branch: main
-  specs:
-    hanami-cli (2.2.1)
-      bundler (~> 2.1)
-      dry-cli (~> 1.0, >= 1.1.0)
-      dry-files (~> 1.0, >= 1.0.2, < 2)
-      dry-inflector (~> 1.0, < 2)
-      irb
-      rackup
-      rake (~> 13.0)
-      zeitwerk (~> 2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -244,7 +148,8 @@ GEM
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
-    formatador (1.1.0)
+    formatador (1.2.1)
+      reline
     guard (2.19.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -261,21 +166,70 @@ GEM
       guard (~> 2.14)
       guard-compat (~> 1.2)
       puma (>= 4.0, < 7)
-    hanami-reloader (2.2.0)
+    hanami (2.3.0.beta1)
+      bundler (>= 1.16, < 3)
+      dry-configurable (~> 1.0, >= 1.2.0, < 2)
+      dry-core (~> 1.0, < 2)
+      dry-inflector (~> 1.0, >= 1.1.0, < 2)
+      dry-logger (~> 1.0, < 2)
+      dry-monitor (~> 1.0, >= 1.0.1, < 2)
+      dry-system (~> 1.1)
+      hanami-cli (~> 2.3.0.beta1)
+      hanami-utils (~> 2.2)
+      json (>= 2.7.2)
+      rack-session
+      zeitwerk (~> 2.6)
+    hanami-assets (2.3.0.beta1)
+      zeitwerk (~> 2.6)
+    hanami-cli (2.3.0.beta1)
+      bundler (~> 2.1)
+      dry-cli (~> 1.0, >= 1.1.0)
+      dry-files (~> 1.0, >= 1.0.2, < 2)
+      dry-inflector (~> 1.0, < 2)
+      irb
+      rackup
+      rake (~> 13.0)
+      zeitwerk (~> 2.6)
+    hanami-controller (2.3.0.beta1)
+      dry-configurable (~> 1.0, < 2)
+      dry-core (~> 1.0)
+      hanami-utils (~> 2.3.0.beta1)
+      rack (>= 2.1)
+      zeitwerk (~> 2.6)
+    hanami-db (2.3.0.beta1)
+      rom (~> 5.4, >= 5.4.1)
+      rom-sql (~> 3.7)
+      zeitwerk (~> 2.6)
+    hanami-reloader (2.3.0.beta1)
       guard (~> 2.19)
       guard-puma (~> 0.8)
-      hanami-cli (~> 2.2)
+      hanami-cli (~> 2.3.0.beta1)
       zeitwerk (~> 2.6)
-    hanami-rspec (2.2.1)
-      hanami-cli (~> 2.2)
+    hanami-router (2.3.0.beta1)
+      csv (~> 3.3)
+      mustermann (~> 3.0)
+      mustermann-contrib (~> 3.0)
+      rack (>= 2.0)
+    hanami-rspec (2.3.0.beta1)
+      hanami-cli (~> 2.3.0.beta1)
       rake (~> 13.0)
       rspec (~> 3.12)
       zeitwerk (~> 2.6)
-    hanami-utils (2.2.0)
+    hanami-utils (2.3.0.beta1)
+      bigdecimal (~> 3.1)
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
       dry-transformer (~> 1.0, < 2)
-    hanami-webconsole (2.2.0)
+    hanami-validations (2.3.0.beta1)
+      dry-validation (>= 1.10, < 2)
+    hanami-view (2.3.0.beta1)
+      dry-configurable (~> 1.0)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0, < 2)
+      temple (~> 0.10.0, >= 0.10.2)
+      tilt (~> 2.3)
+      zeitwerk (~> 2.6)
+    hanami-webconsole (2.3.0.beta1)
       better_errors (~> 2.10, >= 2.10.1)
       binding_of_caller (~> 1.0)
     hansi (0.2.1)
@@ -285,7 +239,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-missing_translations (0.0.1)
     ice_nine (0.11.2)
-    io-console (0.8.0)
+    io-console (0.8.1)
     irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
@@ -303,7 +257,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    lumberjack (1.2.10)
+    lumberjack (1.4.2)
     maruku (0.7.3)
     matrix (0.4.2)
     method_source (1.1.0)
@@ -314,11 +268,11 @@ GEM
     mini_portile2 (2.8.9)
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
-    mustermann (3.0.3)
+    mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
-    mustermann-contrib (3.0.3)
+    mustermann-contrib (3.0.4)
       hansi (~> 0.2.0)
-      mustermann (= 3.0.3)
+      mustermann (= 3.0.4)
     nenv (0.3.0)
     net-http (0.6.0)
       uri
@@ -363,7 +317,7 @@ GEM
     omniauth-oauth2-generic (0.2.8)
       omniauth-oauth2 (~> 1.0)
       rake
-    ostruct (0.6.1)
+    ostruct (0.6.3)
     parallel (1.27.0)
     parser (3.3.9.0)
       ast (~> 2.4.1)
@@ -396,19 +350,20 @@ GEM
     puma (6.6.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.18)
-    rack-protection (3.2.0)
+    rack (3.2.1)
+    rack-protection (4.1.1)
       base64 (>= 0.1.0)
-      rack (~> 2.2, >= 2.2.4)
-    rack-session (1.0.2)
-      rack (< 3)
+      logger (>= 1.6.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
     rack-unpoly (0.5.0)
       rack (>= 2.0, < 4.0)
-    rackup (1.0.0)
-      rack (< 3)
-      webrick
+    rackup (2.2.1)
+      rack (>= 3)
     rainbow (3.1.1)
     rake (13.3.0)
     rb-fsevent (0.11.2)
@@ -418,7 +373,7 @@ GEM
       erb
       psych (>= 4.0.0)
     regexp_parser (2.11.2)
-    reline (0.6.1)
+    reline (0.6.2)
       io-console (~> 0.5)
     rexml (3.4.4)
     rom (5.4.2)
@@ -510,7 +465,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.25.0)
     stringio (3.1.7)
-    temple (0.10.3)
+    temple (0.10.4)
     thor (1.4.0)
     transproc (1.1.1)
     ttfunk (1.8.0)
@@ -559,17 +514,17 @@ DEPENDENCIES
   dry-operation
   dry-types (~> 1.7)
   faraday (~> 2.13)
-  hanami!
-  hanami-assets!
-  hanami-cli!
-  hanami-controller!
-  hanami-db!
-  hanami-reloader (~> 2.2)
-  hanami-router!
-  hanami-rspec (~> 2.2)
-  hanami-validations!
-  hanami-view!
-  hanami-webconsole (~> 2.2)
+  hanami (~> 2.3.0.beta)
+  hanami-assets (~> 2.3.0.beta)
+  hanami-cli (~> 2.3.0.beta)
+  hanami-controller (~> 2.3.0.beta)
+  hanami-db (~> 2.3.0.beta)
+  hanami-reloader (~> 2.3.0.beta)
+  hanami-router (~> 2.3.0.beta)
+  hanami-rspec (~> 2.3.0.beta)
+  hanami-validations (~> 2.3.0.beta)
+  hanami-view (~> 2.3.0.beta)
+  hanami-webconsole (~> 2.3.0.beta)
   i18n (~> 1.14)
   i18n-missing_translations
   irb
@@ -586,7 +541,6 @@ DEPENDENCIES
   puma
   rack-test
   rack-unpoly (~> 0.5.0)
-  rackup (= 1.0.0)
   rake
   rom-factory
   rubyzip (~> 3.0)
