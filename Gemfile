@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "hanami", "~> 2.3.0.beta"
-gem "hanami-cli", "~> 2.3.0.beta"
+gem "hanami-cli", github: "rickenharp/cli", branch: "make_postgres_db_exist_check_more_robust"
 gem "hanami-assets", "~> 2.3.0.beta"
 gem "hanami-controller", "~> 2.3.0.beta"
 gem "hanami-db", "~> 2.3.0.beta"
