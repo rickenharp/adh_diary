@@ -24,6 +24,7 @@ jobs:
       HANAMI_ENV: test
       TZ: Europe/Berlin
       DATABASE_URL: postgres://postgres:postgres@localhost/adh_diary_test
+      SESSION_SECRET: 38de7f646b9d87f313d0dea5b49ff39d0a3e8043675c3ac96577c21248129ee793dd0ce147dcdc4a01de4ccf5d3f2bf3cfb33e30dd476009e8f6857b3110d0d0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

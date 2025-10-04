@@ -5,6 +5,21 @@ GIT
   specs:
     tilt (2.6.1)
 
+GIT
+  remote: https://github.com/rickenharp/cli.git
+  revision: ccbe3e445740b92c27d3eba06056f9fc4e09e628
+  branch: make_postgres_db_exist_check_more_robust
+  specs:
+    hanami-cli (2.3.0.beta1)
+      bundler (~> 2.1)
+      dry-cli (~> 1.0, >= 1.1.0)
+      dry-files (~> 1.0, >= 1.0.2, < 2)
+      dry-inflector (~> 1.0, < 2)
+      irb
+      rackup
+      rake (~> 13.0)
+      zeitwerk (~> 2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -180,15 +195,6 @@ GEM
       rack-session
       zeitwerk (~> 2.6)
     hanami-assets (2.3.0.beta1)
-      zeitwerk (~> 2.6)
-    hanami-cli (2.3.0.beta1)
-      bundler (~> 2.1)
-      dry-cli (~> 1.0, >= 1.1.0)
-      dry-files (~> 1.0, >= 1.0.2, < 2)
-      dry-inflector (~> 1.0, < 2)
-      irb
-      rackup
-      rake (~> 13.0)
       zeitwerk (~> 2.6)
     hanami-controller (2.3.0.beta1)
       dry-configurable (~> 1.0, < 2)
@@ -516,7 +522,7 @@ DEPENDENCIES
   faraday (~> 2.13)
   hanami (~> 2.3.0.beta)
   hanami-assets (~> 2.3.0.beta)
-  hanami-cli (~> 2.3.0.beta)
+  hanami-cli!
   hanami-controller (~> 2.3.0.beta)
   hanami-db (~> 2.3.0.beta)
   hanami-reloader (~> 2.3.0.beta)
