@@ -2,6 +2,7 @@
 
 #MISE description="Reset the database to a well-known state"
 #MISE alias="rdb"
+#USAGE flag "-m --migrate" help="Migrate the database after recreation"
 
 set -o errexit
 set -o nounset
@@ -15,6 +16,9 @@ main() {
   bundle exec hanami db drop
   bundle exec hanami db create
   psql "$DATABASE_URL" < /Users/alex/Downloads/adh_diary_2025-09-27T11:05:01+02:00.sql
+  if [ "$usage_migrate" = "true" ]; then
+    bundle exec hanami db migrate
+  fi
 }
 
 main "$@"
