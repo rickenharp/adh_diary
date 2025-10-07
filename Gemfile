@@ -70,3 +70,5 @@ group :test do
   gem "mimemagic", "~> 0.4.3"
   gem "webmock", "~> 3.25.1"
 end
+
+gem "openssl", "~> 3.3", ">= 3.3.1"

@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S usage bash
 
 #MISE description="Reset the database to a well-known state"
 #MISE alias="rdb"
-#USAGE flag "-m --migrate" help="Migrate the database after recreation"
+#USAGE flag "-m --migrate" help="Migrate the database after recreation" default="false"
 
 set -o errexit
 set -o nounset

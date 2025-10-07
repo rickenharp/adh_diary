@@ -12,7 +12,7 @@ module AdhDiary
     def authenticate!
       account = account_repo.by_email(params["email"])
 
-      if account && account.password_hash == BCrypt::Engine.hash_secret(request.params["password"], account.password_salt)
+      if account && BCrypt::Password.new(account.password_hash) == request.params["password"]
         return success!(account)
       end
 

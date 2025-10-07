@@ -324,6 +324,7 @@ GEM
     omniauth-oauth2-generic (0.2.8)
       omniauth-oauth2 (~> 1.0)
       rake
+    openssl (3.3.1)
     ostruct (0.6.3)
     parallel (1.27.0)
     parser (3.3.9.0)
@@ -541,6 +542,7 @@ DEPENDENCIES
   omniauth
   omniauth-oauth2
   omniauth-oauth2-generic
+  openssl (~> 3.3, >= 3.3.1)
   pg
   prawn (~> 2.5)
   prawn-table (~> 0.2.2)

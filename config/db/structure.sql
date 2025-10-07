@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict fLGaQc2Tex2MChQtzbjnohPB1D5WxO0L8T2WaxBcUrWo6H4LdP9UFdv5m2mK5On
+\restrict Y9PnAPgJ9qKddjGVOVceoUAmZ9WbNWb4PMAZIPpb5IH7ZLpaUkMxqryQnBhdMpm
 
 -- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
 -- Dumped by pg_dump version 16.10 (Homebrew)
@@ -31,8 +31,8 @@ CREATE TABLE public.accounts (
     name text NOT NULL,
     email text NOT NULL,
     password_hash text NOT NULL,
-    password_salt text NOT NULL,
-    locale text DEFAULT 'en'::text
+    locale text DEFAULT 'en'::text,
+    password_salt text NOT NULL
 );
 
 
@@ -334,7 +334,7 @@ ALTER TABLE ONLY public.medication_schedules
 -- PostgreSQL database dump complete
 --
 
-\unrestrict fLGaQc2Tex2MChQtzbjnohPB1D5WxO0L8T2WaxBcUrWo6H4LdP9UFdv5m2mK5On
+\unrestrict Y9PnAPgJ9qKddjGVOVceoUAmZ9WbNWb4PMAZIPpb5IH7ZLpaUkMxqryQnBhdMpm
 
 SET search_path TO "$user", public;
 
