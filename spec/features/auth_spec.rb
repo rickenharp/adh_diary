@@ -4,9 +4,8 @@ RSpec.feature "Auth", db: true do
   let(:password) { "setec astronomy" }
   # let(:email) { "user@example.com" }
   let(:account) do
-    password_salt = BCrypt::Engine.generate_salt
-    password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    Factory.create(:account, name: "Some Guy", password_hash: password_hash, password_salt: password_salt)
+    password_hash = BCrypt::Password.create(password)
+    Factory.create(:account, name: "Some Guy", password_hash: password_hash)
   end
 
   before(:each) do

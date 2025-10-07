@@ -30,13 +30,11 @@ module AdhDiary
           # halt 422, { errors: "This email is already taken" }.to_json if accounts_repo.email_taken?(request.params[:email])
 
           if request.params.valid?
-            password_salt = BCrypt::Engine.generate_salt
-            password_hash = BCrypt::Engine.hash_secret(request.params[:account][:password], password_salt)
+            password_hash = BCrypt::Password.create(request.params[:account][:password])
             account_repo.create(
               name: request.params[:account][:name],
               email: request.params[:account][:email],
-              password_hash: password_hash,
-              password_salt: password_salt
+              password_hash: password_hash
             )
 
             response.flash[:notice] = "Account created"
