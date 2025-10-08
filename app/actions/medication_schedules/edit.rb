@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module MedicationSchedules
-      class Edit < AdhDiary::AuthenticatedAction
+      class Edit < AdhDiary::Authenticated
         def handle(request, response)
         end
       end

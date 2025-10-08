@@ -14,6 +14,7 @@ Capybara.register_driver(:cuprite) do |app|
 end
 Capybara.javascript_driver = :cuprite
 WebMock.enable_net_connect!
+Capybara.default_host = Hanami.app.config.base_url.to_s
 
 Capybara.app = Hanami.app
 

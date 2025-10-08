@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Entries
-      class Create < AdhDiary::AuthenticatedAction
+      class Create < AdhDiary::Authenticated
         include Deps["repos.entry_repo", "entries.create"]
 
         def handle(request, response)

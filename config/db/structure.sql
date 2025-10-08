@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Y9PnAPgJ9qKddjGVOVceoUAmZ9WbNWb4PMAZIPpb5IH7ZLpaUkMxqryQnBhdMpm
+\restrict ai4VhD4JXejcODsJtD9CLXZSow14nSM7odG4ZL5zOWkWSRizQQK5l40rrEN4PXK
 
 -- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
 -- Dumped by pg_dump version 16.10 (Homebrew)
@@ -18,21 +18,107 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: citext; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
+
+
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- Name: account_login_change_keys; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_login_change_keys (
+    id bigint NOT NULL,
+    key text NOT NULL,
+    login text NOT NULL,
+    deadline timestamp without time zone DEFAULT ((CURRENT_TIMESTAMP)::timestamp without time zone + make_interval(days => 1)) NOT NULL
+);
+
+
+--
+-- Name: account_password_reset_keys; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_password_reset_keys (
+    id bigint NOT NULL,
+    key text NOT NULL,
+    deadline timestamp without time zone DEFAULT ((CURRENT_TIMESTAMP)::timestamp without time zone + make_interval(days => 1)) NOT NULL,
+    email_last_sent timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: account_remember_keys; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_remember_keys (
+    id bigint NOT NULL,
+    key text NOT NULL,
+    deadline timestamp without time zone DEFAULT ((CURRENT_TIMESTAMP)::timestamp without time zone + make_interval(days => 14)) NOT NULL
+);
+
+
+--
+-- Name: account_statuses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_statuses (
+    id integer NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: account_verification_keys; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_verification_keys (
+    id bigint NOT NULL,
+    key text NOT NULL,
+    requested_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    email_last_sent timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
 
 --
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.accounts (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     name text NOT NULL,
-    email text NOT NULL,
+    email public.citext NOT NULL,
     password_hash text NOT NULL,
     locale text DEFAULT 'en'::text,
-    password_salt text NOT NULL
+    status_id integer DEFAULT 1 NOT NULL,
+    CONSTRAINT valid_email CHECK ((email OPERATOR(public.~) '^[^,;@ \r\n]+@[^,@; \r\n]+\.[^,@; \r\n]+$'::public.citext))
 );
 
 
@@ -206,6 +292,54 @@ CREATE VIEW public.weekly_reports AS
 
 
 --
+-- Name: account_login_change_keys account_login_change_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_login_change_keys
+    ADD CONSTRAINT account_login_change_keys_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_password_reset_keys account_password_reset_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_password_reset_keys
+    ADD CONSTRAINT account_password_reset_keys_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_remember_keys account_remember_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_remember_keys
+    ADD CONSTRAINT account_remember_keys_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_statuses account_statuses_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_statuses
+    ADD CONSTRAINT account_statuses_name_key UNIQUE (name);
+
+
+--
+-- Name: account_statuses account_statuses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_statuses
+    ADD CONSTRAINT account_statuses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_verification_keys account_verification_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_verification_keys
+    ADD CONSTRAINT account_verification_keys_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -273,7 +407,7 @@ ALTER TABLE ONLY public.schema_migrations
 -- Name: accounts_email_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX accounts_email_index ON public.accounts USING btree (email);
+CREATE UNIQUE INDEX accounts_email_index ON public.accounts USING btree (email) WHERE (status_id = ANY (ARRAY[1, 2]));
 
 
 --
@@ -288,6 +422,46 @@ CREATE INDEX entries_date_index ON public.entries USING btree (date);
 --
 
 CREATE UNIQUE INDEX identities_account_id_provider_index ON public.identities USING btree (account_id, provider);
+
+
+--
+-- Name: account_login_change_keys account_login_change_keys_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_login_change_keys
+    ADD CONSTRAINT account_login_change_keys_id_fkey FOREIGN KEY (id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: account_password_reset_keys account_password_reset_keys_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_password_reset_keys
+    ADD CONSTRAINT account_password_reset_keys_id_fkey FOREIGN KEY (id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: account_remember_keys account_remember_keys_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_remember_keys
+    ADD CONSTRAINT account_remember_keys_id_fkey FOREIGN KEY (id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: account_verification_keys account_verification_keys_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_verification_keys
+    ADD CONSTRAINT account_verification_keys_id_fkey FOREIGN KEY (id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: accounts accounts_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.accounts
+    ADD CONSTRAINT accounts_status_id_fkey FOREIGN KEY (status_id) REFERENCES public.account_statuses(id);
 
 
 --
@@ -334,7 +508,7 @@ ALTER TABLE ONLY public.medication_schedules
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Y9PnAPgJ9qKddjGVOVceoUAmZ9WbNWb4PMAZIPpb5IH7ZLpaUkMxqryQnBhdMpm
+\unrestrict ai4VhD4JXejcODsJtD9CLXZSow14nSM7odG4ZL5zOWkWSRizQQK5l40rrEN4PXK
 
 SET search_path TO "$user", public;
 
@@ -352,4 +526,6 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250709203920_add_weekly_report_view.rb'),
 ('20250710102932_add_locale_to_user.rb'),
 ('20250715143059_add_identities.rb'),
-('20251002071820_rename_users_to_accounts.rb');
+('20251002071820_rename_users_to_accounts.rb'),
+('20251006091653_remove_password_salt.rb'),
+('20251007154225_create_rodauth_tables.rb');

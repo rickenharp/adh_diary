@@ -1,5 +1,6 @@
 RSpec.feature "Withings integration", db: true do
-  let(:account) { Factory.create(:account, name: "Some Guy", identities: []) }
+  let(:password) { "password" }
+  let(:account) { Factory.create(:account, name: "Some Guy", password: password, identities: []) }
   let(:identity_relation) { Hanami.app["relations.identities"] }
   let(:now) { Time.utc(2025, 7, 22, 14, 56) }
   let(:expiry) { now + 60 * 60 }
@@ -34,10 +35,12 @@ RSpec.feature "Withings integration", db: true do
   end
 
   scenario "creating an identity" do
-    login_as(account)
+    login_as(account.email, password)
     visit "/"
 
-    expect { click_button("Connect with Withings") }.to change { identity_relation.where(account_id: account.id, provider: "withings").count }.by(1)
+    expect {
+      click_button("Connect with Withings")
+    }.to change { identity_relation.where(account_id: account.id, provider: "withings").count }.by(1)
     identity = identity_relation.where(account_id: account.id, provider: "withings").one!
 
     expect(identity).to include(token: "initial token", refresh_token: "initial refresh token", uid: "1234567890")
@@ -59,7 +62,7 @@ RSpec.feature "Withings integration", db: true do
 
       account.identities << identity
 
-      login_as(account)
+      login_as(account.email, password)
 
       stub_request(:post, "https://wbsapi.withings.net/measure?action=getmeas&category=1&enddate=#{enddate.to_i}&meastypes=1,9,10&startdate=#{startdate.to_i}")
         .with(
@@ -88,7 +91,7 @@ RSpec.feature "Withings integration", db: true do
       )
       account.identities << identity
 
-      login_as(account)
+      login_as(account.email, password)
 
       stub_request(:post, "https://wbsapi.withings.net/v2/oauth2/")
         .with(

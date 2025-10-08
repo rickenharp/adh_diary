@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Reports
-      class Pdf < AdhDiary::AuthenticatedAction
+      class Pdf < AdhDiary::Authenticated
         params do
           required(:week).filled(:string)
         end

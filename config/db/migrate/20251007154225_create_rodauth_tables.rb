@@ -1,0 +1,93 @@
+# frozen_string_literal: true
+
+# Adapted from https://rodauth.jeremyevans.net/rdoc/files/README_rdoc.html
+ROM::SQL.migration do
+  up do
+    run "CREATE EXTENSION IF NOT EXISTS citext"
+
+    extension :date_arithmetic
+
+    # Used by the account verification and close account features
+    create_table :account_statuses do
+      Integer :id, primary_key: true
+      String :name, null: false, unique: true
+    end
+
+    from(:account_statuses).import([:id, :name], [[1, "Unverified"], [2, "Verified"], [3, "Closed"]])
+
+    alter_table :accounts do
+      add_foreign_key :status_id, :account_statuses, null: false, default: 1
+      set_column_type :id, :Bignum
+      set_column_type :email, "citext"
+      add_constraint(:valid_email, email: /^[^,;@ \r\n]+@[^,@; \r\n]+\.[^,@; \r\n]+$/)
+
+      drop_index :email
+      add_index :email, unique: true, where: {status_id: [1, 2]}
+    end
+
+    execute "UPDATE accounts SET status_id = 2;"
+
+    deadline_opts = proc do |days|
+      {null: false, default: Sequel.date_add(Sequel::CURRENT_TIMESTAMP, days: days)}
+    end
+
+    # Used by the password reset feature
+    create_table :account_password_reset_keys do
+      foreign_key :id, :accounts, primary_key: true, type: :Bignum
+      String :key, null: false
+      DateTime :deadline, deadline_opts[1]
+      DateTime :email_last_sent, null: false, default: Sequel::CURRENT_TIMESTAMP
+    end
+
+    # Used by the account verification feature
+    create_table :account_verification_keys do
+      foreign_key :id, :accounts, primary_key: true, type: :Bignum
+      String :key, null: false
+      DateTime :requested_at, null: false, default: Sequel::CURRENT_TIMESTAMP
+      DateTime :email_last_sent, null: false, default: Sequel::CURRENT_TIMESTAMP
+    end
+
+    execute <<~SQL
+      INSERT INTO account_verification_keys (id, key)
+      SELECT DISTINCT id, translate(encode(gen_random_bytes(32), 'base64'), '+/=', '-_') as key
+      FROM "accounts"
+      WHERE ("status_id" IN (1, 2))
+    SQL
+
+    # Used by the verify login change feature
+    create_table :account_login_change_keys do
+      foreign_key :id, :accounts, primary_key: true, type: :Bignum
+      String :key, null: false
+      String :login, null: false
+      DateTime :deadline, deadline_opts[1]
+    end
+
+    # Used by the remember me feature
+    create_table :account_remember_keys do
+      foreign_key :id, :accounts, primary_key: true, type: :Bignum
+      String :key, null: false
+      DateTime :deadline, deadline_opts[14]
+    end
+  end
+
+  down do
+    alter_table :accounts do
+      drop_foreign_key :status_id
+      set_column_type :id, :Bignum
+      set_column_type :email, String
+      drop_constraint :valid_email
+      # drop_index :email
+      add_index :email, unique: true
+    end
+
+    drop_table(
+      :account_remember_keys,
+      :account_login_change_keys,
+      :account_verification_keys,
+      :account_password_reset_keys,
+      :account_statuses
+    )
+
+    run "DROP EXTENSION IF EXISTS citext"
+  end
+end

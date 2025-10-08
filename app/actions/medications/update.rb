@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Medications
-      class Update < AdhDiary::AuthenticatedAction
+      class Update < AdhDiary::Authenticated
         include Deps["repos.medication_repo"]
 
         params do

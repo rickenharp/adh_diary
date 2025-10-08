@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module MedicationSchedules
-      class Index < AdhDiary::AuthenticatedAction
+      class Index < AdhDiary::Authenticated
         def handle(request, response)
         end
       end

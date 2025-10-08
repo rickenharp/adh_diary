@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module MedicationSchedules
-      class Delete < AdhDiary::AuthenticatedAction
+      class Delete < AdhDiary::Authenticated
         def handle(request, response)
         end
       end

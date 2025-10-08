@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require "sentry-ruby"
 #
 # Environment and port
 #
 port ENV.fetch("HANAMI_PORT", 2300)
-environment ENV.fetch("HANAMI_ENV", "development")
+environment(ENV["HANAMI_ENV"] || ENV["APP_ENV"] || ENV["RACK_ENV"] || "development")
 
 #
 # Threads within each Puma/Ruby process (aka worker)
@@ -26,6 +27,25 @@ puma_cluster_mode = puma_concurrency > 1
 # How many worker (Puma/Ruby) processes to run.
 # Typically this is set to the number of available cores.
 workers puma_concurrency
+
+Sentry.init do |config|
+  config.breadcrumbs_logger = [:sentry_logger, :http_logger]
+  # Add data like request headers and IP for accounts, if applicable;
+  # see https://docs.sentry.io/platforms/ruby/data-management/data-collected/ for more info
+  config.send_default_pii = true
+  config.environment = @options[:environment].to_sym
+end
+
+lowlevel_error_handler do |e, env, status|
+  if status == 400
+    message = "The server could not process the request due to an error, such as an incorrectly typed URL, malformed syntax, or a URL that contains illegal characters.\n"
+  else
+    message = "An error has occurred, and engineers have been informed. Please reload the page.\n"
+    Sentry.capture_exception(e)
+  end
+
+  [status, {}, [message]]
+end
 
 #
 # Cluster mode (aka multiple workers)

@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module MedicationSchedules
-      class Create < AdhDiary::AuthenticatedAction
+      class Create < AdhDiary::Authenticated
         include Deps["repos.medication_schedule_repo"]
 
         params do

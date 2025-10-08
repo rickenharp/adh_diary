@@ -4,15 +4,30 @@ RSpec.feature "Signup", db: true do
   let(:name) { "Some Guy" }
 
   scenario "signing up works" do
-    visit "/accounts/new"
+    visit "/"
+    click_link_or_button "Sign up"
 
-    fill_in "account[name]", with: name
-    fill_in "account[email]", with: email
-    fill_in "account[password]", with: password
-    fill_in "account[password_confirmation]", with: password
+    fill_in "name", with: name
+    fill_in "login", with: email
+    fill_in "password", with: password
 
-    click_link_or_button("Log in")
+    click_link_or_button("Create Account")
+    expect(page).to have_content "An email has been sent to you with a link to verify your account"
+    match = /^(https?:.*?) $/.match(Mail::TestMailer.deliveries.last.body.to_s)
+    expect(match).to be_truthy
+    verify_url = URI(match[1])
+    visit verify_url.request_uri
+    click_link_or_button("Verify Account")
+    expect(page).to have_content "Your account has been verified"
 
-    expect(page).to have_content "Please log in"
+    click_link_or_button "Log out"
+    click_link_or_button "Log in"
+
+    fill_in "login", with: email
+    fill_in "password", with: password
+
+    click_link_or_button("Login")
+
+    expect(page).to have_content "You have been logged in"
   end
 end

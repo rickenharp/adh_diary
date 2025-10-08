@@ -14,6 +14,10 @@ class AccountDryEffect
   end
 
   def detect_account(env)
-    env["warden"].user
+    if env["rodauth"].logged_in?
+      _account = env["rodauth"].account_from_session
+
+      Hanami.app["repos.account_repo"].by_id(env["rodauth"].account_id)
+    end
   end
 end

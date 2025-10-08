@@ -4,7 +4,7 @@ require "rspec"
 
 RSpec.feature "Entries JS", db: true, js: true do
   let(:password) { "password" }
-  let(:account) { Factory.create(:account) }
+  let(:account) { Factory.create(:account, password: password) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
   let(:medication_schedule) do
@@ -26,7 +26,7 @@ RSpec.feature "Entries JS", db: true, js: true do
     # Hanami.app.container.stub("withings.get_measurements", ->(_) { Success({}) })
     medication_schedule
 
-    login_as(account)
+    login_as(account.email, password)
   end
 
   # after(:each) do

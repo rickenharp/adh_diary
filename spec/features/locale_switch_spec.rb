@@ -4,10 +4,11 @@ require "rspec"
 
 RSpec.feature "Switch locale", db: true do
   context "logged in" do
-    let(:account) { Factory.create(:account) }
+    let(:password) { "password" }
+    let(:account) { Factory.create(:account, password: password) }
 
     before(:each) do
-      login_as(account)
+      login_as(account.email, password)
     end
 
     scenario "switching the locale works" do

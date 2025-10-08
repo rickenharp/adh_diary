@@ -1,0 +1,8 @@
+<%== rodauth.login_form_footer_links_heading %>
+
+<ul class="field is-grouped">
+  <% rodauth.login_form_footer_links.map do |_, link, text|  %>
+    <li class="control"><a href="<%== link %>" class="button is-info"><%== text %></a></li>
+  <% end %>
+</ul>
+
