@@ -1,15 +1,12 @@
-require "bcrypt"
-
 RSpec.describe "AuthenticationSpec", :db, type: :request do
   context "when action inherits from authenticated action" do
     context "when account is logged in" do
-      let(:password) { "setec astronomy" }
       let!(:account) do
-        Factory[:account, name: "Guy", email: "my@guy.com"]
+        Factory[:account, name: "John Mastodon", email: "john.mastodon@example.com"]
       end
 
       it "succeeds" do
-        login_as account
+        env "rack.session", {account_id: account.id}
 
         get "/entries"
 

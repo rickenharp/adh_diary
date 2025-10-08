@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Entries
-      class Update < AdhDiary::AuthenticatedAction
+      class Update < AdhDiary::Authenticated
         include Deps["repos.entry_repo", "entries.update"]
 
         def handle(request, response)

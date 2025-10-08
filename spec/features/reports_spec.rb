@@ -11,7 +11,7 @@ RSpec.feature "Weekly Reports", db: true do
 
   context "default entries" do
     before(:each) do
-      login_as(account)
+      login_as(account.email, password)
       generate_entries
     end
 
@@ -47,7 +47,7 @@ RSpec.feature "Weekly Reports", db: true do
     scenario "PDF bulk export" do
       AdhDiary::Now.override!(Time.utc(2025, 7, 14, 12, 0)) do
         generate_entries(from: "2025-05-01", to: "2025-05-18")
-        login_as(account)
+        login_as(account.email, password)
 
         visit "/reports"
 
@@ -69,7 +69,7 @@ RSpec.feature "Weekly Reports", db: true do
 
     scenario "PDF bulk export with nothing selected" do
       generate_entries(from: "2025-05-01", to: "2025-05-18")
-      login_as(account)
+      login_as(account.email, password)
 
       visit "/reports"
 

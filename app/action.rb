@@ -3,6 +3,7 @@
 
 require "hanami/action"
 require "dry/monads"
+require "dry/effects"
 
 module AdhDiary
   class Action < Hanami::Action
@@ -10,13 +11,12 @@ module AdhDiary
     include Dry::Monads[:result]
     include Dry::Effects::Handler.Reader(:account)
     include Dry::Effects::Reader(:account)
-    include Deps["i18n", "inflector", "sentry"]
+    include Deps["i18n", "inflector", "repos.account_repo"]
 
-    handle_exception StandardError => :handle_standard_error
     before :set_locale
 
     def handle(request, response)
-      with_account(request.env["warden"].user) do
+      with_account(request.env["rodauth"]&.account_id) do
         super
       end
     end
@@ -41,17 +41,6 @@ module AdhDiary
     end
 
     private
-
-    def handle_standard_error(request, response, exception)
-      if Hanami.env?(:development, :test)
-        raise exception
-      else
-        sentry.capture_exception(exception)
-
-        response.status = 500
-        response.body = "Sorry, something went wrong handling your request"
-      end
-    end
 
     def set_locale(request, response)
       i18n.locale = request.session[:language] || i18n.default_locale

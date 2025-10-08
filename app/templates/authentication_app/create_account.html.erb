@@ -1,0 +1,24 @@
+<h1 class="title">Sign Up</h1>
+<form method="post" class="rodauth" role="form" id="create-account-form">
+  <%== rodauth.create_account_additional_form_tags %>
+  <%== rodauth.csrf_tag %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label for="name" class="label">Name</label>
+    </div>
+    <div class="field-body">
+      <div class="control has-icons-left">
+      <input required="required" type="text" class="input" id="name" name="name" value="<%= rodauth.param("name") %>">
+        <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      </div>
+    </div>
+
+  </div>
+  <%== rodauth.render("login-field") %>
+  <%== rodauth.render("login-confirm-field") if rodauth.require_login_confirmation? %>
+  <%== rodauth.render("password-field") if rodauth.create_account_set_password? %>
+  <%== rodauth.render("password-confirm-field") if rodauth.create_account_set_password? && rodauth.require_password_confirmation? %>
+  <%== rodauth.button(rodauth.create_account_button, class: "button is-primary") %>
+</form>

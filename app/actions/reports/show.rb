@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Reports
-      class Show < AdhDiary::AuthenticatedAction
+      class Show < AdhDiary::Authenticated
         def handle(request, response)
           response.render(view, week: request.params[:week])
         end

@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
+require "account_dry_effect"
+
 module AdhDiary
   class Routes < Hanami::Routes
     # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
+    use AdhDiary::AuthenticationApp
+    use AccountDryEffect
+
     root to: "home.index"
-
-    # New account registration
-    get "/accounts/new", to: "accounts.new", as: "sign_up"
-    post "/accounts", to: "accounts.create", as: "create_account"
-
-    # Session management
-    get "/login", to: "login.new", as: "login"
-    post "/sessions", to: "sessions.create", as: "create_session"
-    delete "/logout", to: "sessions.destroy", as: "logout"
 
     post "/locale", to: "locale.update", as: "locale"
 

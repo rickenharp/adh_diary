@@ -17,11 +17,13 @@ gem "puma"
 gem "rake"
 gem "pg"
 
-gem "warden"
 gem "bcrypt"
 gem "omniauth"
 gem "omniauth-oauth2-generic"
 gem "omniauth-oauth2"
+
+gem "rodauth"
+gem "mail"
 
 gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
 gem "rubyzip", "~> 3.0"
@@ -60,7 +62,7 @@ end
 group :test do
   # Database
   gem "database_cleaner-sequel"
-  gem "rom-factory"
+  gem "rom-factory", git: "https://github.com/rickenharp/rom-factory", branch: "transient_attributes"
 
   # Web integration
   gem "capybara"
@@ -72,3 +74,4 @@ group :test do
 end
 
 gem "openssl", "~> 3.3", ">= 3.3.1"
+gem "uri", "~> 1.0", ">= 1.0.4"

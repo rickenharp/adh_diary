@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require "hanami"
-require "warden"
 require "omniauth"
-require "account_dry_effect"
+
 require "rack/unpoly/middleware"
 require "omniauth/strategies/withings"
 
@@ -31,8 +30,11 @@ module AdhDiary
       Hanami.app.config.logger.level = :debug
     end
 
-    if settings.host_name
-      OmniAuth.config.full_host = "https://#{settings.host_name}"
+    config.render_errors = false
+
+    if settings.base_url
+      OmniAuth.config.full_host = settings.base_url
+      Hanami.app.config.base_url = settings.base_url
     end
 
     Dry::Validation.load_extensions(:monads)
@@ -59,24 +61,16 @@ module AdhDiary
       "data:"
     ].join(" ")
 
-    config.middleware.use Warden::Manager do |manager|
-      manager.default_strategies :password
-      manager.failure_app =
-        lambda do |env|
-          AdhDiary::Actions::AuthFailure::Show.new.call(env)
-        end
-    end
-
     # OmniAuth::AuthenticityTokenProtection.default_options(key: "_csrf_token", authenticity_param: "_csrf_token")
 
     withings_options = [
-      Hanami.app.settings.withings_client_id, Hanami.app.settings.withings_client_secret,
+      settings.withings_client_id, settings.withings_client_secret,
       {
         scope: "user.info,user.metrics,user.activity",
         authorize_options: %i[scope state mode],
-        client_options: {
-          connection_opts: oauth2_connection_options
-        },
+        # client_options: {
+        #   connection_opts: oauth2_connection_options
+        # },
         token_params: {
           action: "requesttoken",
           client_id: settings.withings_client_id,
@@ -87,19 +81,10 @@ module AdhDiary
 
     config.middleware.use OmniAuth::Builder do
       provider :developer
-      # provider :withings,
-      #   ENV["WITHINGS_CLIENT_ID"], ENV["WITHINGS_CLIENT_SECRET"],
-      #   mode: "demo",
-      #   scope: "user.info,user.metrics,user.activity",
-      #   state: "FOOOBAR",
-      #   authorize_options: %i[scope state mode]
-      provider :withings,
-        # Hanami.app.settings.withings_client_id, Hanami.app.settings.withings_client_secret,
-        # mode: "demo",
-        *withings_options
+      provider :withings, *withings_options
     end
 
-    config.middleware.use Rack::Unpoly::Middleware
-    config.middleware.use AccountDryEffect
+    # config.middleware.use Rack::Unpoly::Middleware
+    # config.middleware.use AccountDryEffect
   end
 end

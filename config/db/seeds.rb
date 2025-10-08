@@ -16,3 +16,13 @@
 # medications = Hanami.app["relations.medications"]
 # medications.dataset.insert_conflict.insert(name: "Lisdexamfetamin")
 # medications.dataset.insert_conflict.insert(name: "Medikinet")
+account_statuses_table = Hanami.app["db.gateway"].connection[:account_statuses]
+unless account_statuses_table.to_a.any?
+  account_statuses_table.multi_insert(
+    [
+      {id: 1, name: "Unverified"},
+      {id: 2, name: "Verified"},
+      {id: 3, name: "Closed"}
+    ]
+  )
+end

@@ -3,7 +3,7 @@
 module AdhDiary
   module Actions
     module Entries
-      class New < AdhDiary::AuthenticatedAction
+      class New < AdhDiary::Authenticated
         def handle(request, response)
         end
       end

@@ -1,10 +1,11 @@
 RSpec.feature "Medication schedules", db: true do
+  let(:password) { "password" }
   let(:account) do
-    Factory.create(:account, name: "Some Guy")
+    Factory.create(:account, name: "Some Guy", password: password)
   end
 
   let(:other_account) do
-    Factory.create(:account, name: "Some Other Guy")
+    Factory.create(:account, name: "Some Other Guy", password: password)
   end
 
   let(:medication) do
@@ -15,33 +16,33 @@ RSpec.feature "Medication schedules", db: true do
     scenario "index redirects to login" do
       visit "/medication_schedules"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "new redirects to login" do
       visit "/medication_schedules/new"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "delete redirects to login" do
       medication_schedule = Factory.create(:medication_schedule)
       visit "/medication_schedules/#{medication_schedule.id}/delete"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "edit redirects to login" do
       medication_schedule = Factory.create(:medication_schedule, account: account, medication: medication)
       visit "/medication_schedules/#{medication_schedule.id}/edit"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
   end
 
   context "authenticated account" do
     before(:each) do
-      login_as account
+      login_as account.email, password
     end
 
     scenario "index shows all medication_schedules" do

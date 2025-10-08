@@ -4,7 +4,7 @@ require "rspec"
 
 RSpec.feature "Entries", db: true do
   let(:password) { "password" }
-  let(:account) { Factory.create(:account) }
+  let(:account) { Factory.create(:account, password: password) }
 
   let(:lisdexamfetamin) { Factory.create(:medication, name: "Lisdexamfetamin") }
   let(:medication_schedule) do
@@ -25,7 +25,11 @@ RSpec.feature "Entries", db: true do
   before(:each) do
     medication_schedule
 
-    login_as(account)
+    # visit "/sign-in"
+    # fill_in "Email", :with => account.email
+    # fill_in "Password", :with => password
+    # click_on "Login"
+    login_as(account.email, password)
   end
 
   scenario "visiting the entries page shows an entry" do

@@ -17,7 +17,7 @@ en:
   home: "Home"
   welcome: "Welcome to ADHDiary"
   log_in: "Log in"
-  please_log_in: "Please log in"
+  please_log_in: "Please login to continue"
   log_out: "Log out"
   first: "First"
   last: "Last"

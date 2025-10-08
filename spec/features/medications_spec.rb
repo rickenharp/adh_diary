@@ -1,39 +1,40 @@
 RSpec.feature "Medications", db: true do
+  let(:password) { "password" }
   let(:account) do
-    Factory.create(:account, name: "Some Guy")
+    Factory.create(:account, name: "Some Guy", password: password)
   end
 
   context "unauthenticated account" do
     scenario "index redirects to login" do
       visit "/medications"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "new redirects to login" do
       visit "/medications/new"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "delete redirects to login" do
       medication = Factory.create(:medication)
       visit "/medications/#{medication.id}/delete"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
 
     scenario "edit redirects to login" do
       medication = Factory.create(:medication)
       visit "/medications/#{medication.id}/edit"
 
-      expect(page).to have_content "Please log in"
+      expect(page).to have_content "Please login to continue"
     end
   end
 
   context "authenticated account" do
     before(:each) do
-      login_as account
+      login_as account.email, password
     end
 
     scenario "index shows all medications" do

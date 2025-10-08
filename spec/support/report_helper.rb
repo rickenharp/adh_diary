@@ -1,7 +1,8 @@
 require "ostruct"
 
 RSpec.shared_context "report data", shared_context: :db do
-  let(:account) { Factory.create(:account) }
+  let(:password) { "password" }
+  let(:account) { Factory.create(:account, password: password) }
   let(:medication) { Factory.create(:medication) }
   let(:medication_schedule) { Factory.create(:medication_schedule, account: account, medication: medication) }
 

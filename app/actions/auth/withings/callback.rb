@@ -4,7 +4,7 @@ module AdhDiary
   module Actions
     module Auth
       module Withings
-        class Callback < AdhDiary::Action
+        class Callback < AdhDiary::Authenticated
           include Deps["repos.identity_repo"]
 
           def handle(request, response)
