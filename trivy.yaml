@@ -1,1 +1,5 @@
 ignorefile: .trivyignore.yaml
+image:
+  skip-dirs:
+    - /usr/local/lib/ruby/gems/
+    - /usr/lib/ruby/gems/
