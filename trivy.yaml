@@ -1,5 +1,5 @@
 ignorefile: .trivyignore.yaml
-image:
+scan:
   skip-dirs:
     - /usr/local/lib/ruby/gems/
     - /usr/lib/ruby/gems/
