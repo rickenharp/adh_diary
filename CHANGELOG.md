@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/rickenharp/adh_diary/compare/v1.2.0...v1.3.0) (2025-10-11)
+
+
+### Features
+
+* switch to rodauth for authentication ([d82b12a](https://github.com/rickenharp/adh_diary/commit/d82b12add99903d3969aee3a543fb68b66db1621))
+
 ## [1.2.0](https://github.com/rickenharp/adh_diary/compare/v1.1.0...v1.2.0) (2025-09-27)
 
 
