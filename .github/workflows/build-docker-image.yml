@@ -65,6 +65,10 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
 
+      - name: Read .ruby-version file
+        id: getrubyversion
+        run: echo "ruby_version=$(<.ruby-version)" >> "$GITHUB_OUTPUT"
+
       - name: Build and push Docker image
         id: build-docker-load
         uses: docker/build-push-action@v4
@@ -72,6 +76,8 @@ jobs:
           platforms: linux/amd64
           context: .
           push: true
+          build-args: |
+            RUBY_VERSION=${{ steps.getrubyversion.outputs.ruby_version }}-slim
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: |

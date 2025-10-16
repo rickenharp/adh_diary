@@ -8,7 +8,7 @@ node = "22"
 [tasks.docker_build]
 alias = "db"
 description = "Build the docker image"
-run = "docker build  -t ghcr.io/rickenharp/adh_diary ."
+run = "docker build --build-arg RUBY_VERSION=$(<.ruby-version)-slim -t ghcr.io/rickenharp/adh_diary ."
 
 [tasks.docker_run]
 alias = "dr"
