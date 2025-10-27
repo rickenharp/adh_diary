@@ -33,7 +33,7 @@ gem "rack-unpoly", "~> 0.5.0"
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "faraday", "~> 2.13"
-gem "sentry-ruby", "~> 5.26"
+gem "sentry-ruby", "~> 6.0"
 
 group :development do
   gem "hanami-webconsole", "~> 2.3.0.beta"

@@ -478,7 +478,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (3.2.1)
-    sentry-ruby (5.28.0)
+    sentry-ruby (6.0.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sequel (5.97.0)
@@ -582,7 +582,7 @@ DEPENDENCIES
   rodauth
   rom-factory!
   rubyzip (~> 3.0)
-  sentry-ruby (~> 5.26)
+  sentry-ruby (~> 6.0)
   standard
   tilt!
   uri (~> 1.0, >= 1.0.4)
