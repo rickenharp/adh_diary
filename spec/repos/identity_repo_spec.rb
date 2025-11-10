@@ -3,10 +3,10 @@
 RSpec.describe AdhDiary::Repos::IdentityRepo, db: true do
   include_context "report data"
 
-  account_provider = Object.new.extend(Dry::Effects::Handler.Reader(:account, as: :call))
-
   around do |example|
-    account_provider.call(account, &example)
+    Hanami.app.container.stub("current_account", account) do
+      example.run
+    end
   end
 
   it "upserts an identity" do

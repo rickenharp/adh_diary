@@ -7,10 +7,10 @@ module AdhDiary
     module Entries
       class New < AdhDiary::View
         include Dry::Monads[:result]
-        include Deps["repos.entry_repo", "withings.get_measurements", "logger"]
+        include Deps["repos.entry_repo", "withings.get_measurements", "logger", "current_account"]
 
         expose :entry do
-          measurements = case get_measurements.call(account)
+          measurements = case get_measurements.call(current_account.obj)
           in Success(measurements)
             measurements
           in Failure(failure)

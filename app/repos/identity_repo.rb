@@ -3,12 +3,12 @@
 module AdhDiary
   module Repos
     class IdentityRepo < AdhDiary::DB::Repo
-      include Deps["repos.account_repo"]
+      include Deps["repos.account_repo", "current_account"]
 
       commands :upsert, :create
 
       def new_from_omniauth(auth)
-        account = account_repo.get(account.id)
+        account = account_repo.get(current_account.id)
         new_identity = identities.changeset(:create, provider: auth[:provider], uid: auth[:uid]).associate(account)
         new_identity.commit
       end

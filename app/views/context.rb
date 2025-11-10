@@ -4,7 +4,6 @@ module AdhDiary
   module Views
     class Context < Hanami::View::Context
       include Deps["i18n", "repos.account_repo"]
-      include Dry::Effects::Reader(:account)
 
       def t(...)
         i18n.translate(...)

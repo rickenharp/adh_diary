@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "account_dry_effect"
-
 module AdhDiary
   class Routes < Hanami::Routes
     # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
-    use AdhDiary::AuthenticationApp
+    use AuthenticationApp
     use AccountDryEffect
 
     root to: "home.index"
