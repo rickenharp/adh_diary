@@ -3,6 +3,8 @@
 module AdhDiary
   module Repos
     class AccountRepo < AdhDiary::DB::Repo
+      include Deps["current_account"]
+
       commands :create, update: :by_pk, delete: :by_pk
 
       def query(conditions)
@@ -22,7 +24,7 @@ module AdhDiary
       end
 
       def update_locale(lang)
-        accounts.where(id: account.id).changeset(:update, locale: lang.to_s).commit
+        accounts.where(id: current_account.id).changeset(:update, locale: lang.to_s).commit
       end
 
       # def update_withings_token(token)

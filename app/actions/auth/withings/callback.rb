@@ -5,11 +5,11 @@ module AdhDiary
     module Auth
       module Withings
         class Callback < AdhDiary::Authenticated
-          include Deps["repos.identity_repo"]
+          include Deps["repos.identity_repo", "current_account"]
 
           def handle(request, response)
             identity_repo.upsert(
-              account_id: account.id,
+              account_id: current_account.id,
               provider: "withings",
               token: request.env["omniauth.auth"]["credentials"]["token"],
               refresh_token: request.env["omniauth.auth"]["credentials"]["refresh_token"],

@@ -9,17 +9,9 @@ module AdhDiary
   class Action < Hanami::Action
     # Provide `Success` and `Failure` for pattern matching on operation results
     include Dry::Monads[:result]
-    include Dry::Effects::Handler.Reader(:account)
-    include Dry::Effects::Reader(:account)
     include Deps["i18n", "inflector", "repos.account_repo"]
 
     before :set_locale
-
-    def handle(request, response)
-      with_account(request.env["rodauth"]&.account_id) do
-        super
-      end
-    end
 
     def callback_phase # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
       error = request.params["error_reason"] || request.params["error"]
