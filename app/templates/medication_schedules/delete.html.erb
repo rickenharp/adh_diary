@@ -1,6 +1,6 @@
 <h1 class="title"><%= t("delete_named", name: medication_schedule.long_name) %></h1>
 
-<%= form_for :medication_schedule, routes.path("destroy_medication_schedule", id: medication_schedule.id), method: :delete do |f| %>
+<%= form_for :medication_schedule, routes.path("medication_schedule", id: medication_schedule.id), method: :delete do |f| %>
   <%= f.submit "Confirm", name: "action", value: "confirm", class: "button is-danger" %>
   <%= f.submit "Cancel", name: "action", value: "cancel", class: "button is-link" %>
 <% end %>
