@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/rickenharp/adh_diary/compare/v1.3.0...v1.3.1) (2025-11-13)
+
+
+### Bug Fixes
+
+* update routes to use new resource routes ([af89266](https://github.com/rickenharp/adh_diary/commit/af89266605a2f21bac4e11c0ced1ca07440f8972))
+
 ## [1.3.0](https://github.com/rickenharp/adh_diary/compare/v1.2.0...v1.3.0) (2025-10-11)
 
 
