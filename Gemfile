@@ -2,14 +2,14 @@
 
 source "https://rubygems.org"
 
-gem "hanami", "~> 2.3.0.beta"
-gem "hanami-cli", github: "rickenharp/cli", branch: "make_postgres_db_exist_check_more_robust"
-gem "hanami-assets", "~> 2.3.0.beta"
-gem "hanami-controller", "~> 2.3.0.beta"
-gem "hanami-db", "~> 2.3.0.beta"
-gem "hanami-router", "~> 2.3.0.beta"
-gem "hanami-validations", "~> 2.3.0.beta"
-gem "hanami-view", "~> 2.3.0.beta"
+gem "hanami", "~> 2.3"
+gem "hanami-cli", "~> 2.3"
+gem "hanami-assets", "~> 2.3"
+gem "hanami-controller", "~> 2.3"
+gem "hanami-db", "~> 2.3"
+gem "hanami-router", "~> 2.3"
+gem "hanami-validations", "~> 2.3"
+gem "hanami-view", "~> 2.3"
 
 gem "dry-types", "~> 1.7"
 gem "dry-operation"
@@ -36,7 +36,7 @@ gem "faraday", "~> 2.13"
 gem "sentry-ruby", "~> 6.1"
 
 group :development do
-  gem "hanami-webconsole", "~> 2.3.0.beta"
+  gem "hanami-webconsole", "~> 2.3"
   gem "amazing_print"
   gem "yard"
   gem "maruku"
@@ -52,11 +52,11 @@ group :development, :test do
 end
 
 group :cli, :development do
-  gem "hanami-reloader", "~> 2.3.0.beta"
+  gem "hanami-reloader", "~> 2.3"
 end
 
 group :cli, :development, :test do
-  gem "hanami-rspec", "~> 2.3.0.beta"
+  gem "hanami-rspec", "~> 2.3"
 end
 
 group :test do
