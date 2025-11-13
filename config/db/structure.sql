@@ -2,10 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ai4VhD4JXejcODsJtD9CLXZSow14nSM7odG4ZL5zOWkWSRizQQK5l40rrEN4PXK
 
--- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
--- Dumped by pg_dump version 16.10 (Homebrew)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -508,7 +505,6 @@ ALTER TABLE ONLY public.medication_schedules
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ai4VhD4JXejcODsJtD9CLXZSow14nSM7odG4ZL5zOWkWSRizQQK5l40rrEN4PXK
 
 SET search_path TO "$user", public;
 
