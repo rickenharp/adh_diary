@@ -14,6 +14,8 @@ vulnerabilities:
   - id: CVE-2025-58189
   - id: CVE-2025-61723
   - id: CVE-2025-61725
+  - id: CVE-2025-61729
+  - id: CVE-2025-61727
 secrets:
   - id: private-key
     paths:
