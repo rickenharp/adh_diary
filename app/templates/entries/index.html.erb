@@ -30,8 +30,8 @@
     <td class="restlessness"><%= t("entry.strengths")[entry.restlessness] %></td>
     <td class="impulsivity"><%= t("entry.strengths")[entry.impulsivity] %></td>
     <td class="side-effects"><%= entry.side_effects %></td>
-    <td class="blood-pressure"><%= entry.blood_pressure %></td>
-    <td class="weight"><%= entry.weight %></td>
+    <td class="blood-pressure"><%= entry.formatted_blood_pressure %></td>
+    <td class="weight"><%= entry.formatted_weight %></td>
     <td class="actions">
       <%= link_to t("edit"), routes.path(:edit_entry, id: entry.id), class: "button is-link" %>
       <%= link_to t("destroy"), "#", class: "button is-danger" %>

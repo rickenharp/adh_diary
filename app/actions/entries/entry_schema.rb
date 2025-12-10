@@ -15,7 +15,7 @@ module AdhDiary
           required(:restlessness).filled(:integer)
           required(:impulsivity).filled(:integer)
           optional(:side_effects)
-          required(:blood_pressure).filled(:string)
+          optional(:blood_pressure).maybe(:string)
           optional(:weight).maybe(:float)
         end
       end

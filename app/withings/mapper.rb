@@ -35,7 +35,11 @@ module AdhDiary
             find_and_extract(data, :systolic),
             find_and_extract(data, :diastolic)
           ].join("/")
-          data << {blood_pressure: blood_pressure}
+          data << if blood_pressure == "0/0"
+            {blood_pressure: nil}
+          else
+            {blood_pressure: blood_pressure}
+          end
         end
       end
 
