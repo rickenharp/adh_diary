@@ -16,7 +16,7 @@ module AdhDiary
           required(:impulsivity).filled(:integer)
           optional(:side_effects)
           required(:blood_pressure).filled(:string)
-          required(:weight).filled(:float)
+          optional(:weight).maybe(:float)
         end
       end
     end

@@ -149,7 +149,7 @@ CREATE TABLE public.entries (
     impulsivity integer NOT NULL,
     side_effects text,
     blood_pressure text,
-    weight double precision NOT NULL,
+    weight double precision,
     account_id integer,
     medication_schedule_id integer NOT NULL
 );
@@ -279,7 +279,7 @@ CREATE VIEW public.weekly_reports AS
     (round(avg(entries.impulsivity)))::integer AS impulsivity,
     string_agg(NULLIF(entries.side_effects, ''::text), ','::text) AS side_effects,
     array_agg(entries.blood_pressure ORDER BY entries.date) AS blood_pressure,
-    (array_agg(entries.weight ORDER BY entries.date))[1] AS weight,
+    (array_remove(array_agg(entries.weight ORDER BY entries.date DESC), NULL::double precision))[1] AS weight,
     array_agg(DISTINCT concat(medications.name, ' ', medication_schedules.morning, 'mg')) AS medication
    FROM ((public.entries
      LEFT JOIN public.medication_schedules ON ((medication_schedules.id = entries.medication_schedule_id)))
@@ -524,4 +524,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250715143059_add_identities.rb'),
 ('20251002071820_rename_users_to_accounts.rb'),
 ('20251006091653_remove_password_salt.rb'),
-('20251007154225_create_rodauth_tables.rb');
+('20251007154225_create_rodauth_tables.rb'),
+('20251210105034_make_weight_nullable.rb');
