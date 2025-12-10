@@ -1,4 +1,4 @@
 web: bundle exec hanami server
 assets: bundle exec hanami assets watch
-yard: yard server -G Gemfile
+yard: bundle exec yard server -G Gemfile
 dbs: docker compose -f dev/docker-compose.yml up
