@@ -101,6 +101,36 @@ RSpec.feature "Entries", db: true do
     expect(page).to have_selector "td.weight", text: "-"
   end
 
+  scenario "creating a valid entry without blood pressure" do
+    visit "/entries/new"
+
+    fill_in "entry[date]", with: "2025-06-08"
+    select "Lisdexamfetamin 30-0-0-0", from: "entry[medication_schedule_id]"
+    choose "entry[attention]", option: "0"
+    choose "entry[organisation]", option: "1"
+    choose "entry[mood_swings]", option: "2"
+    choose "entry[stress_sensitivity]", option: "3"
+    choose "entry[irritability]", option: "4"
+    choose "entry[restlessness]", option: "5"
+    choose "entry[impulsivity]", option: "4"
+    fill_in("Side Effects", with: "Omniscience")
+    fill_in("Blood Pressure", with: nil)
+    fill_in("Weight", with: "126.7")
+
+    click_on("Create")
+    expect(page).to have_content "Entry successfully created"
+    expect(page).to have_content "2025-06-08"
+    expect(page).to have_selector "td.attention", text: "none"
+    expect(page).to have_selector "td.organisation", text: "mild"
+    expect(page).to have_selector "td.mood-swings", text: "moderate"
+    expect(page).to have_selector "td.stress-sensitivity", text: "medium"
+    expect(page).to have_selector "td.irritability", text: "stronger"
+    expect(page).to have_selector "td.restlessness", text: "sever"
+    expect(page).to have_selector "td.impulsivity", text: "stronger"
+    expect(page).to have_selector "td.blood-pressure", text: "-"
+    expect(page).to have_selector "td.weight", text: "126.7"
+  end
+
   scenario "creating an entry with existing date" do
     Factory.create(:entry, date: "2025-06-09", account: account)
     visit "/entries/new"

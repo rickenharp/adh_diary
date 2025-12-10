@@ -15,7 +15,7 @@ module AdhDiary
             measurements
           in Failure(failure)
             logger.info("Got #{failure} while trying access Withings API")
-            {weight: nil, blood_pressure: ""}
+            {weight: nil, blood_pressure: nil}
           end
           OpenStruct.new(
             medication_schedule_id: entry_repo.last_entry&.medication_schedule_id,
