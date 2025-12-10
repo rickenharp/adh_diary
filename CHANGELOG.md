@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.2](https://github.com/rickenharp/adh_diary/compare/v1.3.1...v1.3.2) (2025-12-10)
+
+
+### Bug Fixes
+
+* allow blood pressure with null values ([f58aa8c](https://github.com/rickenharp/adh_diary/commit/f58aa8ce12b4b60b0eeaf0db0010bf234d4e4892))
+* allow weights with null values ([ee3f21f](https://github.com/rickenharp/adh_diary/commit/ee3f21fb38a063048703e3164649587db6450364))
+
 ## [1.3.1](https://github.com/rickenharp/adh_diary/compare/v1.3.0...v1.3.1) (2025-11-13)
 
 
