@@ -73,5 +73,5 @@ group :test do
   gem "webmock", "~> 3.26.1"
 end
 
-gem "openssl", "~> 3.3", ">= 3.3.1"
+gem "openssl", "~> 4.0", ">= 3.3.1"
 gem "uri", "~> 1.0", ">= 1.0.4"
