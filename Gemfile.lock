@@ -408,9 +408,9 @@ GEM
     reline (0.6.3)
       io-console (~> 0.5)
     rexml (3.4.4)
-    roda (3.97.0)
+    roda (3.99.0)
       rack
-    rodauth (2.41.0)
+    rodauth (2.42.0)
       roda (>= 2.6.0)
       sequel (>= 4)
     rom (5.4.2)
@@ -477,7 +477,7 @@ GEM
     sentry-ruby (6.2.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sequel (5.97.0)
+    sequel (5.99.0)
       bigdecimal
     shellany (0.0.1)
     snaky_hash (2.0.3)
