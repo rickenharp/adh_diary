@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/jeremyevans/tilt
-  revision: e271cab3851ea8ece85d0072511bea2312792aa7
-  branch: master
-  specs:
-    tilt (2.6.1)
-
-GIT
   remote: https://github.com/rickenharp/rom-factory
   revision: fc0cd1901d5340a2b7afa123d79f9d22ce30a631
   branch: transient_attributes
@@ -500,6 +493,7 @@ GEM
     stringio (3.2.0)
     temple (0.10.4)
     thor (1.4.0)
+    tilt (2.7.0)
     timeout (0.4.3)
     transproc (1.1.1)
     tsort (0.2.0)
@@ -582,7 +576,7 @@ DEPENDENCIES
   rubyzip (~> 3.0)
   sentry-ruby (~> 6.1)
   standard
-  tilt!
+  tilt (~> 2.7)
   uri (~> 1.0, >= 1.0.4)
   webmock (~> 3.26.1)
   yard

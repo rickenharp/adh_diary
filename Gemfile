@@ -25,7 +25,7 @@ gem "omniauth-oauth2"
 gem "rodauth"
 gem "mail"
 
-gem "tilt", git: "https://github.com/jeremyevans/tilt", branch: "master"
+gem "tilt", "~> 2.7"
 gem "rubyzip", "~> 3.0"
 gem "dry-effects", "~> 0.5.0"
 gem "i18n", "~> 1.14"
