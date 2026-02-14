@@ -3,3 +3,4 @@ scan:
   skip-dirs:
     - /usr/local/lib/ruby/gems/
     - /usr/lib/ruby/gems/
+    - /hanami/node_modules/@esbuild/
