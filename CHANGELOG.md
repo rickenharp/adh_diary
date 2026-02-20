@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/rickenharp/adh_diary/compare/v1.3.2...v1.3.3) (2026-02-20)
+
+
+### Bug Fixes
+
+* make standard happy again ([a41274f](https://github.com/rickenharp/adh_diary/commit/a41274feb965e36bbdc0cd84e46ab70ac3058611))
+
 ## [1.3.2](https://github.com/rickenharp/adh_diary/compare/v1.3.1...v1.3.2) (2025-12-10)
 
 
