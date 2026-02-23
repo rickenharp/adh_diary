@@ -342,7 +342,7 @@ GEM
     omniauth-oauth2-generic (0.2.8)
       omniauth-oauth2 (~> 1.0)
       rake
-    openssl (4.0.0)
+    openssl (4.0.1)
     ostruct (0.6.3)
     parallel (1.27.0)
     parser (3.3.10.2)
