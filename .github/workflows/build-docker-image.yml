@@ -51,7 +51,7 @@ jobs:
 
       # Build locally first (don't push yet)
       - name: Build image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           load: true # Load into local Docker
@@ -85,7 +85,7 @@ jobs:
 
       - name: Push image
         if: success()
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
