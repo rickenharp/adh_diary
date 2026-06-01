@@ -26,21 +26,32 @@ jobs:
     env:
       HANAMI_ENV: test
       TZ: Europe/Berlin
-      DATABASE_URL: postgres://postgres:postgres@localhost/adh_diary_test
-      SESSION_SECRET: 38de7f646b9d87f313d0dea5b49ff39d0a3e8043675c3ac96577c21248129ee793dd0ce147dcdc4a01de4ccf5d3f2bf3cfb33e30dd476009e8f6857b3110d0d0
+      FNOX_PROFILE: ci
+      FNOX_AGE_KEY: ${{ secrets.FNOX_AGE_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+      - uses: jdx/mise-action@v4 # Installs fnox via mise
+      # Decrypt dev secrets for testing
+      - name: Setup fnox
+        env:
+          FNOX_AGE_KEY: ${{ secrets.FNOX_AGE_KEY }}
+        run: |
+          # Use the CI age key to decrypt secrets
+          echo "FNOX_AGE_KEY is already set from secrets"
+          fnox ls
+#      - name: Set up Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          bundler-cache: true
       - name: Prepare env
         run: cp .env-example .env
+      - name: Install gems
+        run: bundle install
       - name: Prepare database
-        run: bundle exec hanami db prepare -e test
+        run: fnox exec -P ci -- bundle exec hanami db prepare -e test
       - name: npm install
         run: npm install
       - name: Run all tests
-        run: bundle exec rake ci
+        run: fnox exec -P ci -- bundle exec rake ci
