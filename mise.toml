@@ -2,8 +2,16 @@
 _.file = [".env", ".env.local"]
 _.path = ["/opt/homebrew/opt/postgresql@16/bin"]
 
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node"]
+
 [tools]
+fnox = "latest"
 node = "22"
+
+[tasks.test]
+description = "Run automated tests"
+run = "fnox exec -P test -- bundle exec rake spec"
 
 [tasks.docker_build]
 alias = "db"
