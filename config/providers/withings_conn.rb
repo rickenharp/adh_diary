@@ -8,7 +8,7 @@ Hanami.app.register_provider(:withings_conn) do
       url: "https://wbsapi.withings.net/",
       params: {
         action: "getmeas",
-        meastypes: AdhDiary::Withings::MEASUREMENT_TYPES.values.map(&:to_s).join(","),
+        meastypes: AdhDiary::Withings::MEASUREMENT_TYPES.values.join(","),
         category: 1
       }
     )
