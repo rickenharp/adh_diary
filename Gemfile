@@ -35,6 +35,8 @@ gem "prawn-table", "~> 0.2.2"
 gem "faraday", "~> 2.13"
 gem "sentry-ruby", "~> 6.1"
 
+gem "gruff"
+
 group :development do
   gem "hanami-webconsole", "~> 2.3"
   gem "amazing_print"

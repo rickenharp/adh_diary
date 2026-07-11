@@ -157,6 +157,10 @@ GEM
     ffi (1.17.2-x86_64-linux-musl)
     formatador (1.2.1)
       reline
+    gruff (0.32.0)
+      bigdecimal (>= 3.0)
+      histogram
+      rmagick (>= 5.5)
     guard (2.19.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -243,6 +247,7 @@ GEM
     hashdiff (1.2.1)
     hashie (5.1.0)
       logger
+    histogram (0.2.4.1)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     i18n-missing_translations (0.0.1)
@@ -331,6 +336,7 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0, >= 2.0.3)
       version_gem (~> 1.1, >= 1.1.9)
+    observer (0.1.2)
     omniauth (2.1.4)
       hashie (>= 3.4.6)
       logger
@@ -356,6 +362,7 @@ GEM
     pg (1.6.3-x86_64-darwin)
     pg (1.6.3-x86_64-linux)
     pg (1.6.3-x86_64-linux-musl)
+    pkg-config (1.6.5)
     pp (0.6.3)
       prettyprint
     prawn (2.5.0)
@@ -404,6 +411,9 @@ GEM
     reline (0.6.3)
       io-console (~> 0.5)
     rexml (3.4.4)
+    rmagick (7.0.5)
+      observer (~> 0.1)
+      pkg-config (~> 1.4)
     roda (3.105.0)
       rack
     rodauth (2.44.0)
@@ -543,6 +553,7 @@ DEPENDENCIES
   dry-operation
   dry-types (~> 1.7)
   faraday (~> 2.13)
+  gruff
   hanami (~> 2.3)
   hanami-assets (~> 2.3)
   hanami-cli (~> 2.3)

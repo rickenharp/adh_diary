@@ -26,6 +26,17 @@ module AdhDiary
       end
     end
 
+    module FooBar
+      def local_variables
+        Kernel.local_variables
+      end
+
+      def instance_variables
+        Kernel.instance_variables
+      end
+    end
+
+    ROM::SQL::ProjectionDSL.class_eval { include FooBar }
     if settings.oauth_debug
       Hanami.app.config.logger.level = :debug
     end
@@ -36,7 +47,6 @@ module AdhDiary
       OmniAuth.config.full_host = settings.base_url
       Hanami.app.config.base_url = settings.base_url
     end
-
     Dry::Validation.load_extensions(:monads)
     config.actions.sessions = :cookie, {
       key: "adh_diary.session",

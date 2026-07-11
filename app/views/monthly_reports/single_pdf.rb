@@ -5,9 +5,9 @@ require "prawn/table"
 
 module AdhDiary
   module Views
-    module Reports
-      class Pdf < AdhDiary::View
-        include Deps["repos.weekly_report_repo"]
+    module MonthlyReports
+      class SinglePdf < AdhDiary::View
+        include Deps["repos.report_repo"]
 
         scope do
           def strengths_list(selected: nil)
@@ -21,8 +21,8 @@ module AdhDiary
           end
         end
 
-        expose :weekly_report do |week:|
-          weekly_report_repo.get(week)
+        expose :reports do
+          report_repo.monthly
         end
       end
     end

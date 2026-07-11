@@ -2,17 +2,17 @@
 
 module AdhDiary
   module Actions
-    module Reports
+    module MonthlyReports
       class Pdf < AdhDiary::Authenticated
         params do
-          required(:week).filled(:string)
+          required(:month).filled(:string)
         end
         def handle(request, response)
           halt 422, "Invalid parameters" unless request.params.valid?
           response.format = :pdf
           response.cache_control :no_store
-          response.set_header "Content-Disposition", "inline; filename=\"#{request.params[:week]}.pdf\""
-          response.render(view, format: :pdf, layout: false, week: request.params[:week])
+          response.set_header "Content-Disposition", "inline; filename=\"#{request.params[:month]}.pdf\""
+          response.render(view, format: :pdf, layout: false, month: request.params[:month])
         end
       end
     end

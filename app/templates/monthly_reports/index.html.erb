@@ -1,0 +1,35 @@
+<h1 class="title"><% t("reports") %></h1>
+
+<table class="table">
+  <thead>
+  <%= render 'table_header_footer' %>
+  </thead>
+  <tfoot>
+  <%= render 'table_header_footer' %>
+  </tfoot>
+  <tbody>
+  <%= form_for routes.path("monthly_reports_export"), method: "post" do |f|%>
+  <% months.each do |month|  %>
+    <tr>
+      <td>
+        <label class="checkbox">
+          <%= f.check_box("export.ids", name: "export[ids][]", value: month.month) %>
+          <%= link_to month.month, routes.path(:monthly_report, month: month.month) %>
+        </label>
+      </td>
+      <td><%=  month.from %></td>
+      <td><%=  month.to %></td>
+      <th>
+        <%= link_to "PDF", routes.path("monthly_report_pdf", month: month.month) , class: "button is-link" %>
+      </th>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="4">
+      <%= f.submit "Export", class: "button is-warning" %>
+      <%= link_to "Single PDF", routes.path("monthly_report_single_pdf") , class: "button is-link" %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

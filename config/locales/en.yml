@@ -42,6 +42,9 @@ en:
   edit_entry_for: "Edit entry for %{date}"
   update: "Update"
   entry:
+    month:
+      full: "Month"
+      short: "Month"
     week:
       full: "Week"
       short: "Week"

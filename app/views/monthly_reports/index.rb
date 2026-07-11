@@ -2,12 +2,12 @@
 
 module AdhDiary
   module Views
-    module Reports
+    module MonthlyReports
       class Index < AdhDiary::View
-        include Deps["repos.weekly_report_repo"]
+        include Deps["repos.report_repo"]
 
-        expose :weeks do
-          weekly_report_repo.all
+        expose :months do
+          report_repo.monthly
         end
       end
     end

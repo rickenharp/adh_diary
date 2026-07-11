@@ -262,33 +262,6 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: weekly_reports; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.weekly_reports AS
- SELECT entries.account_id,
-    to_char((entries.date)::timestamp with time zone, 'IYYY-"W"IW'::text) AS week,
-    (array_agg(entries.date ORDER BY entries.date))[1] AS "from",
-    (array_agg(entries.date ORDER BY entries.date DESC))[1] AS "to",
-    (round(avg(entries.attention)))::integer AS attention,
-    (round(avg(entries.organisation)))::integer AS organisation,
-    (round(avg(entries.mood_swings)))::integer AS mood_swings,
-    (round(avg(entries.stress_sensitivity)))::integer AS stress_sensitivity,
-    (round(avg(entries.irritability)))::integer AS irritability,
-    (round(avg(entries.restlessness)))::integer AS restlessness,
-    (round(avg(entries.impulsivity)))::integer AS impulsivity,
-    string_agg(NULLIF(entries.side_effects, ''::text), ','::text) AS side_effects,
-    array_agg(entries.blood_pressure ORDER BY entries.date) AS blood_pressure,
-    (array_remove(array_agg(entries.weight ORDER BY entries.date DESC), NULL::double precision))[1] AS weight,
-    array_agg(DISTINCT concat(medications.name, ' ', medication_schedules.morning, 'mg')) AS medication
-   FROM ((public.entries
-     LEFT JOIN public.medication_schedules ON ((medication_schedules.id = entries.medication_schedule_id)))
-     LEFT JOIN public.medications ON ((medications.id = medication_schedules.medication_id)))
-  GROUP BY (to_char((entries.date)::timestamp with time zone, 'IYYY-"W"IW'::text)), entries.account_id
-  ORDER BY (to_char((entries.date)::timestamp with time zone, 'IYYY-"W"IW'::text));
-
-
---
 -- Name: account_login_change_keys account_login_change_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -525,4 +498,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20251002071820_rename_users_to_accounts.rb'),
 ('20251006091653_remove_password_salt.rb'),
 ('20251007154225_create_rodauth_tables.rb'),
-('20251210105034_make_weight_nullable.rb');
+('20251210105034_make_weight_nullable.rb'),
+('20260528102113_remove_report_view.rb');

@@ -15,25 +15,25 @@ RSpec.feature "Weekly Reports", db: true do
       generate_entries
     end
 
-    scenario "visiting the reports page shows an entry" do
-      visit "/reports"
+    scenario "visiting the weekly weekly_reports page shows an entry" do
+      visit "/reports/weekly"
 
       expect(page).to have_content "2025-W23"
       expect(page).to have_content "2025-W24"
     end
 
     scenario "visiting the report detail page shows an entry" do
-      visit "/reports/2025-W23"
+      visit "/reports/weekly/2025-W23"
 
       expect(page).to have_content "from 2025-06-02 to 2025-06-08"
       expect(page).to have_content "Blood Pressure"
       expect(page).to have_content "Weight"
-      expect(page).to_not have_link "2025-W22", href: "/reports/2025-W22"
-      expect(page).to have_link "2025-W24", href: "/reports/2025-W24"
+      expect(page).to_not have_link "2025-W22", href: "/reports/weekly/2025-W22"
+      expect(page).to have_link "2025-W24", href: "/reports/weekly/2025-W24"
     end
 
     scenario "PDF generation" do
-      visit "/reports"
+      visit "/reports/weekly"
       within all("table.table tbody tr")[0] do
         click_on "PDF"
       end
@@ -49,7 +49,7 @@ RSpec.feature "Weekly Reports", db: true do
         generate_entries(from: "2025-05-01", to: "2025-05-18")
         login_as(account.email, password)
 
-        visit "/reports"
+        visit "/reports/weekly"
 
         check("2025-W18")
         check("2025-W20")
@@ -71,10 +71,10 @@ RSpec.feature "Weekly Reports", db: true do
       generate_entries(from: "2025-05-01", to: "2025-05-18")
       login_as(account.email, password)
 
-      visit "/reports"
+      visit "/reports/weekly"
 
       click_on("Export")
-      expect(page).to have_content "Please select reports to export"
+      expect(page).to have_content "Please select weekly_reports to export"
     end
   end
 end
