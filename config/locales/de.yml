@@ -42,6 +42,9 @@ de:
   edit_entry_for: "Eintrag für %{date} editieren"
   update: "Aktualisieren"
   entry:
+    month:
+      full: "Monat"
+      short: "Monat"
     week:
       full: "Woche"
       short: "Woche"

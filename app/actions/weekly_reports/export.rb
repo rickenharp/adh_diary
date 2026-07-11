@@ -4,9 +4,9 @@ require "zip"
 
 module AdhDiary
   module Actions
-    module Reports
+    module WeeklyReports
       class Export < AdhDiary::Action
-        include Deps["views.reports.index", "views.reports.pdf", "now"]
+        include Deps["views.weekly_reports.index", "views.weekly_reports.pdf", "now"]
 
         params do
           required(:export).hash do
@@ -27,7 +27,7 @@ module AdhDiary
             end
             response.body = zip_file.string
           else
-            response.flash.now[:alert] = "Please select reports to export"
+            response.flash.now[:alert] = "Please select weekly_reports to export"
             response.render(index)
           end
         end

@@ -1,19 +1,19 @@
 <h1 class="title"><%= t('report') %></h1>
 
-<% if 0 < previous_week.count %>
-  <%= link_to previous_week.week, routes.path(:report, week: previous_week.week) %>
+<% if previous_month.exist? %>
+  <%= link_to previous_month.month, routes.path(:monthly_report, month: previous_month.month) %>
 <% else %>
-  <%= previous_week.week %>
+  <%= previous_month.month %>
 <% end %>
   ||
-<% if 0 < next_week.count %>
-  <%= link_to next_week.week, routes.path(:report, week: next_week.week) %>
+<% if next_month.exist? %>
+  <%= link_to next_month.month, routes.path(:monthly_report, month: next_month.month) %>
 <% else %>
-  <%= next_week.week %>
+  <%= next_month.month %>
 <% end %>
 <table class="table">
   <tr>
-    <td><%= t('entry.week.full') %></td>
+    <td><%= t('entry.month.full') %></td>
     <td>from <%= report.from %> to <%= report.to %></td>
   </tr>
   <tr>

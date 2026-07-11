@@ -1,0 +1,71 @@
+<h1 class="title"><%= t('report') %></h1>
+
+<% if previous_week.exist? %>
+  <%= link_to previous_week.week, routes.path(:weekly_report, week: previous_week.week) %>
+<% else %>
+  <%= previous_week.week %>
+<% end %>
+  ||
+<% if next_week.exist? %>
+  <%= link_to next_week.week, routes.path(:weekly_report, week: next_week.week) %>
+<% else %>
+  <%= next_week.week %>
+<% end %>
+<table class="table">
+  <tr>
+    <td><%= t('entry.week.full') %></td>
+    <td>from <%= report.from %> to <%= report.to %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.medication.full') %></td>
+    <td><%= report.medication %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.attention_span.full') %></td>
+    <td><%= t("entry.strengths")[report.attention] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.organisation.full') %></td>
+    <td><%= t("entry.strengths")[report.organisation] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.mood_swings.full') %></td>
+    <td><%= t("entry.strengths")[report.mood_swings] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.stress_sensitivity.full') %></td>
+    <td><%= t("entry.strengths")[report.stress_sensitivity] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.irritability.full') %></td>
+    <td><%= t("entry.strengths")[report.irritability] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.restlessness.full') %></td>
+    <td><%= t("entry.strengths")[report.restlessness] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.impulsivity.full') %></td>
+    <td><%= t("entry.strengths")[report.impulsivity] %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.side_effects.full') %></td>
+    <td><%= report.side_effects %></td>
+  </tr>
+  <tr>
+    <td><%= t('entry.blood_pressure.full') %></td>
+    <td>
+      <ul>
+        <% report.blood_pressure.each do |datum| %>
+          <li><%= datum %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><%= t('entry.weight.full') %></td>
+    <td><%= report.weight %></td>
+  </tr>
+</table>
+
+

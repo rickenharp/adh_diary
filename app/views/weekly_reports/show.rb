@@ -4,21 +4,12 @@ require "ostruct"
 
 module AdhDiary
   module Views
-    module Reports
+    module WeeklyReports
       class Show < AdhDiary::View
-        include Deps["repos.weekly_report_repo"]
+        include Deps["repos.report_repo"]
 
-        expose :report do |week:|
-          weekly_report_repo.get(week)
-        end
-
-        def entry_count_for_week(week, distance)
-          count = weekly_report_repo.for_week(week).count
-          if count.zero?
-            nil
-          else
-            other_date.strftime("%Y-W%W")
-          end
+        expose :report, as: Parts::WeeklyReport do |week:|
+          report_repo.get_week(week)
         end
 
         def calculate_week(week, distance)
@@ -29,7 +20,7 @@ module AdhDiary
         expose :previous_week do |week:|
           previous_week = calculate_week(week, -7)
           OpenStruct.new(
-            count: weekly_report_repo.for_week(previous_week).count,
+            exist?: report_repo.for_week(previous_week).count > 0,
             week: previous_week
           )
         end
@@ -37,7 +28,7 @@ module AdhDiary
         expose :next_week do |week:|
           next_week = calculate_week(week, 7)
           OpenStruct.new(
-            count: weekly_report_repo.for_week(next_week).count,
+            exist?: report_repo.for_week(next_week).count > 0,
             week: next_week
           )
         end

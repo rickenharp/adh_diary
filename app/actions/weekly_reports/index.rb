@@ -2,7 +2,7 @@
 
 module AdhDiary
   module Actions
-    module Reports
+    module WeeklyReports
       class Index < AdhDiary::Authenticated
         def handle(request, response)
         end

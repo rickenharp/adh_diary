@@ -41,9 +41,20 @@
           <a class="navbar-item" href="<%= routes.path(:medication_schedules) %>">
             <%= t("medication_schedules") %>
           </a>
-          <a class="navbar-item" href="<%= routes.path(:reports) %>">
-            <%= t("reports") %>
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <%= t("reports") %>
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="<%= routes.path(:weekly_reports) %>">
+                Weekly
+              </a>
+              <a class="navbar-item" href="<%= routes.path(:monthly_reports) %>">
+                Monthly
+              </a>
+            </div>
+          </div>
         </div>
         <div class="navbar-item ">
           <%= render 'locale_switcher' %>
@@ -84,7 +95,6 @@
     <% end %>
     <%= yield %>
   </div>
-
     <%= javascript_tag "app" %>
   </body>
 </html>
