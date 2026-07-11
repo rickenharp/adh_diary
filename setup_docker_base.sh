@@ -8,5 +8,5 @@ apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 nodejs pgloader postgresql-common && \
     /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y -v 16 && \
     apt-get update -qq && \
-    apt-get --no-install-recommends -y install libpq-dev postgresql-client-16 && \
+    apt-get --no-install-recommends -y install libpq-dev postgresql-client-16 imagemagick libmagickcore-dev libmagickwand-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives

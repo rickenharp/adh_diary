@@ -53,5 +53,7 @@ jobs:
         run: fnox exec -P ci -- bundle exec hanami db prepare -e test
       - name: npm install
         run: npm install
+      - name: install rmagick
+        run: apt-get update && apt-get install imagemagick libmagickcore-dev libmagickwand-dev
       - name: Run all tests
         run: fnox exec -P ci -- bundle exec rake ci
