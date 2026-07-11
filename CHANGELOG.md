@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/rickenharp/adh_diary/compare/v1.3.3...v1.4.0) (2026-07-11)
+
+
+### Features
+
+* add monthly report ([141d4a4](https://github.com/rickenharp/adh_diary/commit/141d4a459db56be741747e531be53ffc17ed579e))
+
+
+### Bug Fixes
+
+* add libmagick to docker and ci ([d94e9ae](https://github.com/rickenharp/adh_diary/commit/d94e9aed213b9fa4b3ff8c5b2a6d3981bd6dbfdb))
+* refactor Dockerfile ([f24a0a0](https://github.com/rickenharp/adh_diary/commit/f24a0a0f2d67720f9303105bc7d0dd38ec5338b9))
+
 ## [1.3.3](https://github.com/rickenharp/adh_diary/compare/v1.3.2...v1.3.3) (2026-04-02)
 
 
