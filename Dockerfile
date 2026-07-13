@@ -44,11 +44,12 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
+COPY package.json package-lock.json ./
+RUN npm install
 
 # Copy application code
 COPY . .
 
-RUN npm install
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN env WITHINGS_CLIENT_SECRET=1 WITHINGS_CLIENT_ID=1 SESSION_SECRET=1 bundle exec hanami assets compile
 
