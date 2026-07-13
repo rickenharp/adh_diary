@@ -2,7 +2,7 @@
   <div class="field has-addons is-horizontal">
     <div class="control">
       <div class="select is-small">
-        <%= f.select(:language, languages_for_select, options: {selected: current_language}) %>
+        <%= f.select(:language, i18n.available_locales.each_with_object({}) { |lang, hash| hash[i18n.t(lang)] = lang }, options: {selected: i18n.locale}) %>
       </div>
     </div>
     <div class="control">
