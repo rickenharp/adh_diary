@@ -52,9 +52,6 @@ end
 #
 
 if puma_cluster_mode
-  # Preload the application before starting the workers. Only in cluster mode.
-  preload_app!
-
   # Code to run immediately before master process forks workers (once on boot).
   #
   # These hooks can block if necessary to wait for background operations unknown

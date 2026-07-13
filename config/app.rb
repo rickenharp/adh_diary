@@ -42,6 +42,7 @@ module AdhDiary
     end
 
     config.render_errors = false
+    config.views.decorate_exposures = true
 
     if settings.base_url
       OmniAuth.config.full_host = settings.base_url

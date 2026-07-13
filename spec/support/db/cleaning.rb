@@ -28,7 +28,7 @@ RSpec.configure do |config|
     end
   end
 
-  config.before :each, :db do |example|
+  config.prepend_before :each, :db do |example|
     # strategy = example.metadata[:js] ? :deletion : :transaction
     all_databases.call.each do |db|
       DatabaseCleaner[:sequel, db: db].strategy = :truncation, {except: skip_cleaning_tables}
