@@ -15,7 +15,9 @@ RSpec.describe AdhDiary::Action do
   end
 
   it "sets the locale" do
-    subject.call(params)
-    expect(i18n).to have_received(:locale=).with(:en)
+    Hanami.app.container.stub("i18n", i18n) do
+      subject.call(params)
+      expect(i18n).to have_received(:locale=).with(:en)
+    end
   end
 end

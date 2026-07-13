@@ -2,16 +2,16 @@
 
 source "https://rubygems.org"
 
-gem "hanami", "~> 2.3"
-gem "hanami-cli", "~> 2.3"
-gem "hanami-assets", "~> 2.3"
-gem "hanami-controller", "~> 2.3"
-gem "hanami-db", "~> 2.3"
-gem "hanami-router", "~> 2.3"
-gem "hanami-validations", "~> 2.3"
-gem "hanami-view", "~> 2.3"
+gem "hanami", "~> 3.0"
+gem "hanami-cli", "~> 3.0"
+gem "hanami-assets", "~> 3.0"
+gem "hanami-action", "~> 3.0"
+gem "hanami-db", "~> 3.0"
+gem "hanami-router", "~> 3.0"
+gem "hanami-view", "~> 3.0"
 
 gem "dry-types", "~> 1.7"
+gem "dry-validation"
 gem "dry-operation"
 gem "puma"
 gem "rake"
@@ -38,7 +38,7 @@ gem "sentry-ruby", "~> 6.1"
 gem "gruff"
 
 group :development do
-  gem "hanami-webconsole", "~> 2.3"
+  gem "hanami-webconsole", "~> 3.0"
   gem "amazing_print"
   gem "yard"
   gem "maruku"
@@ -50,15 +50,15 @@ group :development, :test do
   gem "irb"
   gem "pry"
   gem "launchy"
-  gem "i18n-missing_translations"
+  gem "rouge"
 end
 
 group :cli, :development do
-  gem "hanami-reloader", "~> 2.3"
+  gem "hanami-reloader", "~> 3.0"
 end
 
 group :cli, :development, :test do
-  gem "hanami-rspec", "~> 2.3"
+  gem "hanami-rspec", "~> 3.0"
 end
 
 group :test do

@@ -4,7 +4,8 @@
   "type": "module",
   "dependencies": {
     "bulma": "^1.0.4",
-    "hanami-assets": "^2.3.3",
+    "esbuild": "^0.28.1",
+    "hanami-assets": "^3.0.0",
     "unpoly": "^3.14.3"
   },
   "devDependencies": {
@@ -12,6 +13,6 @@
     "@commitlint/config-conventional": "^19.8.1"
   },
   "allowScripts": {
-    "esbuild@0.25.12": true
+    "esbuild@0.28.1": true
   }
 }
