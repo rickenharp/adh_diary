@@ -3,8 +3,24 @@ name: ci
 on:
   push:
     branches:
-      - main
+      - "main"
+      - "staging"
+      - "production"
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   pull_request:
+    branches:
+      - "main"
+      - "staging"
+      - "production"
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
