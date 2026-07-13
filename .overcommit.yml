@@ -28,14 +28,8 @@ PreCommit:
 
 CommitMsg:
   CapitalizedSubject:
-    enabled: false
-    description: 'Check subject capitalization'
-  CommonCommit:
     enabled: true
-    quiet: false
-    description: 'Checks if the commit message follows the common commit specifications'
-    required_executable: 'npx'
-    command: ['npx', '--no', '--', 'commitlint', '--edit']
+    description: 'Check subject capitalization'
 
 PrePush:
   CustomScript:
