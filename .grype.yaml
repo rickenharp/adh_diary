@@ -1,5 +1,7 @@
 only-fixed: true
 fail-on-severity: critical
+exclude:
+  - "/usr/lib/node_modules/**"
 ignore:
   - package:
       name: stdlib
