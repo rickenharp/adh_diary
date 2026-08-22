@@ -234,7 +234,7 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
       dry-transformer (~> 1.0, < 2)
-    hanami-view (3.0.0)
+    hanami-view (3.0.2)
       dry-configurable (~> 1.4)
       dry-core (~> 1.0)
       dry-inflector (~> 1.0, < 2)
@@ -501,9 +501,9 @@ GEM
       rubocop-performance (~> 1.26.0)
     stringio (3.2.0)
     strscan (3.1.8)
-    temple (0.10.4)
+    temple (0.10.7)
     thor (1.4.0)
-    tilt (2.8.0)
+    tilt (2.9.0)
     timeout (0.6.1)
     transproc (1.1.1)
     tsort (0.2.0)
@@ -526,7 +526,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.45)
-    zeitwerk (2.8.2)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   aarch64-linux-gnu
