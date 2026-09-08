@@ -33,7 +33,7 @@ gem "rack-unpoly", "~> 0.5.0"
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "faraday", "~> 2.13"
-gem "sentry-ruby", "~> 6.1"
+gem "sentry-ruby", "~> 7.0"
 
 gem "gruff"
 
