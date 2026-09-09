@@ -3,7 +3,7 @@
 module AdhDiary
   module Repos
     class ReportRepo < AdhDiary::DB::Repo[:entries]
-      include Deps["current_account", "relations.accounts", "relations.medications"]
+      include Deps["current_account", "relations.accounts", "relations.medications", "relations.weights"]
 
       # def data_for_bpm_diagram(date_format:, range:)
       #   entries.select {
@@ -20,6 +20,8 @@ module AdhDiary
       def report(type, date_format)
         meds = medications[:name]
         account_name = accounts[:name]
+        weight_weight = weights[:weight]
+        weights[:date]
         entries.select {
           [
             account_name,
@@ -34,14 +36,14 @@ module AdhDiary
             integer.cast(integer.round(float.avg(restlessness), 0)).as(:restlessness),
             integer.cast(integer.round(float.avg(impulsivity), 0)).as(:impulsivity),
             string.string_agg(string.nullif(side_effects, ""), ",").as(:side_effects),
-            array.array_agg(blood_pressure).order(:date).as(:blood_pressure),
+            array.array_agg(blood_pressure).order(date).as(:blood_pressure),
             array.array_agg(date).order(date).as(:dates),
-            array.array_agg(weight).order(date).as(:weights),
-            array.array_remove(array.array_agg(weight).order(date.desc), nil).sql_subscript(1).as(:weight),
+            array.array_agg(weight_weight).order(date).as(:weights),
+            array.array_remove(array.array_agg(weight_weight).order(date.desc), nil).sql_subscript(1).as(:weight),
             array.array_agg(string.concat(meds, " ", :morning, " mg")).distinct.as(:medication)
 
           ]
-        }.left_join(:medications).left_join(:accounts)
+        }.left_join(:weights, account_id: :account_id, date: :date).left_join(:medications).left_join(:accounts)
           .group { [type, entries[:account_id], accounts[:name]] }
           .order(type)
           .where(entries[:account_id].is(current_account.id))

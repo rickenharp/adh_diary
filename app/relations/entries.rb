@@ -10,7 +10,13 @@ module AdhDiary
           belongs_to :account
           belongs_to :medication_schedule
           has_one :medication, through: :medication_schedules
+          has_one :weight, view: :for_entries, override: true, combine_keys: {date: :date, account_id: :account_id}
         end
+      end
+
+      def for_weights(assoc, weights)
+        pairs = weights.map { |t| [t[:account_id], t[:date]] }.uniq
+        where([:account_id, :date] => pairs)
       end
 
       def report(name, date_format)

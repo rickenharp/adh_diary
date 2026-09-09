@@ -33,7 +33,10 @@ RSpec.shared_context "report data", shared_context: :db do
     additional_data_provider = additional_data_class.new(additional_data)
 
     (Date.parse(from)..Date.parse(to)).each do |date|
-      Factory.create(:entry, date: date, account: account, medication_schedule: medication_schedule, **additional_data_provider.next)
+      add_data = additional_data_provider.next
+      weight = add_data.delete(:weight)
+      Factory.create(:entry, date: date, account: account, medication_schedule: medication_schedule, **add_data)
+      Factory.create(:weight, date: date, account: account, weight: weight)
     end
   end
 end

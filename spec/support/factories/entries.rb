@@ -9,7 +9,6 @@ Factory.define(:entry) do |f|
   f.impulsivity { (0..5).to_a.sample }
   f.side_effects ""
   f.blood_pressure "126/74"
-  f.weight 126.7
   f.association(:account)
   f.association(:medication_schedule)
 end
