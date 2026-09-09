@@ -4,8 +4,12 @@ module AdhDiary
   module Views
     module Parts
       class Entry < AdhDiary::Views::Part
+        def weight
+          value&.weight&.weight
+        end
+
         def formatted_weight
-          value.weight.nil? ? "-" : value.weight
+          value.weight&.weight || "-"
         end
 
         def formatted_blood_pressure

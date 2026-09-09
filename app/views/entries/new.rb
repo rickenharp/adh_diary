@@ -20,7 +20,7 @@ module AdhDiary
           OpenStruct.new(
             medication_schedule_id: entry_repo.last_entry&.medication_schedule_id,
             date: Date.today,
-            weight: measurements[:weight],
+            weight: OpenStruct.new(weight: measurements[:weight], date: Date.today),
             blood_pressure: measurements[:blood_pressure]
           )
         end
