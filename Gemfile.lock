@@ -515,7 +515,7 @@ GEM
     unicode-emoji (4.2.0)
     uri (1.1.1)
     version_gem (1.1.14)
-    webmock (3.26.4)
+    webmock (3.34.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -589,7 +589,7 @@ DEPENDENCIES
   standard
   tilt (~> 2.7)
   uri (~> 1.0, >= 1.0.4)
-  webmock (~> 3.26.1)
+  webmock (~> 3.34.0)
   yard
 
 BUNDLED WITH

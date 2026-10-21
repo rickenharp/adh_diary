@@ -72,7 +72,7 @@ group :test do
   gem "cuprite", "~> 0.17"
 
   gem "mimemagic", "~> 0.4.3"
-  gem "webmock", "~> 3.26.1"
+  gem "webmock", "~> 3.34.0"
 end
 
 gem "openssl", "~> 4.0", ">= 3.3.1"
