@@ -413,9 +413,9 @@ GEM
     rmagick (7.0.5)
       observer (~> 0.1)
       pkg-config (~> 1.4)
-    roda (3.108.0)
+    roda (3.109.0)
       rack
-    rodauth (2.48.0)
+    rodauth (2.49.0)
       roda (>= 2.6.0)
       sequel (>= 4)
     rom (5.4.2)
