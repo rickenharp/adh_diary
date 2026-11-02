@@ -6,7 +6,7 @@
     "bulma": "^1.0.4",
     "esbuild": "^0.28.2",
     "hanami-assets": "^3.0.0",
-    "unpoly": "^3.14.3"
+    "unpoly": "^3.15.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
