@@ -64,7 +64,7 @@ end
 group :test do
   # Database
   gem "database_cleaner-sequel"
-  gem "rom-factory", git: "https://github.com/rickenharp/rom-factory", branch: "transient_attributes"
+  gem "rom-factory", "~> 0.14"
 
   # Web integration
   gem "capybara"
