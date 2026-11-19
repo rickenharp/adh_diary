@@ -44,6 +44,8 @@ jobs:
       TZ: Europe/Berlin
       FNOX_PROFILE: ci
       FNOX_AGE_KEY: ${{ secrets.FNOX_AGE_KEY }}
+      DOMAIN: test-adh-diary.rickenharp.cloud
+      HMAC_SECRET: ${{ secrets.HMAC_SECRET }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
