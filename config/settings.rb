@@ -16,5 +16,7 @@ module AdhDiary
     setting :smtp_user_name, default: nil, constructor: Types::String.optional
     setting :smtp_password, default: nil, constructor: Types::String.optional
     setting :deployment, default: Hanami.env.to_s, constructor: Types::String
+    setting :domain, constructor: Types::String
+    setting :hmac_secret, constructor: Types::String
   end
 end
