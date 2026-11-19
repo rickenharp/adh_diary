@@ -38,7 +38,7 @@ RSpec.feature "Weekly Reports", db: true do
         click_on "PDF"
       end
       expect(page.response_headers["Content-Type"]).to match(%r{application/pdf})
-      expect(page.response_headers["Content-Disposition"]).to eq("inline; filename=\"2025-W23.pdf\"")
+      expect(page.response_headers["Content-Disposition"]).to eq("inline; filename=\"2025-W24.pdf\"")
       expect(MimeMagic.by_magic(page.body)).to eq("application/pdf")
     end
   end
@@ -59,7 +59,7 @@ RSpec.feature "Weekly Reports", db: true do
         expect(page.response_headers["Content-Type"]).to match(%r{application/zip})
         expect(page.response_headers["Content-Disposition"]).to eq("attachment; filename=\"export-2025-07-14-12-00.zip\"")
         Zip::File.open_buffer(page.body) do |zip_file|
-          expect(zip_file.dir.entries(".")).to eq(["2025-W18.pdf", "2025-W20.pdf"])
+          expect(zip_file.dir.entries(".")).to eq(["2025-W20.pdf", "2025-W18.pdf"])
           zip_file.dir.foreach(".") do |pdf_file_name|
             expect(MimeMagic.by_magic(zip_file.file.read(pdf_file_name))).to eq("application/pdf")
           end
