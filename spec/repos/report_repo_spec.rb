@@ -68,7 +68,7 @@ RSpec.describe AdhDiary::Repos::ReportRepo, db: true do
       it "returns available months" do
         result = subject.monthly.to_a
 
-        expect(result.map(&:month)).to eq ["2025-01", "2025-02"]
+        expect(result.map(&:month)).to eq ["2025-02", "2025-01"]
       end
     end
 

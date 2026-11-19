@@ -45,7 +45,7 @@ module AdhDiary
           ]
         }.left_join(:weights, account_id: :account_id, date: :date).left_join(:medications).left_join(:accounts)
           .group { [type, entries[:account_id], accounts[:name]] }
-          .order(type)
+          .order(type.desc)
           .where(entries[:account_id].is(current_account.id))
       end
 

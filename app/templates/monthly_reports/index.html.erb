@@ -1,5 +1,6 @@
 <h1 class="title"><% t("reports") %></h1>
 
+<button class="button" onclick="document.querySelectorAll('.checkbox > input').forEach((element) => element.checked = !element.checked);">Toggle All</button>
 <table class="table">
   <thead>
   <%= render 'table_header_footer' %>
