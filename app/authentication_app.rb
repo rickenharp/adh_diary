@@ -24,6 +24,8 @@ module AdhDiary
 
       enable :hanami
       hanami_view_class -> { AdhDiary::View }
+      domain Hanami.app["settings"].domain
+      hmac_secret Hanami.app["settings"].hmac_secret
 
       # Email configuration
       email_from "mail@rickenharp.cloud"
