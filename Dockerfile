@@ -51,7 +51,7 @@ RUN npm install
 COPY . .
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN env WITHINGS_CLIENT_SECRET=1 WITHINGS_CLIENT_ID=1 SESSION_SECRET=1 bundle exec hanami assets compile
+RUN env WITHINGS_CLIENT_SECRET=1 WITHINGS_CLIENT_ID=1 SESSION_SECRET=1 HMAC_SECRET=1 DOMAIN=example.com bundle exec hanami assets compile
 
 # Final stage for app image
 FROM base
