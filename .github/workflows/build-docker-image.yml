@@ -17,6 +17,8 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  DOMAIN: test-adh-diary.rickenharp.cloud
+  HMAC_SECRET: ${{ secrets.HMAC_SECRET }}
 
 jobs:
   build:
